@@ -7,3 +7,21 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require "open-uri"
+require "nokogiri"
+
+puts "Clearing the database..."
+
+Exercise.destroy_all
+
+# muscles = %w[chest, back, shoulders, biceps, triceps, abdominals, legs, calves]
+
+# muscles.each do |muscle|
+#   url = ""
+# end
+
+url = "https://www.simplyfitness.com/pages/workout-exercise-guides"
+
+html_file = URI.parse(url).read
+html_doc = Nokogiri::HTML.parse(html_file)
