@@ -5,8 +5,8 @@ class CreateSessionExercises < ActiveRecord::Migration[7.1]
       t.references :exercise, null: false, foreign_key: true
       t.decimal :load
       t.integer :repetitions
-      t.boolean :done
-      t.string :difficulty
+      t.boolean :done, default: false
+      t.integer :difficulty_rate
 
       t.timestamps
     end
