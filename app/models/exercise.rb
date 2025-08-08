@@ -1,3 +1,4 @@
 class Exercise < ApplicationRecord
-  belongs_to :session_exercise
+  has_many :session_exercises
+  has_many :workout_sessions, through: :session_exercises
 end
