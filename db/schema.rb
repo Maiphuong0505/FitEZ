@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_09_024245) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_09_064019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_09_024245) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "timestamp"
     t.index ["user_id"], name: "index_body_stats_on_user_id"
   end
 
@@ -126,6 +127,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_09_024245) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "body_stats", "users"
+  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "workout_sessions"
+  add_foreign_key "session_exercises", "exercises"
+  add_foreign_key "session_exercises", "workout_sessions"
   add_foreign_key "workout_plans", "users", column: "client_id"
   add_foreign_key "workout_plans", "users", column: "trainer_id"
   add_foreign_key "workout_sessions", "workout_plans"

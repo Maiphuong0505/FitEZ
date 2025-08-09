@@ -13,7 +13,7 @@ gaps = [30, 60, 90]
 
 clients.each do |client|
   puts "Creating one workout plan for #{client.last_name} #{client.first_name}."
-  starting_date = Random.rand(Time.zone.tomorrow.last_year..Time.zone.tomorrow)
+  starting_date = client.body_stats.first.timestamp - 2
   workout_plan = WorkoutPlan.new(
     starting_date: starting_date,
     ending_date: starting_date + gaps.sample,
