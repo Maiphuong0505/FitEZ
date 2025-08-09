@@ -7,4 +7,7 @@ class User < ApplicationRecord
   has_many :body_stats, dependent: :destroy
   has_many :workout_plans_as_client, class_name: 'WorkoutPlan', foreign_key: :client_id, dependent: :destroy
   has_many :workout_plans_as_trainer, class_name: 'WorkoutPlan', foreign_key: :trainer_id, dependent: :destroy
+  has_many :workout_sessions_as_client, through: :workout_plans_as_client, source: :workout_sessions
+  has_many :workout_sessions_as_trainer, through: :workout_plans_as_trainer, source: :workout_sessions
+  has_many :comments, dependent: :destroy
 end
