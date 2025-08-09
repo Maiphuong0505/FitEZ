@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_08_150852) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_09_024245) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_08_150852) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_body_stats_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "workout_session_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["workout_session_id"], name: "index_comments_on_workout_session_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -116,8 +126,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_08_150852) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "body_stats", "users"
-  add_foreign_key "session_exercises", "exercises"
-  add_foreign_key "session_exercises", "workout_sessions"
   add_foreign_key "workout_plans", "users", column: "client_id"
   add_foreign_key "workout_plans", "users", column: "trainer_id"
   add_foreign_key "workout_sessions", "workout_plans"
