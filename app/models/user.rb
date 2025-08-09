@@ -10,4 +10,6 @@ class User < ApplicationRecord
   has_many :workout_sessions_as_client, through: :workout_plans_as_client, source: :workout_sessions
   has_many :workout_sessions_as_trainer, through: :workout_plans_as_trainer, source: :workout_sessions
   has_many :comments, dependent: :destroy
+
+  has_one_attached :photo
 end
