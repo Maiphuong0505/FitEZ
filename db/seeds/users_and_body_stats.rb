@@ -1,3 +1,5 @@
+require "open-uri"
+
 users = [
   { first_name: "Phuong", last_name: "Mai" , gender: "female", date_of_birth: Date.new(1992, 12, 4), is_a_trainer: true, email: "phuong@gmail.com", password: "password"},
   { first_name: "Bruno", last_name: "Vetorazo" , gender: "male", date_of_birth: Date.new(1995, 1, 25), is_a_trainer: false, email: "bruno@gmail.com", password: "password"},
@@ -16,21 +18,35 @@ body_stats = [
   { weight: 70.9, body_fat: 19.8, muscle_mass: 53.4 }
 ]
 
-avatar_url = [
-  {avatar_url: "https://avatars.githubusercontent.com/u/198897552?v=4"},
-  {avatar_url: "https://avatars.githubusercontent.com/u/47729038?v=4"},
-  {avatar_url: "https://avatars.githubusercontent.com/u/186806851?v=4"},
-  {avatar_url: "https://avatars.githubusercontent.com/u/84979360?v=4"},
-  {avatar_url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmMbpZKhwXGXw87W450kky6z1A26.jpg&f=1&nofb=1&ipt=9895783544d9f674e5c38c007208223b155490ef87f0cb9c16ec2cb129380111"},
-  {avatar_url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FtLelKoPNiyJCSEtQTz1FGv4TLGc.jpg&f=1&nofb=1&ipt=fc9306f16c6843cbc51c553c5a7000fb5a7803ffcb92bc4f455298ab55517c16"}
+avatar_urls = [
+  "https://avatars.githubusercontent.com/u/198897552?v=4",
+  "https://avatars.githubusercontent.com/u/47729038?v=4",
+  "https://avatars.githubusercontent.com/u/186806851?v=4",
+  "https://avatars.githubusercontent.com/u/84979360?v=4",
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmMbpZKhwXGXw87W450kky6z1A26.jpg&f=1&nofb=1&ipt=9895783544d9f674e5c38c007208223b155490ef87f0cb9c16ec2cb129380111",
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FtLelKoPNiyJCSEtQTz1FGv4TLGc.jpg&f=1&nofb=1&ipt=fc9306f16c6843cbc51c553c5a7000fb5a7803ffcb92bc4f455298ab55517c16"
 ]
 
-users.each do |user|
-  user = User.create(first_name: user[:first_name], last_name: user[:last_name], gender: user[:gender], date_of_birth: user[:date_of_birth], is_a_trainer: user[:is_a_trainer], email: user[:email], password: user[:password])
+users.each_with_index do |user_hash, index|
+  # user = User.create(first_name: user[:first_name], last_name: user[:last_name], gender: user[:gender], date_of_birth: user[:date_of_birth], is_a_trainer: user[:is_a_trainer], email: user[:email], password: user[:password])
+  user = User.create(user_hash)
+  avatar_url = avatar_urls[index]
+  file = URI.parse(avatar_url).open
   user.photo.attach(io: file, filename: "#{user.first_name}.jpg", content_type: "image/jpg")
+  user.save
+end
+  # user.body_stats.build
+  body_stats.each do |body_stat|
+    BodyStat.create(
+      weight: body_stat[:weight],
+      body_fat: body_stat[:body_fat],
+      muscle_mass: body_stat[:muscle_mass],
+      user: user
+      )
 end
 
-users.each_with_index do |user, index|
-  # user = User.create!(user)
-  user[:body_stats] = body_stats[index]
-end
+# users.each_with_index do |user, index|
+#   # user = User.create!(user)
+#   user[:body_stats] = body_stats[index]
+#   user[:avatar_url] = avatar_url[index]
+# end
