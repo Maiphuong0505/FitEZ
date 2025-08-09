@@ -1,12 +1,12 @@
 require "open-uri"
 
 users = [
-  { first_name: "Phuong", last_name: "Mai" , gender: "female", date_of_birth: Date.new(1998, 5, 16), is_a_trainer: true, email: "phuong@gmail.com", password: "password"},
-  { first_name: "Bruno", last_name: "Vetorazo" , gender: "male", date_of_birth: Date.new(1995, 1, 25), is_a_trainer: false, email: "bruno@gmail.com", password: "password"},
-  { first_name: "Hannah", last_name: "Lapasaran" , gender: "female", date_of_birth: Date.new(1990, 12, 15), is_a_trainer: false, email: "hannah@gmail.com", password: "password"},
-  { first_name: "Taka", last_name: "Homma" , gender: "male", date_of_birth: Date.new(1978, 6, 21), is_a_trainer: false, email: "taka@gmail.com", password: "password"},
-  { first_name: "Justin", last_name: "Bieber" , gender: "male", date_of_birth: Date.new(2000, 5, 24), is_a_trainer: false, email: "justin@gmail.com", password: "password"},
-  { first_name: "Anne", last_name: "Hathaway" , gender: "female", date_of_birth: Date.new(1985, 7, 1), is_a_trainer: false, email: "anne@gmail.com", password: "password"},
+  { first_name: "Phuong", last_name: "Mai", gender: "female", date_of_birth: Date.new(1998, 5, 16), is_a_trainer: true, email: "phuong@gmail.com", password: "password"},
+  { first_name: "Bruno", last_name: "Vetorazo", gender: "male", date_of_birth: Date.new(1995, 1, 25), is_a_trainer: false, email: "bruno@gmail.com", password: "password"},
+  { first_name: "Hannah", last_name: "Lapasaran", gender: "female", date_of_birth: Date.new(1990, 12, 15), is_a_trainer: false, email: "hannah@gmail.com", password: "password"},
+  { first_name: "Taka", last_name: "Homma", gender: "male", date_of_birth: Date.new(1978, 6, 21), is_a_trainer: false, email: "taka@gmail.com", password: "password"},
+  { first_name: "Justin", last_name: "Bieber", gender: "male", date_of_birth: Date.new(2000, 5, 24), is_a_trainer: false, email: "justin@gmail.com", password: "password"},
+  { first_name: "Anne", last_name: "Hathaway", gender: "female", date_of_birth: Date.new(1985, 7, 1), is_a_trainer: false, email: "anne@gmail.com", password: "password"},
 ]
 
 body_stats_data = [
