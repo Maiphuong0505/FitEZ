@@ -12,4 +12,10 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   has_one_attached :photo
+
+  scope :my_clients, lambda { |trainer_id|
+    where(is_a_trainer: false)
+      .joins(:workout_plans_as_client)
+      .where(workout_plans: { trainer_id: trainer_id })
+  }
 end

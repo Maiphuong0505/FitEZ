@@ -17,7 +17,7 @@ clients.each do |client|
   workout_plan = WorkoutPlan.new(
     starting_date: starting_date,
     ending_date: starting_date + gaps.sample,
-    trainer_id: trainer.first.id,
+    trainer_id: trainer.sample.id,
     client_id: client.id
   )
   workout_plan.save

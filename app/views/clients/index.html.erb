@@ -1,0 +1,13 @@
+<h1>Clients#index</h1>
+<p>Find me in app/views/clients/index.html.erb</p>
+<h1>Bitch EZ</h1>
+<% @my_clients.each do |client| %>
+  <p>Name: <%= client.last_name %> <%= client.first_name %></p>
+  <p>Body Stats</p>
+  <ol>
+    <% client.body_stats.each do |stat| %>
+      <li><%= stat.weight %></li>
+    <% end %>
+  </ol>
+  <hr>
+<% end %>
