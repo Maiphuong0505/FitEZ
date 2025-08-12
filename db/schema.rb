@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_09_064019) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_12_055736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,6 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_09_064019) do
     t.integer "difficulty_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "set"
     t.index ["exercise_id"], name: "index_session_exercises_on_exercise_id"
     t.index ["workout_session_id"], name: "index_session_exercises_on_workout_session_id"
   end
@@ -117,10 +118,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_09_064019) do
   create_table "workout_sessions", force: :cascade do |t|
     t.bigint "workout_plan_id", null: false
     t.string "session_name"
-    t.date "date_and_time"
     t.boolean "with_trainer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date_time"
     t.index ["workout_plan_id"], name: "index_workout_sessions_on_workout_plan_id"
   end
 
