@@ -5,12 +5,14 @@
   <div>
     <h3>Tab 1</h3>
     <h4>Body Stats</h4>
-    <h5>Body Weight</h5>
-    <canvas
-      data-controller="chartjs"
-      data-weight-data-value="<%= @weight_data.to_json %>"
-      data-chartjs-options-value="<%= @chart_options.to_json %>"
-    ></canvas>
+    <h5>Body Muscle Mass</h5>
+    <!-- Code to display the charts, just change if you know what you are doing -->
+    <% column_chart [{name: "Muscle Mass", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+      {name: "Body Fat %", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }},
+      {name: "Weight", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
+      colors: ["#4CAF50", "#FF9800", "#2196F3"],
+      curve: true,
+      empty: "No data available" %>
   </div>
   <hr>
   <%# Div for workout plans %>
@@ -62,49 +64,6 @@
               <p class="text-muted text-center mb-0">Show us how fat you are!</p>
             </div>
             <div class="card-body p-5">
-              <%= simple_form_for([@client, @body_stat], method: :post, url: client_body_stats(@client)) do |f| %>
-                <div class="row g-4">
-                  <!-- User ID hidden -->
-                  <%# <div class="col-12"> %>
-                  <%# <%= f.input :user_id, :as => :hidden, :input_html => { :value => "#{@client.id}" } %>
-                  <%# </div> %>
-                  <!-- Date -->
-                  <div class="col-12">
-                    <%= f.input :timestamp, as: :date,label: "When did you get it????" %>
-                  </div>
-                  <!-- Weight -->
-                  <div class="col-md-6">
-                    <%= f.input :weight,
-                    label: "How much was your weight?",
-                    input_html: {
-                      class: "form-control",
-                      placeholder: "0"
-                    } %>
-                  </div>
-                  <!-- Body Fat -->
-                  <div class="col-md-6">
-                    <%= f.input :body_fat,
-                    label: "How fat are you?",
-                    input_html: {
-                      class: "form-control",
-                      placeholder: "0"
-                    } %>
-                  </div>
-                  <!-- Muscle Mass -->
-                  <div class="col-md-6">
-                    <%= f.input :muscle_mass,
-                    label: "We know it ain't much but how much muscle do you have?",
-                    input_html: {
-                      class: "form-control",
-                      placeholder: "0"
-                    } %>
-                  </div>
-                  <!-- Submit Button -->
-                  <div class="col-12 text-center pt-3">
-                    <%= f.button :submit, "Add body stats", class: "btn btn-primary btn-lg px-5" %>
-                  </div>
-                </div>
-              <% end %>
             </div>
           </div>
         </div>
