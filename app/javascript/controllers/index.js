@@ -2,3 +2,8 @@
 import { application } from "controllers/application"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
+
+// import Chartjs from '@stimulus-components/chartjs'
+
+// const application = application.start()
+// application.register('chartjs', Chartjs)
