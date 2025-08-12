@@ -13,4 +13,9 @@ class UserPolicy < ApplicationPolicy
       user.is_a_trainer? ? scope.all : scope.where(user: user)
     end
   end
+
+    def show?
+      # client or client's trainer
+      true
+    end
 end
