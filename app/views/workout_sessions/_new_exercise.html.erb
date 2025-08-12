@@ -1,0 +1,73 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-light border-0 py-4">
+          <h1 class="h3 text-center mb-2 fw-bold">Add exercises</h1>
+          <p class="text-muted text-center mb-0">Customize your client's exercise</p>
+        </div>
+        <div class="card-body p-5">
+          <%= simple_form_for([workout_session, session_exercise]) do |f| %>
+            <div class="row g-4">
+              <!-- Exercise Selection -->
+              <div class="col-12">
+                <%= f.input :exercise_id,
+                    collection: Exercise.all.map { |exercise| [ "#{exercise.main_muscles} : #{exercise.name}", exercise.id ] },
+                    label: "Which exercise are you adding?",
+                    input_html: {
+                      id: "select-exercise",
+                      data: { controller: "listing" },
+                      class: "form-select form-select-lg"
+                    } %>
+              </div>
+
+              <!-- Load -->
+              <div class="col-4">
+                <div class="input-group mb-3">
+                  <%= f.input :load,
+                      label: "Load:",
+                      input_html: {
+                        class: "form-control",
+                        placeholder: "10 kg"
+                      }, wrapper: false %>
+                  <span class="input-group-text">kg</span>
+                </div>
+              </div>
+
+              <!-- Sets -->
+              <div class="col-4">
+                <div class="input-group mb-3">
+                  <%= f.input :set,
+                      label: "Sets:",
+                      input_html: {
+                        class: "form-control",
+                        placeholder: "3 sets"
+                      }, wrapper: false %>
+                  <span class="input-group-text">sets</span>
+                </div>
+              </div>
+
+              <!-- Repetitions -->
+              <div class="col-4">
+                <div class="input-group mb-3">
+                  <%= f.input :repetitions,
+                      label: "Reps:",
+                      input_html: {
+                        class: "form-control",
+                        placeholder: "8 reps"
+                      }, wrapper: false %>
+                  <span class="input-group-text">reps</span>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="col-12 text-center pt-3">
+                <%= f.button :submit, "Add this exercise", class: "btn btn-primary btn-lg px-5" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
