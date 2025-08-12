@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   resources :clients, only: %i[index show] do
     resources :body_stats, only: %i[create]
   end
+  resources :workout_sessions, only: %i[show] do
+    resources :session_exercises, only: %i[create]
+  end
 end
