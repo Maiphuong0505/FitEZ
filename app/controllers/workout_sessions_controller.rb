@@ -3,7 +3,7 @@ class WorkoutSessionsController < ApplicationController
 
   def show
     # authorize @workout_session
-    @session_exercises = @workout_session.session_exercises if @workout_session.session_exercises.any?
+    @session_exercises = @workout_session.session_exercises.any? ? @workout_session.session_exercises : []
     @session_exercise = SessionExercise.new
   end
 
