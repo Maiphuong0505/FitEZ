@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_12_041416) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_12_055736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,6 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_12_041416) do
     t.integer "difficulty_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "set"
     t.index ["exercise_id"], name: "index_session_exercises_on_exercise_id"
     t.index ["workout_session_id"], name: "index_session_exercises_on_workout_session_id"
   end
