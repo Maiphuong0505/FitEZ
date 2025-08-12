@@ -7,7 +7,7 @@
     <h4>Body Stats</h4>
     <h5>Body Muscle Mass</h5>
     <!-- Code to display the charts, just change if you know what you are doing -->
-    <% column_chart [{name: "Muscle Mass", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+    <%= column_chart [{name: "Muscle Mass", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
       {name: "Body Fat %", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }},
       {name: "Weight", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
       colors: ["#4CAF50", "#FF9800", "#2196F3"],
