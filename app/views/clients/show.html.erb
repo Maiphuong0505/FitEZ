@@ -1,2 +1,73 @@
-<h1>Clients#show</h1>
-<p>Find me in app/views/clients/show.html.erb</p>
+<div class="container my-3">
+  <h1><%= @client.last_name %> <%= @client.first_name %></h1>
+  <hr>
+  <%# The following div is for showing charts %>
+  <div>
+    <h3>Tab 1</h3>
+    <h4>Body Stats</h4>
+    <h5>Body Muscle Mass</h5>
+    <!-- Code to display the charts, just change if you know what you are doing -->
+    <%= column_chart [{name: "Muscle Mass", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+      {name: "Body Fat %", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }},
+      {name: "Weight", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
+      colors: ["#4CAF50", "#FF9800", "#2196F3"],
+      curve: true,
+      empty: "No data available" %>
+  </div>
+  <hr>
+  <%# Div for workout plans %>
+  <div class="display_workout-plans">
+    <h3>Tab 2</h3>
+    <h4>Workout Plans</h4>
+    <% if @workout_plans.any? %>
+      <% @workout_plans.each do |plan| %>
+        <div class="card my-4 shadow-sm border-0 rounded-3 hover-shadow card-fixed-height">
+          <div class="row g-0 h-100">
+            <div class="col-md-4 h-100">
+              <div class="image-container h-100">
+                <i class="fa-solid fa-dumbbell" style="font-size:156px;"></i>
+              </div>
+            </div>
+            <div class="col-md-8 h-100">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <div>
+                    <h5 class="card-title fw-bold text-dark mb-1">
+                      From <%= plan.starting_date %> to <%= plan.ending_date %>
+                    </h5>
+                    <% if plan.workout_sessions.any? %>
+                      <h5 class="text-muted my-4"><i class="fa-solid fa-medal"></i> <%= plan.workout_sessions.count %> sessions</h5>
+                    <% else %>
+                      <h5 class="text-muted my-4"><i class="fa-solid fa-face-grimace"></i> 0 sessions</h5>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-muted mt-4">No workout plan yet!</p>
+    <% end %>
+  </div>
+  <hr>
+  <%# Div for add stats %>
+  <div class="display-add-body-stats">
+    <h2>Tab 3</h2>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-light border-0 py-4">
+              <h1 class="h3 text-center mb-2 fw-bold">Add your body stats</h1>
+              <p class="text-muted text-center mb-0">Show us how fat you are!</p>
+            </div>
+            <div class="card-body p-5">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

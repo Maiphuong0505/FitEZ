@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_client, only: [:show]
   def index
     @users = policy_scope(User)
     # skip_authorization_check
@@ -11,5 +12,14 @@ class ClientsController < ApplicationController
   end
 
   def show
+    # authorize @user
+    @workout_plans = @client.workout_plans_as_client
+    @body_stat = BodyStat.new
+  end
+
+  private
+
+  def set_client
+    @client = User.find(params[:id])
   end
 end

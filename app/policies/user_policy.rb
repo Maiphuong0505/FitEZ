@@ -13,4 +13,8 @@ class UserPolicy < ApplicationPolicy
       user.is_a_trainer? ? scope.all : scope.where(user: user)
     end
   end
+
+  def show?
+    record.user == user || user.is_a_trainer
+  end
 end
