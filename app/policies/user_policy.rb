@@ -15,6 +15,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    record.user == user || user.is_a_trainer
+    # client or client's trainer
+    true
   end
 end
