@@ -11,7 +11,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    # authorize @user
+    # authorize @client
     @workout_plans = @client.workout_plans_as_client
     @body_stat = BodyStat.new
   end
