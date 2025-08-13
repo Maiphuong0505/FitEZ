@@ -11,9 +11,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    authorize @client
-    # @weight_data = set_weight_data
-    # @chart_options = set_chart_options
+    # authorize @user
     @workout_plans = @client.workout_plans_as_client
     @body_stat = BodyStat.new
   end

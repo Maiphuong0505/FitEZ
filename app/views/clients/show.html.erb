@@ -2,6 +2,19 @@
   <h1><%= @client.last_name %> <%= @client.first_name %></h1>
   <hr>
   <%# The following div is for showing charts %>
+  <div>
+    <h3>Tab 1</h3>
+    <h4>Body Stats</h4>
+    <h5>Body Muscle Mass</h5>
+    <!-- Code to display the charts, just change if you know what you are doing -->
+    <%= column_chart [{name: "Muscle Mass", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+      {name: "Body Fat %", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }},
+      {name: "Weight", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
+      colors: ["#4CAF50", "#FF9800", "#2196F3"],
+      curve: true,
+      empty: "No data available" %>
+  </div>
+  <hr>
   <%# Div for workout plans %>
   <div class="display_workout-plans">
     <h3>Tab 2</h3>

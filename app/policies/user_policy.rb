@@ -14,8 +14,8 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-    def show?
-      # client or client's trainer
-      true
-    end
+  def show?
+    # client or client's trainer
+    true
+  end
 end
