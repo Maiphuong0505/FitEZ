@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     resources :body_stats, only: %i[create]
     resources :workout_plans, only: %i[create]
   end
+
+  resources :workout_plan, only: [] do
+    resources :workout_sessions, only: %i[create]
+  end
+
   resources :workout_sessions, only: %i[show] do
     resources :session_exercises, only: %i[create]
   end
