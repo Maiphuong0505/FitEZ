@@ -2,12 +2,47 @@
   <h1><%= @workout_session.session_name %></h1>
   <h3><%= @workout_session.date_time %></h3>
   <%# TODO : Link to the client show page workout plan tab %>
-    <% @session_exercises.each do |exercise| %>
-      <div class="card">
-        <%= cl_image_tag(exercise.exercise.photo.key, class: "card-img-top py-3", style: "height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
-        <h3><%= exercise.exercise.name %></h3>
-        <p><%= exercise.repetitions %> reps/<%= exercise.load %> kg (<%= exercise.set %> sets)</p>
+  <hr>
+
+  <!-- Exercises Box -->
+  <div class="card p-3 mb-4 shadow-sm border-0 rounded-3">
+    <% if @session_exercises.empty? %>
+      <h3> No Exercise </h3>
+    <% else %>
+      <% @session_exercises.each do |exercise| %>
+        <div class="mb-3">
+          <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden">
+            <div class="row g-0 align-items-center">
+
+              <!-- Image -->
+              <div class="col-12 col-md-4 text-center p-3 bg-light">
+                <%= cl_image_tag(exercise.exercise.photo.key,
+                  class: "img-fluid",
+                  style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
+              </div>
+
+              <!-- Text -->
+              <div class="col-12 col-md-8 p-4 d-flex flex-column justify-content-center">
+              <h3><%= exercise.exercise.name %></h3>
+              <p>
+                <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+                  <%= exercise.load %> kg
+                </span>
+                <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+                  <%= exercise.repetitions %> reps
+                </span>
+                <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+                  <%= exercise.set %> sets </p>
+                </span>
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
-  <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
+  <% end %>
 </div>
+
+  <!-- Add Exercise Box -->
+  <div class="card p-3 shadow-sm border-0 rounded-3">
+    <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
+  </div>

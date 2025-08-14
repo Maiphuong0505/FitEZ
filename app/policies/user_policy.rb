@@ -8,9 +8,21 @@ class UserPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      # scope.all
-      # scope.where(is_a_trainer: true)
-      user.is_a_trainer? ? scope.all : scope.where(user: user)
+      if user.trainer?
+        scope.joins(:workout_plans_as_client)
+             .where(workout_plans: { trainer_id: user.id })
+      else
+        scope.none
+      end
+    end
+  end
+
+  def show?
+    # client or client's trainer
+    if user.trainer?
+      record.workout_plans_as_client.where(workout_plans: { trainer_id: user.id })
+    else
+      record.id == user.id
     end
   end
 end
