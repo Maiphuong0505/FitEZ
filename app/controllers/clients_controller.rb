@@ -10,6 +10,7 @@ class ClientsController < ApplicationController
     authorize @client
     @workout_plans = @client.workout_plans_as_client
     @body_stat = BodyStat.new
+    @workout_plan = WorkoutPlan.new
   end
 
   private
