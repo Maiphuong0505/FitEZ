@@ -12,16 +12,16 @@ class WorkoutSession < ApplicationRecord
     greater_than_or_equal_to: 30,
     message: "must be at least 30 minutes"
   }
-  # validate :date_time_cannot_be_in_the_past
+  validate :date_time_cannot_be_in_the_past
   validate :date_time_cannot_be_outside_of_plan_date
 
   scope :upcoming, -> { where("date_time >= ?", Time.current) }
 
-  # def date_time_cannot_be_in_the_past
-  #   if date_time.present? && date_time < Time.current
-  #     errors.add(:date_time, "can't be in the past")
-  #   end
-  # end
+  def date_time_cannot_be_in_the_past
+    if date_time.present? && date_time < Time.current
+      errors.add(:date_time, "can't be in the past")
+    end
+  end
 
   def date_time_cannot_be_outside_of_plan_date
     session_date = date_time.to_date
