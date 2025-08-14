@@ -2,9 +2,10 @@ class WorkoutSessionsController < ApplicationController
   before_action :set_workout_session, only: %i[show]
 
   def show
-    # authorize @workout_session
+    authorize @workout_session
     @session_exercises = @workout_session.session_exercises.any? ? @workout_session.session_exercises : []
     @session_exercise = SessionExercise.new
+    @comment = Comment.new
   end
 
   private
