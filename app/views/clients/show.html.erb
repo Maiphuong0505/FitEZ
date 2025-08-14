@@ -51,6 +51,15 @@
       <p class="text-muted mt-4">No workout plan yet!</p>
     <% end %>
   </div>
+  <%# Add workout plan form %>
+  <div class="card mt-4">
+    <div class="card-header">
+      <h5 class="mb-0">Add Workout Plan</h5>
+    </div>
+    <div class="card-body">
+      <%= render 'workout_plans/workout_plan_form', workout_plan: @workout_plan, client: @client %>
+    </div>
+  </div>
   <hr>
   <%# Div for add stats %>
   <div class="display-add-body-stats">

@@ -1,0 +1,6 @@
+<%= simple_form_for [client, workout_plan], method: :post, url: client_workout_plans_path(client) do |f| %>
+  <%= f.input :starting_date, as: :date, label: "Starting date" %>
+  <%= f.input :ending_date, as: :date, label: "Ending date" %>
+  <%= f.hidden_field :client_id, value: client.id %>
+  <%= f.submit "Create Workout Plan" %>
+<% end %>
