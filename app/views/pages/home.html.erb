@@ -1,2 +1,9 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+<% if user_signed_in? %>
+  <% if current_user.trainer? %>
+    <%= link_to "Getting started", clients_path %>
+  <% else %>
+    <%= link_to "Getting started", client_path(@client) %>
+  <% end %>
+<% end %>

@@ -18,4 +18,9 @@ class User < ApplicationRecord
       .joins(:workout_plans_as_client)
       .where(workout_plans: { trainer_id: trainer_id })
   }
+
+  def trainer?
+    is_a_trainer
+  end
+
 end
