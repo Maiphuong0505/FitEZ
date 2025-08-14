@@ -12,6 +12,7 @@ workout_plans.each do |plan|
     workout_plan_id: plan.id,
     session_name: "#{muscles.sample} Focus",
     date_time: Time.parse("#{plan.starting_date + 2} #{rand(10..22)}:00:00"),
+    duration: 60,
     with_trainer: true
   )
   puts workout_session.errors.full_messages unless workout_session.persisted?
