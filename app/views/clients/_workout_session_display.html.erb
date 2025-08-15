@@ -22,7 +22,9 @@
                 <% end %>
               </div>
               <div class="see-details-button">
-                <button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-circle-info"></i></button>
+                <%= link_to workout_session_path(session) do %>
+                  <button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-circle-info"></i></button>
+                <% end %>
               </div>
             </div>
           </div>

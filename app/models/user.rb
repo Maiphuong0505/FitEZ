@@ -16,7 +16,7 @@ class User < ApplicationRecord
   scope :my_clients, lambda { |trainer_id|
     where(is_a_trainer: false)
       .joins(:workout_plans_as_client)
-      .where(workout_plans: { trainer_id: trainer_id })
+      .where(workout_plans: { trainer_id: trainer_id }).uniq
   }
 
   def trainer?

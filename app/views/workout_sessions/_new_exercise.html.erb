@@ -10,17 +10,21 @@
           <%= simple_form_for([workout_session, session_exercise]) do |f| %>
             <div class="row g-4">
               <!-- Exercise Selection -->
+              <!-- For using Tom Select -->
+              <!-- 1. importmap pin tom-select -> go to importmap.rb, change the version source if needed -->
+              <!-- 2. generate stimulus controller and mount the controller on the select input field-->
+              <!-- 3. add a line to import tom select into the stimulus controller -->
+              <!-- 4. In application.html.erb, add a link for tom select stylesheet-->
               <div class="col-12">
                 <%= f.input :exercise_id,
-                    collection: Exercise.all.map { |exercise| [ "#{exercise.main_muscles} : #{exercise.name}", exercise.id ] },
+                    collection: Exercise.all.map { |exercise| [ "#{exercise.name}", exercise.id ] },
                     label: "Which exercise are you adding?",
                     input_html: {
                       id: "select-exercise",
-                      data: { controller: "listing" },
+                      data: { controller: "tom-select" },
                       class: "form-select form-select-lg"
                     } %>
               </div>
-
               <!-- Load -->
               <div class="col-4">
                 <div class="input-group mb-3">
@@ -33,7 +37,6 @@
                   <span class="input-group-text">kg</span>
                 </div>
               </div>
-
               <!-- Repetitions -->
               <div class="col-4">
                 <div class="input-group mb-3">
@@ -46,7 +49,6 @@
                   <span class="input-group-text">reps</span>
                 </div>
               </div>
-              
               <!-- Sets -->
               <div class="col-4">
                 <div class="input-group mb-3">
@@ -59,7 +61,6 @@
                   <span class="input-group-text">sets</span>
                 </div>
               </div>
-
               <!-- Submit Button -->
               <div class="col-12 text-center pt-3">
                 <%= f.button :submit, "Add this exercise", class: "btn btn-primary btn-lg px-5" %>

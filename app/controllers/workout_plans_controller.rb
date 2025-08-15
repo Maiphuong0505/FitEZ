@@ -11,6 +11,7 @@ class WorkoutPlansController < ApplicationController
       # render client show page if workout plan is invalid
       @workout_plans = @client.workout_plans_as_client
       @body_stat = BodyStat.new
+      @workout_session = WorkoutSession.new
       render "clients/show", status: :unprocessable_entity
     end
   end
