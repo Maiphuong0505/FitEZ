@@ -1,5 +1,6 @@
 class WorkoutSessionsController < ApplicationController
   before_action :set_workout_session, only: %i[show]
+  before_action :set_client, only: %i[create]
 
   def show
     authorize @workout_session
@@ -8,9 +9,32 @@ class WorkoutSessionsController < ApplicationController
     @comment = Comment.new
   end
 
+  def create
+    @workout_session = WorkoutSession.new(workout_session_params)
+    authorize @workout_session
+    if @workout_session.save
+      redirect_to client_path(@client), notice: "Workout session created successfully."
+    else
+      # render client show page if workout plan is invalid
+      @workout_plans = @client.workout_plans_as_client
+      @body_stat = BodyStat.new
+      @workout_plan = WorkoutPlan.new
+      render "clients/show", status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_workout_session
     @workout_session = WorkoutSession.find(params[:id])
+  end
+
+  def set_client
+    workout_plan = WorkoutPlan.find(params[:workout_plan_id])
+    @client = User.find(workout_plan.client_id)
+  end
+
+  def workout_session_params
+    params.require(:workout_session).permit(:session_name, :date_time, :duration, :with_trainer, :workout_plan_id)
   end
 end
