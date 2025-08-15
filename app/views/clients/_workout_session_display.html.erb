@@ -1,29 +1,35 @@
 <div class="row justify-content-end">
   <div class="col-7">
-    <div class="card my-2 shadow-sm border-0 rounded-3 hover-shadow card-fixed-height px-3">
-      <div class="row g-0 h-100">
-        <div class="col-md-4 h-100">
-          <div class="image-container h-100">
-            <i class="fa-solid fa-handshake" style="font-size:96px;"></i>
+    <div class="card my-2 shadow-sm border-0 rounded-3 hover-shadow card-fixed-height mx-2">
+      <div class="row g-0 h-100 align-items-center">
+        <div class="col-12 col-md-4 h-100">
+          <div class="image-container h-100 d-flex justify-content-center align-item-center">
+            <% if session.session_exercises.any? %>
+              <%= cl_image_tag(session.session_exercises.sample.exercise.photo.key,
+                  class: "img-fluid bg-white border border-danger rounded-4",
+                  style: "max-height: 120px; object-fit: contain;") %>
+            <% else %>
+              <i class="fa-solid fa-handshake text-danger" style="font-size:96px;"></i>
+            <% end %>
           </div>
         </div>
         <div class="col-md-8 h-100">
           <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-start mb-2">
+            <div class="d-flex justify-content-between align-items-center mb-2">
               <div class="plan-info">
                 <h5 class="card-title fw-bold text-dark mb-1">
                   Session name: <%= session.session_name %>
                 </h5>
-                <p class="mb-1">Date and time: <%= session.date_time + 9.hours %></p>
+                <p class="mb-1">Date and time: <%= session.date_time.strftime("%a %b %e at %l:%M %p") %></p>
                 <% if session.with_trainer %>
-                  <p class="mb-1">With-trainer-session</p>
+                  <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-danger text-dark fw-normal fs-6">With-trainer-session</p>
                 <% else %>
-                  <p class="mb-1">Solo-session</p>
+                  <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-info text-dark fw-normal fs-6">Solo-session</p>
                 <% end %>
               </div>
               <div class="see-details-button">
                 <%= link_to workout_session_path(session) do %>
-                  <button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-circle-info"></i></button>
+                  <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
                 <% end %>
               </div>
             </div>

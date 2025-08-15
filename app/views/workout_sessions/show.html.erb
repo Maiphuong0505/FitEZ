@@ -1,12 +1,12 @@
 <div class="container my-3">
   <h1><%= @workout_session.workout_plan.client.first_name %>'s <%= @workout_session.session_name %> training</h1>
-  <h3><%= @workout_session.date_time %></h3>
+  <h3 class="my-2 badge rounded-pill px-3 py-2 me-2 border bg-info text-dark fw-normal fs-5"><i class="fa-solid fa-clock"></i> <%= @workout_session.date_time.strftime("%a %b %e at %l:%M %p") %></h3>
   <%# TODO : Link to the client show page workout plan tab %>
   <hr>
   <!-- Exercises Box -->
   <div class="card p-3 mb-4 shadow-sm border-0 rounded-3">
     <% if @session_exercises.empty? %>
-      <h3> No Exercise </h3>
+      <h3><i class="fa-solid fa-face-grimace"></i> Workout magic starts here! </h3>
     <% else %>
       <% @session_exercises.each do |exercise| %>
         <div class="mb-3">
@@ -22,9 +22,11 @@
               <div class="col-12 col-md-8 p-4 d-flex flex-column justify-content-center">
                 <h3><%= exercise.exercise.name %></h3>
                 <p>
-                  <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                    <%= exercise.load %> kg
-                  </span>
+                  <% unless exercise.load.zero? %>
+                    <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+                      <%= exercise.load %> kg
+                    </span>
+                  <% end %>
                   <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
                     <%= exercise.repetitions %> reps
                   </span>

@@ -1,10 +1,15 @@
-<div class="container py-5">
+<div class="container py-4">
   <div class="row justify-content-center">
-    <div class="col-lg-8 col-md-10">
+    <div class="col-lg-10 col-md-10 col-sm-12">
       <div class="card border-0 shadow-sm">
         <div class="card-header bg-light border-0 py-4">
-          <h1 class="h3 text-center mb-2 fw-bold">Add your body stats</h1>
-          <p class="text-muted text-center mb-0">Show us how fat you are!</p>
+          <% if current_user.trainer? %>
+            <h1 class="h3 text-center mb-2 fw-bold">Add <%= client.first_name %>'s body stats</h1>
+            <p class="text-muted text-center mb-0">Show us how fat <%= client.first_name %> is!</p>
+          <% else %>
+            <h1 class="h3 text-center mb-2 fw-bold">Add your body stats</h1>
+            <p class="text-muted text-center mb-0">Show us how fat you are!</p>
+          <% end %>
         </div>
         <div class="card-body p-5">
           <%= simple_form_for([client, body_stat], method: :post, url: client_body_stats_path(client)) do |f| %>
@@ -14,7 +19,7 @@
                 <%= f.input :timestamp, as: :date, label: "Date of measurement" %>
               </div>
               <!-- Weight -->
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <%= f.input :weight,
                   label: "Weight (kg)",
                   input_html: {
@@ -23,7 +28,7 @@
                   } %>
               </div>
               <!-- Body Fat -->
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <%= f.input :body_fat,
                   label: "Body fat percentage (%)",
                   input_html: {
@@ -32,7 +37,7 @@
                   } %>
               </div>
               <!-- Muscle Mass -->
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <%= f.input :muscle_mass,
                   label: "Muscle mass (kg)",
                   input_html: {

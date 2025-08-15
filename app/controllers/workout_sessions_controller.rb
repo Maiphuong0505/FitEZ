@@ -13,7 +13,7 @@ class WorkoutSessionsController < ApplicationController
     @workout_session = WorkoutSession.new(workout_session_params)
     authorize @workout_session
     if @workout_session.save
-      redirect_to client_path(@client), notice: "Workout session created successfully."
+      redirect_to workout_session_path(@workout_session), notice: "Workout session created successfully."
     else
       # render client show page if workout plan is invalid
       @workout_plans = @client.workout_plans_as_client

@@ -17,7 +17,7 @@
   <hr>
   <%# Div for add stats %>
   <div class="add-body-stats-form">
-    <h5>Add your body stats</h5>
+    <h5>Time for a Body Check-In</h5>
     <%= render 'clients/body_stat_form', client: @client, body_stat: @body_stat %>
   </div>
   <hr>
@@ -30,16 +30,19 @@
         <%= render 'clients/workout_plan_display', workout_plans: @workout_plans, plan: plan, workout_session: @workout_session, workout_plan: plan %>
       <% end %>
     <% else %>
-      <p class="text-muted mt-4">No workout plan yet!</p>
+      <% if current_user.trainer? %>
+        <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> <%= @client.first_name %>'s plan awaits!</p>
+      <% else %>
+        <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> Waiting for a plan? Ask your trainer to add one!</p>
+      <% end %>
     <% end %>
   </div>
   <%# Add workout plan form %>
-  <div class="card mt-4">
-    <div class="card-header">
-      <h5 class="mb-0">Add Workout Plan</h5>
+  <% if current_user.trainer? %>
+    <div class="card mt-4">
+      <div class="card-body">
+        <%= render 'workout_plans/workout_plan_form', workout_plan: @workout_plan, client: @client %>
+      </div>
     </div>
-    <div class="card-body">
-      <%= render 'workout_plans/workout_plan_form', workout_plan: @workout_plan, client: @client %>
-    </div>
-  </div>
+  <% end %>
 </div>
