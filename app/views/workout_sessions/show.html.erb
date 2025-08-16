@@ -18,56 +18,67 @@
                   class: "img-fluid",
                   style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
               </div>
-              <!-- Text -->
+              <!-- Text and Done Button -->
               <div class="col-12 col-md-8 p-4 d-flex flex-column justify-content-center">
-                <h3><%= exercise.exercise.name %></h3>
-                <p>
-                  <% unless exercise.load.zero? %>
+                <!-- Exercise Info -->
+                <div>
+                  <h3><%= exercise.exercise.name %></h3>
+                  <p>
+                    <% unless exercise.load.zero? %>
+                      <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+                        <%= exercise.load %> kg
+                      </span>
+                    <% end %>
                     <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                      <%= exercise.load %> kg
+                      <%= exercise.repetitions %> reps
                     </span>
-                  <% end %>
-                  <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                    <%= exercise.repetitions %> reps
+                    <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+                      <%= exercise.set %> sets </p>
                   </span>
-                  <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                    <%= exercise.set %> sets </p>
-                </span>
+                </div>
+                <!-- Done Button -->
+                <div>
+                  <% unless exercise.done? %>
+                    <%= button_to "Mark as Done",
+                    mark_done_workout_session_session_exercise_path(@workout_session, exercise),
+                    method: :patch, class: "btn btn-secondary rounded-3 btn-sm"%>
+                  <% else %>
+                    <span class="text-success fw-bold">Completed</span>
+                  <% end %>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <!-- Add Exercise Box -->
-  <div class="card p-3 shadow-sm border-0 rounded-3">
-    <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
-  </div>
-  <hr>
-  <!-- Comments section -->
-  <div class="container chat">
-    <h1>Comments about <%= @workout_session.session_name %> training</h1>
-    <div id="comment-section" class="comments">
-      <% @workout_session.comments.each do |comment| %>
-        <div id="comment-<%= comment.id %>">
-          <small>
-            <strong><%= comment.user.first_name %></strong>
-            <i><%= comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-          </small>
-          <p><%= comment.content %></p>
-        </div>
+        <% end %>
       <% end %>
     </div>
-    <%= simple_form_for [@workout_session, @comment],
-      html: {class: "d-flex"} do |f|
-    %>
-    <%= f.input :content,
-        label: false,
-        placeholder: "Comment about the session",
-        wrapper_html: {class: "flex-grow-1"}
+    <!-- Add Exercise Box -->
+    <div class="card p-3 shadow-sm border-0 rounded-3">
+      <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
+    </div>
+    <hr>
+    <!-- Comments section -->
+    <div class="container chat">
+      <h1>Comments about <%= @workout_session.session_name %> training</h1>
+      <div id="comment-section" class="comments">
+        <% @workout_session.comments.each do |comment| %>
+          <div id="comment-<%= comment.id %>">
+            <small>
+              <strong><%= comment.user.first_name %></strong>
+              <i><%= comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+            </small>
+            <p><%= comment.content %></p>
+          </div>
+        <% end %>
+      </div>
+      <%= simple_form_for [@workout_session, @comment],
+        html: {class: "d-flex"} do |f|
       %>
-    <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-  <% end %>
-</div>
-</div>
+      <%= f.input :content,
+          label: false,
+          placeholder: "Comment about the session",
+          wrapper_html: {class: "flex-grow-1"}
+        %>
+      <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+    <% end %>
+  </div>
+  </div>

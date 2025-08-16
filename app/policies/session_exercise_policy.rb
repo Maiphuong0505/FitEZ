@@ -19,4 +19,8 @@ class SessionExercisePolicy < ApplicationPolicy
   def create?
     user.present? && user.trainer?
   end
+
+  def mark_done?
+    user == record.workout_session.workout_plan.client || user.is_a_trainer?
+  end
 end

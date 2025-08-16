@@ -22,4 +22,12 @@ Rails.application.routes.draw do
     resources :session_exercises, only: %i[create]
     resources :comments, only: %i[create]
   end
+
+  resources :workout_sessions do
+    resources :session_exercises do
+      member do
+        patch :mark_done
+      end
+    end
+  end
 end

@@ -14,6 +14,15 @@ class SessionExercisesController < ApplicationController
     end
   end
 
+  def mark_done
+    @session_exercise = SessionExercise.find(params[:id])
+    authorize @session_exercise
+    @session_exercise.update(done: true)
+
+    redirect_to workout_session_path(@session_exercise.workout_session),
+    notice: "Exercise marked as done!"
+  end
+  
   private
 
   def set_workout_session
@@ -23,4 +32,5 @@ class SessionExercisesController < ApplicationController
   def session_exercise_params
     params.require(:session_exercise).permit(:exercise_id, :repetitions, :load, :set, :done)
   end
+
 end
