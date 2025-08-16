@@ -1,5 +1,5 @@
 <div class="mb-3">
-  <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden">
+  <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden" data-controller="display-toggle form-toggle-display">
     <div class="row g-0 align-items-center">
       <!-- Image -->
       <div class="col-12 col-md-4 text-center p-3 bg-light">
@@ -20,9 +20,18 @@
             <%= session_exercise.repetitions %> reps
           </span>
           <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-            <%= session_exercise.set %> sets </p>
-        </span>
+            <%= session_exercise.set %> sets
+          </span>
+        </p>
+        <button type="button" class="btn btn-outline-warning my-4 rounded-pill px-3 py-2 me-2 fw-bold fs-5" data-action="click->display-toggle#fire">
+          <i class="fa-solid fa-eye"></i> Exercise details
+        </button>
       </div>
+    </div>
+    <div data-display-toggle-target="togglableElement" class="session-display d-none">
+      <% if session_exercise.present? %>
+        <%= render 'workout_sessions/exercise_details_display', exercise: session_exercise %>
+      <% end %>
     </div>
   </div>
 </div>

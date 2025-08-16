@@ -12,9 +12,11 @@
   <% if @session_exercises.empty? %>
     <h3><i class="fa-solid fa-face-grimace"></i> Workout magic starts here! </h3>
   <% else %>
-    <% @session_exercises.each do |session_exercise| %>
-      <%= render "workout_sessions/exercise_display", session_exercise: session_exercise %>
-    <% end %>
+    <div id="session_exercises">
+      <% @session_exercises.each do |session_exercise| %>
+        <%= render "workout_sessions/exercise_display", session_exercise: session_exercise %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 <!-- Add Exercise Box -->
