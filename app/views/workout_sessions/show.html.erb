@@ -3,82 +3,50 @@
     <h1><%= @workout_session.workout_plan.client.first_name %>'s <%= @workout_session.session_name %> training</h1>
     <h3 class="my-2 badge rounded-pill px-3 py-2 me-2 border bg-info text-dark fw-normal fs-5"><i class="fa-solid fa-clock"></i> <%= @workout_session.date_time.strftime("%a %b %e at %l:%M %p") %></h3>
   </div>
-    <%= link_to "← Back", client_path(@workout_session.workout_plan.client), class: "btn btn-outline-secondary rounded-pill" %>
+  <%= link_to "← Back", client_path(@workout_session.workout_plan.client), class: "btn btn-outline-secondary rounded-pill" %>
 </div>
-    <%# TODO : Link to the client show page workout plan tab %>
-    <hr>
-    <!-- Exercises Box -->
-    <div class="card p-3 mb-4 shadow-sm border-0 rounded-3">
-      <% if @session_exercises.empty? %>
-        <h3><i class="fa-solid fa-face-grimace"></i> Workout magic starts here! </h3>
-      <% else %>
-        <% @session_exercises.each do |exercise| %>
-          <div class="mb-3">
-            <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden" data-controller="display-toggle form-toggle-display">
-              <div class="row g-0 align-items-center">
-                <!-- Image -->
-                <div class="col-12 col-md-4 text-center p-3 bg-light">
-                  <%= cl_image_tag(exercise.exercise.photo.key,
-                    class: "img-fluid",
-                    style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
-                </div>
-                <!-- Text -->
-                <div class="col-12 col-md-8 p-4 d-flex flex-column justify-content-center">
-                  <h3><%= exercise.exercise.name %></h3>
-                  <p>
-                    <% unless exercise.load.zero? %>
-                      <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                        <%= exercise.load %> kg
-                      </span>
-                    <% end %>
-                    <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                      <%= exercise.repetitions %> reps
-                    </span>
-                    <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                      <%= exercise.set %> sets </p>
-                  </span>
-                <button type="button" class="btn btn-outline-warning my-4 rounded-pill px-3 py-2 me-2 fw-bold fs-5" data-action="click->display-toggle#fire">
-                <i class="fa-solid fa-eye"></i> Exercise details
-              </button>
-              </div>
-            </div>
-            <div data-display-toggle-target="togglableElement" class="session-display d-none">
-              <% if exercise.present? %>
-                  <%= render 'workout_sessions/exercise_details_display', exercise: exercise %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+<%# TODO : Link to the client show page workout plan tab %>
+<hr>
+<!-- Exercises Box -->
+<div class="card p-3 mb-4 shadow-sm border-0 rounded-3">
+  <% if @session_exercises.empty? %>
+    <h3><i class="fa-solid fa-face-grimace"></i> Workout magic starts here! </h3>
+  <% else %>
+    <div id="session_exercises">
+      <% @session_exercises.each do |session_exercise| %>
+        <%= render "workout_sessions/exercise_display", session_exercise: session_exercise %>
       <% end %>
     </div>
-    <!-- Add Exercise Box -->
-    <div class="card p-3 shadow-sm border-0 rounded-3">
-      <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
-    </div>
-    <hr>
-    <!-- Comments section -->
-    <div class="container chat">
-      <h1>Comments about <%= @workout_session.session_name %> training</h1>
-      <div id="comment-section" class="comments">
-        <% @workout_session.comments.each do |comment| %>
-          <div id="comment-<%= comment.id %>">
-            <small>
-              <strong><%= comment.user.first_name %></strong>
-              <i><%= comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-            </small>
-            <p><%= comment.content %></p>
-          </div>
-        <% end %>
+  <% end %>
+</div>
+<!-- Add Exercise Box -->
+<div class="card p-3 shadow-sm border-0 rounded-3">
+  <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
+</div>
+<hr>
+<!-- Comments section -->
+<div class="container chat">
+  <h1>Comments about <%= @workout_session.session_name %> training</h1>
+  <div id="comment-section" class="comments">
+    <% @workout_session.comments.each do |comment| %>
+      <div id="comment-<%= comment.id %>">
+        <small>
+          <strong><%= comment.user.first_name %></strong>
+          <i><%= comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+        </small>
+        <p><%= comment.content %></p>
       </div>
-      <%= simple_form_for [@workout_session, @comment],
+    <% end %>
+  </div>
+  <%= simple_form_for [@workout_session, @comment],
         html: {class: "d-flex"} do |f|
       %>
-      <%= f.input :content,
+  <%= f.input :content,
           label: false,
           placeholder: "Comment about the session",
           wrapper_html: {class: "flex-grow-1"}
         %>
-      <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-    <% end %>
-  </div>
-  </div>
+  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+<% end %>
+</div>
+</div>
