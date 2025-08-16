@@ -12,11 +12,14 @@
 }
 
 .nav-item a:hover {
-  font-weight: bold;
   color: gray;
 }
 
 .active {
   font-weight: bold;
   color: white;
+}
+
+.nav-link {
+  color: white !important;
 }

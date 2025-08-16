@@ -10,3 +10,15 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+body {
+  h1, h2, h3 {
+    font-family: poppins, sans-serif;
+    color: #4B4B4B;
+  }
+
+  p {
+    font-family: montserrat, sans-serif;
+    font-size: 18px
+  }
+}
