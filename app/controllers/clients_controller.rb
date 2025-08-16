@@ -11,6 +11,7 @@ class ClientsController < ApplicationController
     @workout_plans = @client.workout_plans_as_client
     @body_stat = BodyStat.new
     @workout_plan = WorkoutPlan.new
+    @workout_session = WorkoutSession.new
   end
 
   private
