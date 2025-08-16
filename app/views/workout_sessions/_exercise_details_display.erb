@@ -1,7 +1,15 @@
 <div class="exercise-details p-3">
   <h3><%= exercise.exercise.name %></h3>
-  <p><strong>Muscle Group:</strong> <%= exercise.exercise.main_muscles if !exercise.exercise.main_muscles.empty? %></p>
-  <p><strong>Equipment:</strong> <%= exercise.exercise.equipment if !exercise.exercise.equipment.empty? %></p>
-  <p><strong>Starting Position:</strong> <%= exercise.exercise.starting_position if !exercise.exercise.starting_position.empty? %></p>
-  <p><strong>Execution:</strong> <%= exercise.exercise.execution if !exercise.exercise.execution.empty? %></p>
+  <% unless exercise.exercise.main_muscles.empty?%>
+    <p><strong>Muscle Group:</strong> <%= exercise.exercise.main_muscles %></p>
+  <% end %>
+  <% unless exercise.exercise.equipment.empty?%>
+     <p><strong>Equipment:</strong> <%= exercise.exercise.equipment %></p>
+  <% end %>
+  <% unless exercise.exercise.starting_position.empty?%>
+     <p><strong>Starting Position:</strong> <%= exercise.exercise.starting_position %></p>
+  <% end %>
+  <% unless exercise.exercise.execution.empty?%>
+    <p><strong>Execution:</strong> <%= exercise.exercise.execution %></p>
+  <% end %>
 </div>
