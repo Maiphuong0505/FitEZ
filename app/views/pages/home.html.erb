@@ -1,9 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<% if user_signed_in? %>
-  <% if current_user.trainer? %>
-    <%= link_to "Getting started", clients_path %>
-  <% else %>
-    <%= link_to "Getting started", client_path(@client) %>
-  <% end %>
-<% end %>
+<div class="container my-3 d-flex justify-content-center align-items-center flex-column">
+  <h1>Welcome to FitEZ!</h1>
+  <div class="chotto-matte-image">
+    <%= image_tag("chotto-matte.png", size: "338x450", alt: "Chotto Matte") %>
+  </div>
+  <h4 class="text-danger">Please be patient! We will code this page later!</h4>
+  <h5 class="text-danger">!WE PROMISE!</h5>
+  <div class="redirect-link my-3">
+    <% if user_signed_in? %>
+      <% if current_user.trainer? %>
+        <%= link_to "Getting started", clients_path, class: "btn btn-danger rounded-4" %>
+      <% else %>
+        <%= link_to "Getting started", client_path(@client), class: "btn btn-info rounded-4" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

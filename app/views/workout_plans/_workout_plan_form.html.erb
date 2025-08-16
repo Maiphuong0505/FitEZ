@@ -1,6 +1,20 @@
-<%= simple_form_for [client, workout_plan], method: :post, url: client_workout_plans_path(client) do |f| %>
-  <%= f.input :starting_date, as: :date, label: "Starting date" %>
-  <%= f.input :ending_date, as: :date, label: "Ending date" %>
-  <%= f.hidden_field :client_id, value: client.id %>
-  <%= f.submit "Create Workout Plan" %>
-<% end %>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-10 col-sm-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-light border-0 py-4">
+          <h1 class="h3 text-center mb-2 fw-bold">Plan <%= client.first_name %>'s Next Workout Journey</h1>
+          <p class="text-muted text-center mb-0">Set your client’s path to success!</p>
+        </div>
+        <div class="card-body p-5">
+          <%= simple_form_for [client, workout_plan], method: :post, url: client_workout_plans_path(client) do |f| %>
+            <%= f.input :starting_date, as: :date, label: "Starting date" %>
+            <%= f.input :ending_date, as: :date, label: "Ending date" %>
+            <%= f.hidden_field :client_id, value: client.id %>
+            <%= f.submit "Create Workout Plan" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
