@@ -8,36 +8,11 @@
     <% if @session_exercises.empty? %>
       <h3><i class="fa-solid fa-face-grimace"></i> Workout magic starts here! </h3>
     <% else %>
-      <% @session_exercises.each do |exercise| %>
-        <div class="mb-3">
-          <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden">
-            <div class="row g-0 align-items-center">
-              <!-- Image -->
-              <div class="col-12 col-md-4 text-center p-3 bg-light">
-                <%= cl_image_tag(exercise.exercise.photo.key,
-                  class: "img-fluid",
-                  style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
-              </div>
-              <!-- Text -->
-              <div class="col-12 col-md-8 p-4 d-flex flex-column justify-content-center">
-                <h3><%= exercise.exercise.name %></h3>
-                <p>
-                  <% unless exercise.load.zero? %>
-                    <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                      <%= exercise.load %> kg
-                    </span>
-                  <% end %>
-                  <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                    <%= exercise.repetitions %> reps
-                  </span>
-                  <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
-                    <%= exercise.set %> sets </p>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <div id="session_exercises">
+        <% @session_exercises.each do |session_exercise| %>
+          <%= render "workout_sessions/exercise_display", session_exercise: session_exercise %>
+        <% end %>
+      </div>
     <% end %>
   </div>
   <!-- Add Exercise Box -->

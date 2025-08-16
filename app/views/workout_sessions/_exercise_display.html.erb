@@ -1,0 +1,28 @@
+<div class="mb-3">
+  <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden">
+    <div class="row g-0 align-items-center">
+      <!-- Image -->
+      <div class="col-12 col-md-4 text-center p-3 bg-light">
+        <%= cl_image_tag(session_exercise.exercise.photo.key,
+                  class: "img-fluid",
+                  style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
+      </div>
+      <!-- Text -->
+      <div class="col-12 col-md-8 p-4 d-flex flex-column justify-content-center">
+        <h3><%= session_exercise.exercise.name %></h3>
+        <p>
+          <% unless session_exercise.load.zero? %>
+            <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+              <%= session_exercise.load %> kg
+            </span>
+          <% end %>
+          <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+            <%= session_exercise.repetitions %> reps
+          </span>
+          <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+            <%= session_exercise.set %> sets </p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
