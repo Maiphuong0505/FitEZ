@@ -16,7 +16,7 @@
             <div class="row g-4">
               <!-- Date -->
               <div class="col-12">
-                <%= f.input :timestamp, as: :date, label: "Date of measurement" %>
+                <%= f.input :timestamp, as: :string, label: "Date of measurement", input_html: { data: {controller: "datepicker-body-stat"} } %>
               </div>
               <!-- Weight -->
               <div class="col-md-4">

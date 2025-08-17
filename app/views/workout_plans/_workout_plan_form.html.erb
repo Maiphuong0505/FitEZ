@@ -8,10 +8,12 @@
         </div>
         <div class="card-body p-5">
           <%= simple_form_for [client, workout_plan], method: :post, url: client_workout_plans_path(client) do |f| %>
-            <%= f.input :starting_date, as: :date, label: "Starting date" %>
-            <%= f.input :ending_date, as: :date, label: "Ending date" %>
+            <%= f.input :starting_date,
+                    as: :string,
+                    label: "Select Dates for #{client.first_name}'s Fitness Journey",
+                    input_html: { data: {controller: "datepicker-workout-plan"} } %>
             <%= f.hidden_field :client_id, value: client.id %>
-            <%= f.submit "Create Workout Plan" %>
+            <%= f.submit "Add Workout Plan" %>
           <% end %>
         </div>
       </div>

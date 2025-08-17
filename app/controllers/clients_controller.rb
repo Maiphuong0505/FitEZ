@@ -8,7 +8,7 @@ class ClientsController < ApplicationController
 
   def show
     authorize @client
-    @workout_plans = @client.workout_plans_as_client
+    @workout_plans = @client.workout_plans_as_client.order(:starting_date)
     @body_stat = BodyStat.new
     @workout_plan = WorkoutPlan.new
     @workout_session = WorkoutSession.new
