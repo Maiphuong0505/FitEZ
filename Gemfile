@@ -34,6 +34,9 @@ gem "chartkick"
 
 gem "groupdate"
 
+# Turbo Stream
+gem "solid_cable", "~> 1.0.3"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
