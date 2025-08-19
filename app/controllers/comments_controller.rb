@@ -6,7 +6,12 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     authorize @comment
     if @comment.save
-      redirect_to workout_session_path(@workout_session), notice: "Comment was successfully created."
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append("comment-section", partial: "comments/comment", locals: { comment: @comment })
+        end
+        format.html { redirect_to workout_session_path(@workout_session), notice: "Comment added successfully" }
+      end
     else
       render 'workout_sessions/show', locals: { workout_session: @workout_session, comment: @comment }, status: :unprocessable_entity
     end
