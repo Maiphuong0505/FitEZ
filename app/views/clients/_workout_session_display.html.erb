@@ -27,15 +27,19 @@
                   <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-info text-dark fw-normal fs-6">Solo-session</p>
                 <% end %>
               </div>
-              <div class="see-details-button">
-                <%= link_to workout_session_path(session) do %>
-                  <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
-                <% end %>
+              <div class="copy-session">
+                <%= button_to "Copy", workout_session_path(session), method: :post, class: "btn btn-outline-secondary rounded-4" %>
               </div>
+            </div>
+            <div class="see-details-button">
+              <%= link_to workout_session_path(session) do %>
+                <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>

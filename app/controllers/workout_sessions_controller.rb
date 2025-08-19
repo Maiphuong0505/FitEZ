@@ -25,15 +25,25 @@ class WorkoutSessionsController < ApplicationController
 
   # Method to copy existing session
   def copy
-    original_session = WorkoutSession.find(params[:id])
-    copied_sessions = original_session.deep_clone include: :session_exercises
-    # copied_session = original_session.dup
-    # copied_session.session_name = "Copy of #{original_session.session_name}"
-    # copied_session.date_time =
-    # copied_session.save
+    copied_session = copy_session(params[:id])
+    if copied_session.save
+      redirect_to workout_session_path(copied_session), notice: "Session copied successfully"
+    else
+      @workout_plans = @client.workout_plans_as_client
+      @body_stat = BodyStat.new
+      @workout_plan = WorkoutPlan.new
+      render "clients/show", status: :unprocessable_entity
+    end
   end
 
   private
+
+  def copy_session(session_id)
+    original_session = WorkoutSession.find(session_id)
+    copied_session = original_session.deep_clone include: :session_exercises
+    copied_session.session_name = "Copy of #{original_session.session_name}"
+    copied_session
+  end
 
   def set_workout_session
     @workout_session = WorkoutSession.find(params[:id])
