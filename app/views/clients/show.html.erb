@@ -2,47 +2,50 @@
   <h1><%= @client.first_name %> <%= @client.last_name %></h1>
   <hr>
   <%# The following div is for showing charts %>
-  <div>
-    <h3>Tab 1</h3>
-    <h4>Body Stats</h4>
-    <h5>Body Stats Chart</h5>
-    <!-- Code to display the charts, just change if you know what you are doing -->
-    <%= column_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
-      {name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }},
-      {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
-      colors: ["#4CAF50", "#FF9800", "#2196F3"],
-      curve: true,
-      empty: "No data available" %>
-  </div>
-  <hr>
-  <%# Div for add stats %>
-  <div class="add-body-stats-form">
-    <h5>Time for a Body Check-In</h5>
-    <%= render 'clients/body_stat_form', client: @client, body_stat: @body_stat %>
-  </div>
-  <hr>
-  <%# Div for workout plans %>
-  <div class="display_workout-plans">
-    <h3>Tab 2</h3>
-    <h4>Workout Plans</h4>
-    <% if @workout_plans.any? %>
-      <% @workout_plans.each do |plan| %>
-        <%= render 'clients/workout_plan_display', workout_plans: @workout_plans, plan: plan, workout_session: @workout_session, workout_plan: plan %>
-      <% end %>
-    <% else %>
-      <% if current_user.trainer? %>
-        <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> <%= @client.first_name %>'s plan awaits!</p>
-      <% else %>
-        <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> Waiting for a plan? Ask your trainer to add one!</p>
-      <% end %>
-    <% end %>
-  </div>
-  <%# Add workout plan form %>
-  <% if current_user.trainer? %>
-    <div class="card mt-4">
-      <div class="card-body">
-        <%= render 'workout_plans/workout_plan_form', workout_plan: @workout_plan, client: @client %>
+  <div class="row">
+    <div class="col-12 col-md-7">
+      <h3>Tab 1</h3>
+      <h4>Body Stats</h4>
+      <h5>Body Stats Chart</h5>
+      <!-- Code to display the charts, just change if you know what you are doing -->
+      <%= column_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+        {name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }},
+        {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
+        colors: ["#4CAF50", "#FF9800", "#2196F3"],
+        curve: true,
+        empty: "No data available" %>
+    </div>
+
+    <%# Div for add stats %>
+    <div class="col 12 col-md-5">
+      <div class="add-body-stats-form">
+        <h5 class="text-center">Time for a Body Check-In</h5>
+        <%= render 'clients/body_stat_form', client: @client, body_stat: @body_stat %>
       </div>
     </div>
-  <% end %>
-</div>
+      <hr>
+      <%# Div for workout plans %>
+      <div class="display_workout-plans">
+        <h3>Tab 2</h3>
+        <h4>Workout Plans</h4>
+        <% if @workout_plans.any? %>
+          <% @workout_plans.each do |plan| %>
+            <%= render 'clients/workout_plan_display', workout_plans: @workout_plans, plan: plan, workout_session: @workout_session, workout_plan: plan %>
+          <% end %>
+        <% else %>
+          <% if current_user.trainer? %>
+            <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> <%= @client.first_name %>'s plan awaits!</p>
+          <% else %>
+            <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> Waiting for a plan? Ask your trainer to add one!</p>
+          <% end %>
+        <% end %>
+      </div>
+      <%# Add workout plan form %>
+      <% if current_user.trainer? %>
+        <div class="card mt-4">
+          <div class="card-body">
+            <%= render 'workout_plans/workout_plan_form', workout_plan: @workout_plan, client: @client %>
+          </div>
+        </div>
+      <% end %>
+    </div>
