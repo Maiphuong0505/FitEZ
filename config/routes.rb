@@ -22,4 +22,6 @@ Rails.application.routes.draw do
     resources :session_exercises, only: %i[create]
     resources :comments, only: %i[create]
   end
+
+  resources :exercises, only: %i[index]
 end

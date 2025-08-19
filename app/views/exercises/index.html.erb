@@ -1,0 +1,12 @@
+<div class="container my-3">
+  <% @exercises.each do |exercise| %>
+    <hr>
+    <h2><%= exercise.name %></h2>
+    <% unless exercise.starting_position.blank? %>
+      <h5><%= exercise.starting_position%></h5>
+    <% else %>
+      <h5>No execution</h5>
+    <% end %>
+    <hr>
+  <% end %>
+</div>
