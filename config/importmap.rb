@@ -13,3 +13,4 @@ pin "Chart.bundle", to: "Chart.bundle.js"
 pin "tom-select", to: "https://esm.sh/tom-select@2.4.3"
 pin "@orchidjs/sifter", to: "@orchidjs--sifter.js" # @1.1.0
 pin "@orchidjs/unicode-variants", to: "@orchidjs--unicode-variants.js" # @1.1.2
+pin "flatpickr" # @4.6.13

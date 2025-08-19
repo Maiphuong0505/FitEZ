@@ -2,8 +2,13 @@ class WorkoutPlansController < ApplicationController
   before_action :set_client, only: %i[create]
 
   def create
-    @workout_plan = WorkoutPlan.new(workout_plan_params)
-    @workout_plan.trainer_id = current_user.id
+    date_range = params[:workout_plan][:starting_date].split(" to ")
+    @workout_plan = WorkoutPlan.new(
+      starting_date: date_range[0],
+      ending_date: date_range[1],
+      trainer_id: current_user.id,
+      client_id: @client.id
+    )
     authorize @workout_plan
     if @workout_plan.save
       redirect_to client_path(@client), notice: "Workout plan created successfully."
@@ -20,9 +25,5 @@ class WorkoutPlansController < ApplicationController
 
   def set_client
     @client = User.find(params[:client_id])
-  end
-
-  def workout_plan_params
-    params.require(:workout_plan).permit(:starting_date, :ending_date, :client_id)
   end
 end
