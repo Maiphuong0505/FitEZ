@@ -37,6 +37,12 @@ gem "groupdate"
 # Turbo Stream
 gem "solid_cable", "~> 1.0.3"
 
+# AI feature - Search for the closest vector
+gem "neighbor"
+
+# Ai feature - Ruby Open AI
+gem "ruby-openai"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
