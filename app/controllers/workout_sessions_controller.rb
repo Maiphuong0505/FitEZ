@@ -23,6 +23,16 @@ class WorkoutSessionsController < ApplicationController
     end
   end
 
+  # Method to copy existing session
+  def copy
+    original_session = WorkoutSession.find(params[:id])
+    copied_sessions = original_session.deep_clone include: :session_exercises
+    # copied_session = original_session.dup
+    # copied_session.session_name = "Copy of #{original_session.session_name}"
+    # copied_session.date_time =
+    # copied_session.save
+  end
+
   private
 
   def set_workout_session
