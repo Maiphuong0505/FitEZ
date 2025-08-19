@@ -5,7 +5,7 @@ class BodyStatsController < ApplicationController
     @body_stat.user_id = @client.id
     authorize @body_stat
     if @body_stat.save
-      redirect_to client_path(@client), notice: "Finally! Added!"
+      redirect_to client_path(@client), notice: "Your stats are now shown in charts!"
     else
       @workout_plans = @client.workout_plans_as_client
       @workout_plan = WorkoutPlan.new
