@@ -29,17 +29,11 @@
   <h1>Comments about <%= @workout_session.session_name %> training</h1>
   <div id="comment-section" class="comments">
     <% @workout_session.comments.each do |comment| %>
-      <div id="comment-<%= comment.id %>">
-        <small>
-          <strong><%= comment.user.first_name %></strong>
-          <i><%= comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-        </small>
-        <p><%= comment.content %></p>
-      </div>
+      <%= render "comments/comment", comment: comment %>
     <% end %>
   </div>
   <%= simple_form_for [@workout_session, @comment],
-        html: {class: "d-flex"} do |f|
+        html: { class: "d-flex", data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" } } do |f|
       %>
   <%= f.input :content,
           label: false,
