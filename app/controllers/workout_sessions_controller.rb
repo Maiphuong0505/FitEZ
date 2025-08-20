@@ -1,6 +1,6 @@
 class WorkoutSessionsController < ApplicationController
   before_action :set_workout_session, only: %i[show]
-  before_action :set_client, only: %i[create]
+  before_action :set_client, only: %i[create copy]
 
   def show
     authorize @workout_session
@@ -25,9 +25,10 @@ class WorkoutSessionsController < ApplicationController
 
   # Method to copy existing session
   def copy
-    copied_session = copy_session(params[:id])
-    if copied_session.save
-      redirect_to workout_session_path(copied_session), notice: "Session copied successfully"
+    @copied_session = copy_session(params[:id])
+    authorize @copied_session
+    if @copied_session.save
+      redirect_to workout_session_path(@copied_session), notice: "Session copied successfully"
     else
       @workout_plans = @client.workout_plans_as_client
       @body_stat = BodyStat.new
@@ -41,7 +42,8 @@ class WorkoutSessionsController < ApplicationController
   def copy_session(session_id)
     original_session = WorkoutSession.find(session_id)
     copied_session = original_session.deep_clone include: :session_exercises
-    copied_session.session_name = "Copy of #{original_session.session_name}"
+    # have strong params from the form to update the values of copied_session
+    copied_session.assign_attributes(workout_session_params)
     copied_session
   end
 

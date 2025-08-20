@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :workout_sessions, only: %i[show] do
+    get :copy, to: "workout_sessions#copy"
     post :copy, to: "workout_sessions#copy"
     resources :session_exercises, only: %i[create]
     resources :comments, only: %i[create]
