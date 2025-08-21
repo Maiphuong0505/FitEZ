@@ -13,6 +13,9 @@
             <%= f.input :duration, label: "How long is the session (minutes)?",input_html: { class: "form-control", placeholder: "30" }%>
             <%= f.input :with_trainer, as: :radio_buttons, collection: [[ 'Yes', true ], [ 'No', false ]], label: "With a trainer?" %>
             <%= f.hidden_field :workout_plan_id, value: workout_plan.id %>
+            <% if params[:id] %>
+              <%= hidden_field_tag :copy_from_id, params[:id] %>
+            <% end %>
             <%= f.submit "Add a session", class: "btn btn-danger" %>
           <% end %>
         </div>
