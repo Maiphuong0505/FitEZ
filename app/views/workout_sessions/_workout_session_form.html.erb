@@ -12,7 +12,7 @@
               <%= f.input :session_name, label: "Focus of the session" %>
             </div>
             <div class="col-12 my-0">
-              <%= f.input :date_time, as: :string, label: "Choose date and time", input_html: { data: {controller: "datepicker-workout-session"} } %>
+              <%= f.input :date_time, as: :string, label: "Choose date and time", label_html: {for: dom_id(workout_plan)}, input_html: { data: {controller: "datepicker-workout-session"}, id: dom_id(workout_plan) } %>
               <!--value type for normal date_time input is datetime-->
             </div>
             <div class="col-12 my-0">

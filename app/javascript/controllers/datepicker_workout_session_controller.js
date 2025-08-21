@@ -8,6 +8,7 @@ export default class extends Controller {
     flatpickr(this.element, {
       enableTime: true,
       dateFormat: "Y-m-d H:i",
+      disableMobile: "true",
       minDate: "today",
       time_24hr: true,
       minTime: "7:00",
