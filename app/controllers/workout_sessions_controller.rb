@@ -1,6 +1,6 @@
 class WorkoutSessionsController < ApplicationController
   before_action :set_workout_session, only: %i[show copy]
-  before_action :set_client, only: %i[create copy]
+  before_action :set_client, only: %i[create]
 
   def show
     authorize @workout_session
@@ -12,23 +12,16 @@ class WorkoutSessionsController < ApplicationController
   # Method to copy existing session
   def copy
     @workout_session_copy = @workout_session.deep_clone include: :session_exercises
-    @workout_session_copy.session_name = "#{@workout_session.session_name} (Copy)"
-    @workout_session_copy.date_time = Time.current
-    @workout_session_copy.id = nil
+    @workout_session_copy.assign_attributes(workout_session_params)
     authorize @workout_session_copy
-    render :new, locals: { workout_session: @workout_session_copy, copy_from_id: @workout_session.id }
+    @workout_session_copy.save
+    redirect_to client_path(@workout_session_copy.workout_plan.client_id)
   end
 
   def create
     @workout_session = WorkoutSession.new(workout_session_params)
     authorize @workout_session
     if @workout_session.save
-      if params[:copy_from_id].present?
-        original = WorkoutSession.find(params[:copy_from_id])
-        original.session_exercises.each do |exercise|
-          @workout_session.session_exercises.create(exercise.attributes.except("id", "workout_session_id", "created_at", "updated_at"))
-        end
-      end
       redirect_to workout_session_path(@workout_session), notice: "Workout session created successfully."
     else
       # render client show page if workout plan is invalid
@@ -43,7 +36,7 @@ class WorkoutSessionsController < ApplicationController
   private
 
   def set_workout_session
-    @workout_session = WorkoutSession.find(params[:id])
+    @workout_session = WorkoutSession.find(params[:id] || params[:workout_session_id])
   end
 
   def set_client
