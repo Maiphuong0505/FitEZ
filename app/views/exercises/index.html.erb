@@ -1,0 +1,33 @@
+<div class="container my-3">
+  <ol>
+    <% @exercises.each do |exercise| %>
+      <hr>
+      <li>
+        <h2><%= exercise.name %></h2>
+        <% unless exercise.execution.blank? %>
+          <h5>Execution: <%= exercise.execution%></h5>
+        <% else %>
+          <h5>No execution</h5>
+        <% end %>
+        <!--
+        <% unless exercise.starting_position.blank? %>
+          <h5>Starting position: <%= exercise.starting_position%></h5>
+        <% else %>
+          <h5>No starting_position</h5>
+        <% end %>
+        <% unless exercise.equipment.blank? %>
+          <h5>Equipment: <%= exercise.equipment%></h5>
+        <% else %>
+          <h5>No equipment</h5>
+        <% end %>
+        <% unless exercise.main_muscles.blank? %>
+          <h5>Main muscles: <%= exercise.main_muscles%></h5>
+        <% else %>
+          <h5>No main muscles</h5>
+        <% end %>
+        -->
+        <hr>
+      <% end %>
+    </li>
+  </ol>
+</div>
