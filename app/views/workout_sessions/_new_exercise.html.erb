@@ -3,9 +3,9 @@
     <div class="row justify-content-center">
       <div class="col-lg-10 col-md-10 col-sm-12">
         <div class="card border-0 shadow-sm">
-          <div class="card-header bg-light border-0 py-4">
-            <h1 class="h3 text-center mb-2 fw-bold">Add exercises</h1>
-            <p class="text-muted text-center mb-0">Customize your client's exercise</p>
+          <div class="card-header bg-danger border-0 py-4">
+            <h1 class="h3 text-center text-light mb-2 fw-bold">Add exercises</h1>
+            <p class="text-center text-light mb-0">Customize your client's exercise</p>
           </div>
           <div class="card-body p-5">
             <%= simple_form_for([workout_session, session_exercise], data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" }) do |f| %>
@@ -64,7 +64,7 @@
                 </div>
                 <!-- Submit Button -->
                 <div class="col-12 text-center pt-3">
-                  <%= f.button :submit, "Add this exercise", class: "btn btn-primary btn-lg px-5" %>
+                  <%= f.button :submit, "Add this exercise", class: "btn btn-danger btn-lg px-5" %>
                 </div>
               </div>
             <% end %>
