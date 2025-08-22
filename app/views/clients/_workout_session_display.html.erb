@@ -34,7 +34,7 @@
               <% end %>
             </div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
               Copy Session
             </button>
             <!-- Modal -->
@@ -47,10 +47,6 @@
                   </div>
                   <div class="modal-body">
                     <%= render "workout_sessions/copy_form", workout_session: session, empty_workout_session: session.dup %>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                   </div>
                 </div>
               </div>
