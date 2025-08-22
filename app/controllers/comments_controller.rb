@@ -13,6 +13,10 @@ class CommentsController < ApplicationController
         format.html { redirect_to workout_session_path(@workout_session), notice: "Comment added successfully" }
       end
     else
+      @session_exercises = @workout_session.session_exercises.any? ? @workout_session.session_exercises : []
+      @session_exercise = SessionExercise.new
+      @questions = current_user.questions
+      @question = Question.new
       render 'workout_sessions/show', locals: { workout_session: @workout_session, comment: @comment }, status: :unprocessable_entity
     end
   end

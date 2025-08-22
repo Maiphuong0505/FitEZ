@@ -16,6 +16,9 @@ class SessionExercisesController < ApplicationController
     else
       @session_exercises = @workout_session.session_exercises if @workout_session.session_exercises.any?
       @comment = Comment.new
+      @questions = current_user.questions
+      @question = Question.new
+
       render "workout_sessions/show", status: :unprocessable_entity
     end
   end

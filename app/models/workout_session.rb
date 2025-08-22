@@ -3,6 +3,7 @@ class WorkoutSession < ApplicationRecord
   has_many :session_exercises, dependent: :destroy
   has_many :exercises, through: :session_exercises
   has_many :comments, dependent: :destroy
+  has_many :questions, dependent: :destroy
 
   validates :session_name, presence: true
   validates :date_time, presence: true

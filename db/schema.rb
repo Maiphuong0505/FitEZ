@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_22_120639) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_22_123520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -73,6 +73,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_22_120639) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.vector "embedding", limit: 1536
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.text "user_question"
+    t.text "ai_answer"
+    t.bigint "user_id", null: false
+    t.bigint "workout_session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_questions_on_user_id"
+    t.index ["workout_session_id"], name: "index_questions_on_workout_session_id"
   end
 
   create_table "session_exercises", force: :cascade do |t|
@@ -263,6 +274,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_22_120639) do
   add_foreign_key "body_stats", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "comments", "workout_sessions"
+  add_foreign_key "questions", "users"
+  add_foreign_key "questions", "workout_sessions"
   add_foreign_key "session_exercises", "exercises"
   add_foreign_key "session_exercises", "workout_sessions"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

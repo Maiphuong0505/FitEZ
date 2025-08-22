@@ -8,24 +8,26 @@
         </div>
         <div class="card-body p-5">
           <%= simple_form_for [workout_plan, workout_session], method: :post, url: workout_plan_workout_sessions_path(workout_plan) do |f| %>
-            <div class="col-12 my-0">
-              <%= f.input :session_name, label: "Focus of the session" %>
-            </div>
-            <div class="col-12 my-0">
-              <%= f.input :date_time, as: :string, label: "Choose date and time", label_html: {for: dom_id(workout_plan)}, input_html: { data: {controller: "datepicker-workout-session"}, id: dom_id(workout_plan) } %>
-              <!--value type for normal date_time input is datetime-->
-            </div>
-            <div class="col-12 my-0">
-              <%= f.input :duration, label: "Session duration (minutes)?",input_html: { class: "form-control", placeholder: "30" }%>
-            </div>
-            <div class="col-12 my-0">
-              <%= f.input :with_trainer, as: :radio_buttons, collection: [[ 'Yes', true ], [ 'No', false ]], label: "With a trainer?" %>
-            </div>
-            <%= f.hidden_field :workout_plan_id, value: workout_plan.id %>
-            <div class="col-12 text-center pt-1">
-              <%= f.submit "Add a session", class: "btn btn-danger px-5" %>
-            </div>
-          <% end %>
+            <div class="row g-4 justify-content-center align-items-center">
+              <div class="col-12 my-0">
+                <%= f.input :session_name, label: "Focus of the session" %>
+              </div>
+              <div class="col-12 my-0">
+                <%= f.input :date_time, as: :string, label: "Choose date and time", label_html: {for: dom_id(workout_plan)}, input_html: { data: {controller: "datepicker-workout-session"}, id: dom_id(workout_plan) } %>
+                <!--value type for normal date_time input is datetime-->
+              </div>
+              <div class="col-12 my-0">
+                <%= f.input :duration, label: "Session duration (minutes)?",input_html: { class: "form-control", placeholder: "30" }%>
+              </div>
+              <div class="col-12 my-0">
+                <%= f.input :with_trainer, as: :radio_buttons, collection: [[ 'Yes', true ], [ 'No', false ]], label: "With a trainer?" %>
+              </div>
+              <%= f.hidden_field :workout_plan_id, value: workout_plan.id %>
+              <div class="col-12 text-center pt-1">
+                <%= f.submit "Add Session", class: "btn btn-danger px-5" %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

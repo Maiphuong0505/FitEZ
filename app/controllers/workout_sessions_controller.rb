@@ -7,6 +7,8 @@ class WorkoutSessionsController < ApplicationController
     @session_exercises = @workout_session.session_exercises.any? ? @workout_session.session_exercises : []
     @session_exercise = SessionExercise.new
     @comment = Comment.new
+    @questions = current_user.questions
+    @question = Question.new
   end
 
   def create
