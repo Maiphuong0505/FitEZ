@@ -8,7 +8,8 @@ export default class extends Controller {
     flatpickr(this.element, {
       dateFormat: "Y-m-d",
       maxDate: "today",
+      disableMobile: "true",
     })
-    console.log("okinawa body stat")
+    console.log("okinawa body stat", this.element)
   }
 }
