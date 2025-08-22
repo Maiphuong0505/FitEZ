@@ -9,6 +9,7 @@ export default class extends Controller {
       dateFormat: "Y-m-d",
       mode: "range",
       minDate: "today",
+      disableMobile: "true",
     })
     console.log("buddah workout plan")
   }
