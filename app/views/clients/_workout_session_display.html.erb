@@ -28,24 +28,23 @@
                 <% end %>
               </div>
             </div>
-            <div class="see-details-button">
+            <div class="see-details-button d-flex align-items-center">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-warning rounded-4 me-2" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
+                <i class="fa-solid fa-copy"></i>
+              </button>
               <%= link_to workout_session_path(session) do %>
                 <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
               <% end %>
             </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
-              Copy Session
-            </button>
             <!-- Modal -->
             <div class="modal fade" id="<%= dom_id(session) %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body py-0">
                     <%= render "workout_sessions/copy_form", workout_session: session, empty_workout_session: session.dup %>
                   </div>
                 </div>

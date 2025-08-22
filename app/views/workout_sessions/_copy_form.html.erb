@@ -1,17 +1,19 @@
-<div class="container py-5">
+<div class="container py-0">
   <div class="row justify-content-center">
     <div class="col-lg-10 col-md-10 col-sm-12">
       <div class="card border-0 shadow-sm">
         <div class="card-header bg-light border-0 py-4">
           <h1 class="h3 text-center mb-2 fw-bold">Copy a Workout Session</h1>
         </div>
-        <div class="card-body p-5">
+        <div class="card-body pt-0 pb-5">
           <%= simple_form_for [workout_session, empty_workout_session], method: :post, url: workout_session_copy_path(workout_session) do |f| %>
-            <%= f.input :session_name, label: "Write the focus of the session", input_html: { value: "Copy of #{workout_session.session_name}" } %>
-            <%= f.input :date_time, as: :datetime, label: "Choose the date and time for the session" %>
-            <%= f.input :duration, label: "How long is the session (minutes)?",input_html: { class: "form-control", placeholder: "30" }%>
+            <%= f.input :session_name, label: "Focus of the session", input_html: { value: "Copy of #{workout_session.session_name}" } %>
+            <%= f.input :date_time, as: :string, label: "Choose date and time", input_html: { data: {controller: "datepicker-workout-session"} } %>
+            <%= f.input :duration, label: "Session duration (minutes)?",input_html: { class: "form-control", placeholder: "30" }%>
             <%= f.input :with_trainer, as: :radio_buttons, collection: [[ 'Yes', true ], [ 'No', false ]], label: "With a trainer?" %>
-            <%= f.submit "Add a session", class: "btn btn-danger" %>
+            <div class="col-12 text-center pt-1">
+              <%= f.submit "Add a session", class: "btn btn-danger px-5" %>
+            </div>
           <% end %>
         </div>
       </div>
