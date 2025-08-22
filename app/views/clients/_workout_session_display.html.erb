@@ -27,10 +27,27 @@
                   <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-info text-dark fw-normal fs-6">Solo-session</p>
                 <% end %>
               </div>
-              <div class="see-details-button">
-                <%= link_to workout_session_path(session) do %>
-                  <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
-                <% end %>
+            </div>
+            <div class="see-details-button d-flex align-items-center">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-warning rounded-4 me-2" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+              <%= link_to workout_session_path(session) do %>
+                <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
+              <% end %>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="<%= dom_id(session) %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body py-0">
+                    <%= render "workout_sessions/copy_form", workout_session: session, empty_workout_session: session.dup %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

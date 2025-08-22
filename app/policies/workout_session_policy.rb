@@ -16,6 +16,10 @@ class WorkoutSessionPolicy < ApplicationPolicy
     true
   end
 
+  def copy?
+    [record.workout_plan.client, record.workout_plan.trainer].include?(user)
+  end
+
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve

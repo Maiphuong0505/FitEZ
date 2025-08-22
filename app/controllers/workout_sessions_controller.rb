@@ -1,5 +1,5 @@
 class WorkoutSessionsController < ApplicationController
-  before_action :set_workout_session, only: %i[show]
+  before_action :set_workout_session, only: %i[show copy]
   before_action :set_client, only: %i[create]
 
   def show
@@ -7,6 +7,15 @@ class WorkoutSessionsController < ApplicationController
     @session_exercises = @workout_session.session_exercises.any? ? @workout_session.session_exercises : []
     @session_exercise = SessionExercise.new
     @comment = Comment.new
+  end
+
+  # Method to copy existing session
+  def copy
+    @workout_session_copy = @workout_session.deep_clone include: :session_exercises
+    @workout_session_copy.assign_attributes(workout_session_params)
+    authorize @workout_session_copy
+    @workout_session_copy.save
+    redirect_to client_path(@workout_session_copy.workout_plan.client_id)
   end
 
   def create
@@ -23,10 +32,11 @@ class WorkoutSessionsController < ApplicationController
     end
   end
 
+
   private
 
   def set_workout_session
-    @workout_session = WorkoutSession.find(params[:id])
+    @workout_session = WorkoutSession.find(params[:id] || params[:workout_session_id])
   end
 
   def set_client
