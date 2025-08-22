@@ -43,6 +43,9 @@ gem "neighbor"
 # Ai feature - Ruby Open AI
 gem "ruby-openai"
 
+# Background job
+gem "solid_queue"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
