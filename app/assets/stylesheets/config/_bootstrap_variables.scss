@@ -27,3 +27,22 @@ $border-radius-xl:            .5rem;
 $border-radius-xxl:           1rem;
 
 // Override other variables below!
+// Tabs
+$nav-pills-link-active-bg: $danger;
+$nav-link-color: $danger;
+$nav-link-hover-color: $light;
+
+.nav-pills .nav-link:not(.active) {
+  // box-shadow: inset 0 0 0 1px $danger;
+  background-color: #c9b5b5;
+  color: $light;
+}
+
+.nav-pills .nav-link {
+  transition: box-shadow 0.1s, transform 0.1s;
+}
+
+.nav-pills .nav-link:active {
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.15);
+  transform: scale(0.97);
+}
