@@ -8,17 +8,19 @@
         </div>
         <div class="card-body p-5">
           <%= simple_form_for [client, workout_plan], method: :post, url: client_workout_plans_path(client) do |f| %>
-            <div class="col-12 my-0">
-              <%= f.input :starting_date,
+            <div class="row g-4 justify-content-center align-items-center">
+              <div class="col-12 my-0">
+                <%= f.input :starting_date,
                     as: :string,
                     label: "Select a date range",
                     input_html: { data: {controller: "datepicker-workout-plan"} } %>
-            </div>
-            <%= f.hidden_field :client_id, value: client.id %>
-            <div class="col-12 text-center pt-1 mt-5">
-              <%= f.submit "Add Workout Plan",  class: "btn btn-danger px-5" %>
-            </div>
-          <% end %>
+              </div>
+              <%= f.hidden_field :client_id, value: client.id %>
+              <div class="col-12 text-center pt-1">
+                <%= f.submit "Add Plan",  class: "btn btn-danger px-5" %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
