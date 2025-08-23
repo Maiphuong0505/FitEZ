@@ -14,28 +14,28 @@
           </div>
         </div>
         <div class="col-md-8 h-100">
-          <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="card-body pb-0 d-flex flex-column justify-content-center">
+            <div class="d-flex justify-content-center align-items-center mb-2">
               <div class="plan-info">
                 <h5 class="card-title fw-bold text-dark mb-1">
                   Session name: <%= session.session_name %>
                 </h5>
                 <p class="mb-1">Date and time: <%= session.date_time.strftime("%a %b %e at %l:%M %p") %></p>
-                <% if session.with_trainer %>
-                  <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-danger text-light fw-normal fs-6">With-trainer-session</p>
-                <% else %>
-                  <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-info text-dark fw-normal fs-6">Solo-session</p>
+                <div class="d-flex align-items-center">
+                  <% if session.with_trainer %>
+                    <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-danger text-light fw-normal fs-6">With-trainer-session</p>
+                  <% else %>
+                    <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-info text-dark fw-normal fs-6">Solo-session</p>
+                  <% end %>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-outline-warning rounded-4 me-2" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
+                    <i class="fa-solid fa-copy"></i>
+                  </button>
+                  <%= link_to workout_session_path(session) do %>
+                    <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
+                  </div>
                 <% end %>
               </div>
-            </div>
-            <div class="see-details-button d-flex align-items-center">
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-outline-warning rounded-4 me-2" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
-                <i class="fa-solid fa-copy"></i>
-              </button>
-              <%= link_to workout_session_path(session) do %>
-                <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
-              <% end %>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="<%= dom_id(session) %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
