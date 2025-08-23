@@ -3,6 +3,7 @@ require "nokogiri"
 
 puts "Clearing the database..."
 
+SessionExercise.destroy_all
 Exercise.destroy_all
 
 url = "https://www.simplyfitness.com/pages/workout-exercise-guides"
@@ -45,6 +46,7 @@ exercise_urls.each do |exercise_url|
   )
   exercise.photo.attach(io: file, filename: "#{name}.jpg", content_type: "image/png")
   exercise.save
+  puts "Finish creating #{exercise.name}!"
 end
 
 puts "Finish creating #{Exercise.count} exercises!"

@@ -17,7 +17,7 @@ users = User.all
 
 users.each_with_index do |user, index|
   puts "Creating body stats for #{user.last_name} #{user.first_name}."
-  timestamp = Random.rand(Time.zone.today.last_year..Time.zone.today)
+  timestamp = Random.rand(Time.zone.today.last_year..(Time.zone.today - 21))
   initial_stats = body_stats_data[index]
   body_stats = [
     { timestamp: timestamp, weight: initial_stats[:weight], body_fat: initial_stats[:body_fat], muscle_mass: initial_stats[:muscle_mass], user_id: user.id },

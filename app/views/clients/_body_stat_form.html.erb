@@ -2,10 +2,10 @@
   <div class="row justify-content-end">
     <div class="col-lg-10 col-md-10 col-sm-12">
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-light border-0 py-4">
+        <div class="card-header bg-danger border-0 py-4">
           <% if current_user.trainer? %>
-            <h1 class="h3 text-center mb-2 fw-bold">Add <%= client.first_name %>'s body stats</h1>
-            <p class="text-muted text-center mb-0">Show us how fat <%= client.first_name %> is!</p>
+            <h1 class="h3 text-center text-light mb-2 fw-bold">Add <%= client.first_name %>'s body stats</h1>
+            <p class="text-center text-light mb-0">Show us how fat <%= client.first_name %> is!</p>
           <% else %>
             <h1 class="h3 text-center mb-2 fw-bold">Add your body stats</h1>
             <p class="text-muted text-center mb-0">Show us how fat you are!</p>
@@ -13,7 +13,7 @@
         </div>
         <div class="card-body p-5">
           <%= simple_form_for([client, body_stat], method: :post, url: client_body_stats_path(client)) do |f| %>
-            <div class="row g-4">
+            <div class="row g-4 justify-content-center align-items-center">
               <!-- Date -->
               <div class="col-12 my-0">
                 <%= f.input :timestamp, as: :string, label: "Date of measurement", input_html: { data: {controller: "datepicker-body-stat"} } %>
@@ -47,7 +47,7 @@
               </div>
               <!-- Submit Button -->
               <div class="col-12 text-center pt-1">
-                <%= f.button :submit, "Add body stats", class: "btn btn-danger btn-lg px-5" %>
+                <%= f.button :submit, "Add body stats", class: "btn btn-danger px-5" %>
               </div>
             </div>
           <% end %>

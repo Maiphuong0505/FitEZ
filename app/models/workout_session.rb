@@ -3,6 +3,7 @@ class WorkoutSession < ApplicationRecord
   has_many :session_exercises, dependent: :destroy
   has_many :exercises, through: :session_exercises
   has_many :comments, dependent: :destroy
+  has_many :questions, dependent: :destroy
 
   validates :session_name, presence: true
   validates :date_time, presence: true
@@ -12,8 +13,9 @@ class WorkoutSession < ApplicationRecord
     greater_than_or_equal_to: 30,
     message: "must be at least 30 minutes"
   }
-  validate :date_time_cannot_be_in_the_past
+  # validate :date_time_cannot_be_in_the_past
   validate :date_time_cannot_be_outside_of_plan_date
+  # validate :date_time_unique
 
   scope :upcoming, -> { where("date_time >= ?", Time.current) }
 
@@ -29,6 +31,18 @@ class WorkoutSession < ApplicationRecord
 
     if date_time.present? && !plan_range.cover?(session_date)
       errors.add(:date_time, "must be within plan period")
+    end
+  end
+
+  def date_time_unique
+    if current_user.trainer?
+      existing_sessions = current_user.workout_plans_as_trainer.map(&:workout_sessions).flatten!
+    else
+      existing_sessions = current_user.workout_plans_as_client.map(&:workout_sessions).flatten!
+    end
+    existing_sessions_date_time = existing_sessions.map(&:date_time)
+    if date_time.present? && existing_sessions_date_time.include(date_time)
+      errors.add(:date_time, "already exists. Please choose another date and time")
     end
   end
 end

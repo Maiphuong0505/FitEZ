@@ -2,19 +2,25 @@
   <div class="row justify-content-center">
     <div class="col-lg-10 col-md-10 col-sm-12">
       <div class="card border-0 shadow-sm">
-        <div class="card-header bg-light border-0 py-4">
-          <h1 class="h3 text-center mb-2 fw-bold">Plan <%= client.first_name %>'s Next Workout Journey</h1>
-          <p class="text-muted text-center mb-0">Set your client’s path to success!</p>
+        <div class="card-header bg-danger light-gray border-0 py-4">
+          <h1 class="h3 text-center text-light mb-2 fw-bold">Plan <%= client.first_name %>'s Next Workout Journey</h1>
+          <p class="text-center text-light mb-0">Set your client’s path to success!</p>
         </div>
         <div class="card-body p-5">
           <%= simple_form_for [client, workout_plan], method: :post, url: client_workout_plans_path(client) do |f| %>
-            <%= f.input :starting_date,
+            <div class="row g-4 justify-content-center align-items-center">
+              <div class="col-12 my-0">
+                <%= f.input :starting_date,
                     as: :string,
-                    label: "Select Dates for #{client.first_name}'s Fitness Journey",
+                    label: "Select a date range",
                     input_html: { data: {controller: "datepicker-workout-plan"} } %>
-            <%= f.hidden_field :client_id, value: client.id %>
-            <%= f.submit "Add Workout Plan" %>
-          <% end %>
+              </div>
+              <%= f.hidden_field :client_id, value: client.id %>
+              <div class="col-12 text-center pt-1">
+                <%= f.submit "Add Plan",  class: "btn btn-danger px-5" %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
