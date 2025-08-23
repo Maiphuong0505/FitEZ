@@ -13,7 +13,7 @@ class WorkoutSession < ApplicationRecord
     greater_than_or_equal_to: 30,
     message: "must be at least 30 minutes"
   }
-  validate :date_time_cannot_be_in_the_past
+  # validate :date_time_cannot_be_in_the_past
   validate :date_time_cannot_be_outside_of_plan_date
   validate :date_time_unique
 
