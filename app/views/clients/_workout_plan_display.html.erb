@@ -30,7 +30,9 @@
                   <i class="fa-solid fa-medal"></i> <%= pluralize(plan.workout_sessions.count, "session") %>
                 </button>
               <% else %>
-                <h5 class="text-muted my-4 badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-5"><i class="fa-solid fa-face-grimace"></i> 0 sessions</h5>
+                <h5 class="text-muted my-4 badge rounded-pill px-3 py-0 me-2 border bg-white text-dark fw-normal fs-6 d-flex align-items-center">
+                  <i class="fa-solid fa-face-grimace me-2"></i>0 sessions
+                </h5>
               <% end %>
               <div class="add-session-button py-2 my-4 mx-2">
                 <button type="button" class="btn btn-outline-warning rounded-4" data-action="click->form-toggle-display#fire"><i class="fa-solid fa-calendar-plus"></i></button>
