@@ -21,7 +21,7 @@
       <div class="card-body p-0">
         <div class="d-flex justify-content-center align-items-start">
           <div class="plan-info">
-            <h3 class="card-title fw-bold text-dark mb-1 fs-4">
+            <h3 class="card-title fw-bold text-dark mt-0 mb-1 fs-4">
               <span class="fs-5">From</span> <%= plan.starting_date %> <span class="fs-5">to</span> <%= plan.ending_date %>
             </h3>
             <div class="d-flex justify-content-center">
@@ -31,7 +31,7 @@
                 </button>
               <% else %>
                 <h5 class="text-muted my-4 badge rounded-pill px-3 py-0 me-2 border bg-white text-dark fw-normal fs-6 d-flex align-items-center">
-                  <i class="fa-solid fa-face-grimace me-2"></i>0 sessions
+                  <i class="fa-solid fa-face-grimace me-2"></i>0 session
                 </h5>
               <% end %>
               <div class="add-session-button py-2 my-4 mx-2">
@@ -44,15 +44,16 @@
       </div>
     </div>
   </div>
+  <%# Div for session-adding form %>
+  <div data-form-toggle-display-target="togglableForm" class="add-session-form row g-0 h-100 my-3 px-3 d-none">
+    <%= render 'workout_sessions/workout_session_form', workout_session: workout_session, workout_plan: plan %>
+  </div>
+  <%# Div for displaying sessions %>
   <div data-display-toggle-target="togglableElement" class="session-display d-none">
     <% if plan.workout_sessions.any? %>
       <% plan.workout_sessions.each do |session| %>
         <%= render 'clients/workout_session_display', session: session%>
       <% end %>
     <% end %>
-  </div>
-  <%# Div for session-adding form %>
-  <div data-form-toggle-display-target="togglableForm" class="add-session-form row g-0 h-100 my-3 px-3 d-none">
-    <%= render 'workout_sessions/workout_session_form', workout_session: workout_session, workout_plan: plan %>
   </div>
 </div>

@@ -1,6 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: $danger;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -8,5 +8,19 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 150px;
+  width: 100px;
+}
+
+.avatar-toggler {
+  border: none;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Custom focus style for accessibility */
+.avatar-toggler:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #FFFFFF8C; /* circular glow */
+  border-radius: 50%; /* ensures focus ring follows the circle */
 }
