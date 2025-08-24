@@ -10,15 +10,15 @@
                   class: "img-fluid bg-white",
                   style: "max-height: 180px; object-fit: contain;") %>
           <% else %>
-            <i class="fa-solid fa-dumbbell text-danger" style="font-size:156px;"></i>
+            <%= image_tag "strength-training-placeholder.png", style: "width:156px; height:156px;" %>
           <% end %>
         <% else %>
-          <i class="fa-solid fa-dumbbell text-danger" style="font-size:156px;"></i>
+          <%= image_tag "sitting-meditation-placeholder.png", style: "width:156px; height:156px;" %>
         <% end %>
       </div>
     </div>
     <div class="col-md-8 h-100">
-      <div class="card-body pb-0">
+      <div class="card-body p-0">
         <div class="d-flex justify-content-center align-items-start">
           <div class="plan-info">
             <h3 class="card-title fw-bold text-dark mb-1 fs-4">
