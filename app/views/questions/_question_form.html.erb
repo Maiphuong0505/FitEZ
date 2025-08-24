@@ -1,0 +1,10 @@
+<%= simple_form_for [workout_session, question],
+      html: { class: "d-flex", data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" } }  do |f| %>
+  <div class="input-group mb-3 w-100">
+    <div class="form-floating">
+      <%= f.input :user_question, label: false, wrapper: false %>
+      <%= f.label :user_question, "Your question" %>
+    </div>
+    <%= f.submit "Ask", id: "new-question-button", class: "btn btn-danger" %>
+  </div>
+<% end %>

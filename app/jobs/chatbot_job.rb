@@ -40,10 +40,16 @@ class ChatbotJob < ApplicationJob
       load: #{session_exercise.load}, repetitions: #{session_exercise.repetitions}, set: #{session_exercise.set} **"
     end
     # to nearest_execises code as private method
-    system_text += "3. Always say the name of the exercise when suggesting one.
-    4. Never suggest an exercise that has the same name with any of the exercises that already existing in the current workout session.
+    system_text += "3. Always suggest each exercise in the following format:
+    'This is the exercise we suggest:
+      - Exercise name: ,/n
+      - Loads: ,/n
+      - Repetitions: ,/n
+      - Sets: .'/n
+    And then give a brief summary of the required equipment and the main muscles that get trained in the exercise."
+    system_text += "4. Never suggest an exercise that has the same name with any of the exercises that already existing in the current workout session.
     5. If you don't know the answer, you can say 'I don't know'.
-    If you don't have any exercise at the end of this message, say 'We don't have that'.  Here are the exercises you should use to answer the user's questions: "
+    Here are the exercises you should use to answer the user's questions: "
     nearest_exercises.each do |exercise|
       system_text += "** EXERCISE #{exercise.id}: name: #{exercise.name}, equipment: #{exercise.equipment}, main muscles: #{exercise.main_muscles},
       starting position: #{exercise.starting_position}, execution: #{exercise.execution} **"
