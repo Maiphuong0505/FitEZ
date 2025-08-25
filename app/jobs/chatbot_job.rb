@@ -9,23 +9,20 @@ class ChatbotJob < ApplicationJob
         messages: questions_formatted_for_openai
       }
     )
-    @new_content = chatgpt_response["choices"][0]["message"]["content"]
+    new_content = chatgpt_response["choices"][0]["message"]["content"]
 
-    human_content = @new_content.match(/<human>(.*?)<\/human>/m)
+    human_content = new_content.match(/<human>(.*?)<\/human>/m)
     human_response = human_content[1].strip
+    # ai_json = new_content.match(/<output>(.*?)<\/output>/m)
+    # json = ai_json[1].strip
 
     question.update(ai_answer: human_response)
+    # question.update(json_output: json)
     Turbo::StreamsChannel.broadcast_update_to(
       "question_#{@question.id}",
       target: "question_#{@question.id}",
       partial: "questions/question", locals: { question: question }
     )
-  end
-
-  def parse_json(question)
-    @question = question
-    json_output = @new_content.match(/<output>(.*?)<\/output>/m)
-    JSON.parse(json_output[1].strip)
   end
 
   private
