@@ -15,7 +15,7 @@ class WorkoutSession < ApplicationRecord
   }
   # validate :date_time_cannot_be_in_the_past
   validate :date_time_cannot_be_outside_of_plan_date
-  # validate :date_time_unique
+  validate :date_time_unique
 
   scope :upcoming, -> { where("date_time >= ?", Time.current) }
 
@@ -35,14 +35,15 @@ class WorkoutSession < ApplicationRecord
   end
 
   def date_time_unique
-    if current_user.trainer?
-      existing_sessions = current_user.workout_plans_as_trainer.map(&:workout_sessions).flatten!
-    else
-      existing_sessions = current_user.workout_plans_as_client.map(&:workout_sessions).flatten!
+    trainer = workout_plan.trainer
+    client = workout_plan.client
+    trainer_sessions = trainer.workout_sessions_as_trainer.map(&:date_time)
+    client_sessions = client.workout_sessions_as_client.map(&:date_time)
+    if trainer_sessions.include?(date_time)
+      errors.add(:date_time, "Trainer already has a session on that date. Please choose another date and time")
     end
-    existing_sessions_date_time = existing_sessions.map(&:date_time)
-    if date_time.present? && existing_sessions_date_time.include(date_time)
-      errors.add(:date_time, "already exists. Please choose another date and time")
+    if client_sessions.include?(date_time)
+      errors.add(:date_time, "Client already has a session on this date. Please choose another date and time")
     end
   end
 end
