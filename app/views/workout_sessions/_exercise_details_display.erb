@@ -1,5 +1,5 @@
-<div class="exercise-details p-3">
-  <h3><%= exercise.exercise.name %></h3>
+<div class="exercise-details py-0 px-3">
+  <h3 class="mt-0 text-center"><%= exercise.exercise.name %></h3>
   <% unless exercise.exercise.main_muscles.blank?%>
     <p><strong>Muscle Group:</strong> <%= exercise.exercise.main_muscles %></p>
   <% end %>

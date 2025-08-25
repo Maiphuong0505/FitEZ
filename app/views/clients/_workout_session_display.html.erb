@@ -3,7 +3,7 @@
     <div class="card my-2 shadow-sm border-0 rounded-3 hover-shadow card-fixed-height mx-2">
       <div class="row g-0 h-100 align-items-center">
         <div class="col-12 col-md-4 h-100">
-          <div class="image-container h-100 d-flex justify-content-center align-item-center">
+          <div class="image-container h-100 mt-3 d-flex justify-content-center align-item-center">
             <% if session.session_exercises.any? %>
               <%= cl_image_tag(session.session_exercises.sample.exercise.photo.key,
                   class: "img-fluid bg-white border border-danger rounded-4",
@@ -17,15 +17,15 @@
           <div class="card-body pb-0 d-flex flex-column justify-content-center">
             <div class="d-flex justify-content-center align-items-center mb-2">
               <div class="plan-info">
-                <h5 class="card-title fw-bold text-dark mb-1">
+                <h5 class="card-title fw-bold text-dark mt-1 mb-1">
                   Session name: <%= session.session_name %>
                 </h5>
                 <p class="mb-1">Date and time: <%= session.date_time.strftime("%a %b %e at %l:%M %p") %></p>
                 <div class="d-flex align-items-center">
                   <% if session.with_trainer %>
-                    <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-danger text-light fw-normal fs-6">With-trainer-session</p>
+                    <p class="my-2 badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">With-trainer-session</p>
                   <% else %>
-                    <p class="my-2 badge rounded-pill px-3 py-2 me-2 border border-dark bg-info text-dark fw-normal fs-6">Solo-session</p>
+                    <p class="my-2 badge rounded-pill px-3 py-2 me-2 bg-info text-dark fw-normal fs-6">Solo-session</p>
                   <% end %>
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-outline-warning rounded-4 me-2" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
