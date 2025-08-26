@@ -1,4 +1,4 @@
-<div id="<%= dom_id(question) %>" class="question">
+<div id="<%= dom_id(question) %>" class="question" data-controller="auto-scroll">
   <%= turbo_stream_from dom_id(question) %>
   <p class="user-question"><%= question.user_question %></p>
   <% if question.ai_answer.blank? || question.ai_answer == "..." %>
@@ -6,7 +6,8 @@
   <% else %>
     <div class="ai-answer">
       <p class="ai-answer-text my-0"><%= question.ai_answer%></p>
-      <button class="ai-task-button bg-danger text-light fs-6 w-100">Use this suggestion</button>
+      <%# <button class="ai-task-button bg-danger text-light fs-6 w-100">Use this suggestion</button> %>
+      <!--The above button is not used in the demo version of the app, but it's kept for education purpose-->
     </div>
   <% end %>
 </div>
