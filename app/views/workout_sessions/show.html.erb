@@ -38,18 +38,9 @@
         <%= render "comments/comment", comment: comment %>
       <% end %>
     </div>
-    <%= simple_form_for [@workout_session, @comment],
-        html: { class: "d-flex", data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" } } do |f| %>
-      <div class="input-group mb-3 w-100">
-        <div class="form-floating">
-          <%= f.input :content,
-            label: false,
-            wrapper: false %>
-          <%= f.label :user_question, "Your comment" %>
-        </div>
-      </div>
-      <%= f.submit "Send", class: "btn btn-danger mb-3" %>
-    <% end %>
+    <div class="comment-form">
+      <%= render "comments/comment_form", workout_session: @workout_session, comment: @comment %>
+    </div>
   </div>
   <!-- AI section -->
   <div class="container chatbot my-3">
@@ -59,15 +50,8 @@
         <%= render "questions/question", question: question %>
       <% end %>
     </div>
-    <%= simple_form_for [@workout_session, @question],
-      html: { class: "d-flex", data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" } }  do |f| %>
-      <div class="input-group mb-3 w-100">
-        <div class="form-floating">
-          <%= f.input :user_question, label: false, wrapper: false %>
-          <%= f.label :user_question, "Your question" %>
-        </div>
-        <%= f.submit "Ask", id: "new-question-button", class: "btn btn-danger" %>
-      </div>
-    <% end %>
+    <div class="question-form">
+      <%= render "questions/question_form", workout_session: @workout_session, question: @question%>
+    </div>
   </div>
 </div>

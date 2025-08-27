@@ -24,25 +24,36 @@
     flex-direction: column;
   }
 
-  .user-question, .ai-answer {
+  .user-question, .ai-answer-text {
     border-radius: 1rem;
     margin-bottom: 1rem;
     padding: 0.5rem;
-    max-width: 70%;
     width: fit-content;
     word-wrap: break-word;
   }
 
   .user-question {
+    max-width: 70%;
     align-self: flex-end;
     background: $red-subtle;
     color: $gray;
   }
 
   .ai-answer {
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    max-width: 70%;
     align-self: flex-start;
     background: $gray-200;
   }
+
+  .ai-task-button {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border: 2px solid;
+    border-color: tint-color($gray, 30%);
+  }
+
 
   #new_question {
     border-top: 1px solid $gray-200;
