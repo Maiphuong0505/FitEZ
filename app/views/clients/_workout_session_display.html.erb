@@ -2,40 +2,44 @@
   <div class="col-12 col-lg-8">
     <div class="card my-2 shadow-sm border-0 rounded-3 hover-shadow card-fixed-height mx-2">
       <div class="row g-0 h-100 align-items-center">
-        <div class="col-12 col-md-4 h-100">
-          <div class="image-container h-100 mt-3 d-flex justify-content-center align-item-center">
+        <!--For the image-->
+        <div class="col-4 col-md-4 h-100">
+          <div class="image-container h-100 d-flex justify-content-center align-item-center">
             <% if session.session_exercises.any? %>
               <%= cl_image_tag(session.session_exercises.sample.exercise.photo.key,
                   class: "img-fluid bg-white border border-danger rounded-4",
-                  style: "max-height: 120px; object-fit: contain;") %>
+                  style: "max-height: 100px; object-fit: contain;") %>
             <% else %>
-              <i class="fa-solid fa-handshake text-danger" style="font-size:96px;"></i>
+              <i class="fa-solid fa-handshake text-danger" style="font-size:68px;"></i>
             <% end %>
           </div>
         </div>
-        <div class="col-md-8 h-100">
-          <div class="card-body pb-0 d-flex flex-column justify-content-center">
-            <div class="d-flex justify-content-center align-items-center mb-2">
-              <div class="plan-info">
-                <h5 class="card-title fw-bold text-dark mt-1 mb-1">
-                  Session name: <%= session.session_name %>
-                </h5>
-                <p class="mb-1">Date and time: <%= session.date_time.strftime("%a %b %e at %l:%M %p") %></p>
-                <div class="d-flex align-items-center">
+        <!--For the session details-->
+        <div class="col-8 col-md-8 h-100">
+          <div class="card-body pb-0 mb-2">
+            <div class="plan-info">
+              <h5 class="card-title fw-bold text-dark mt-1 mb-1">
+                <%= session.session_name %>
+              </h5>
+              <p class="mb-1"><%= session.date_time.strftime("%a %b %e at %l:%M %p") %></p>
+              <div class="row align-items-center justify-content-center">
+                <div class="col-6 col-md-6 d-flex justify-content-center align-items-center">
                   <% if session.with_trainer %>
-                    <p class="my-2 badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">With-trainer-session</p>
+                    <p class="my-2 badge rounded-pill px-3 py-2 bg-danger text-light fw-normal">With trainer</p>
                   <% else %>
-                    <p class="my-2 badge rounded-pill px-3 py-2 me-2 bg-info text-dark fw-normal fs-6">Solo-session</p>
+                    <p class="my-2 badge rounded-pill px-3 py-2 bg-info text-dark fw-normal">Solo</p>
                   <% end %>
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-outline-warning rounded-4 me-2" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
+                </div>
+                <!-- Button trigger modal -->
+                <div class="col-4 col-md-4 d-flex justify-content-center align-items-center">
+                  <button type="button" class="btn btn-outline-warning btn-sm rounded-4 me-2" data-bs-toggle="modal" data-bs-target="#<%= dom_id(session) %>">
                     <i class="fa-solid fa-copy"></i>
                   </button>
                   <%= link_to workout_session_path(session) do %>
-                    <button type="button" class="btn btn-outline-warning rounded-4"><i class="fa-solid fa-circle-info"></i></button>
+                    <button type="button" class="btn btn-outline-warning btn-sm rounded-4"><i class="fa-solid fa-circle-info"></i></button>
                   </div>
-                <% end %>
-              </div>
+                </div>
+              <% end %>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="<%= dom_id(session) %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
