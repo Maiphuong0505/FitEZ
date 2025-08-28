@@ -1,10 +1,16 @@
 <div class="container my-3">
-  <%= link_to "← Back", client_path(@workout_session.workout_plan.client), class: "btn btn-outline-secondary rounded-pill" %>
   <div class="col-12 my-3">
-    <h2><%= @workout_session.workout_plan.client.first_name %>'s <%= @workout_session.session_name.split(" ")[0] %> training</h2>
-    <h3 class="my-2 badge rounded-pill px-3 py-2 me-2 border bg-info text-dark fw-normal fs-6"><i class="fa-solid fa-clock"></i> <%= @workout_session.date_time.strftime("%a %b %e at %l:%M %p") %></h3>
+    <div class="d-flex justify-content-between align-items-center">
+      <%= link_to "← Back", client_path(@workout_session.workout_plan.client), class: "link-button btn btn-outline-secondary rounded-pill" %>
+      <h3 class="my-2 badge rounded-pill px-3 py-2 me-2 bg-info text-dark fw-normal fs-6"><i class="fa-solid fa-clock"></i> <%= @workout_session.date_time.strftime("%a %b %e at %l:%M %p") %></h3>
+    </div>
+    <h2 ><%= @workout_session.workout_plan.client.first_name %>'s <%= @workout_session.session_name.split(" ")[0] %> training</h2>
   </div>
-  <hr>
+  <div class="d-flex justify-content-start mt-2">
+    <%= link_to "#add-exercise-form" do %>
+      <p class="link-button badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">Add Session Exercise</p>
+    <% end %>
+  </div>
   <div class="row justify-content-between g-1">
     <!-- Exercises Box -->
     <div class="card p-3 mb-4 shadow-sm border-0 rounded-3 col-12 col-md-7" id="session_exercises">
@@ -18,8 +24,8 @@
         </div>
       <% end %>
     </div>
-    <!-- Add Exercise Box -->
-    <div class="card p-3 mb-4 shadow-sm border-0 rounded-3 col-12 col-md-5 d-flex justify-content-end">
+    <!-- Add Exercise Form -->
+    <div class="col-12 col-md-5 d-flex" id="add-exercise-form">
       <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
     </div>
   </div>
@@ -32,18 +38,9 @@
         <%= render "comments/comment", comment: comment %>
       <% end %>
     </div>
-    <%= simple_form_for [@workout_session, @comment],
-        html: { class: "d-flex", data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" } } do |f| %>
-      <div class="input-group mb-3 w-100">
-        <div class="form-floating">
-          <%= f.input :content,
-            label: false,
-            wrapper: false %>
-          <%= f.label :user_question, "Your comment" %>
-        </div>
-      </div>
-      <%= f.submit "Send", class: "btn btn-danger mb-3" %>
-    <% end %>
+    <div class="comment-form">
+      <%= render "comments/comment_form", workout_session: @workout_session, comment: @comment %>
+    </div>
   </div>
   <!-- AI section -->
   <div class="container chatbot my-3">
@@ -53,15 +50,8 @@
         <%= render "questions/question", question: question %>
       <% end %>
     </div>
-    <%= simple_form_for [@workout_session, @question],
-      html: { class: "d-flex", data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" } }  do |f| %>
-      <div class="input-group mb-3 w-100">
-        <div class="form-floating">
-          <%= f.input :user_question, label: false, wrapper: false %>
-          <%= f.label :user_question, "Your question" %>
-        </div>
-        <%= f.submit "Ask", id: "new-question-button", class: "btn btn-danger" %>
-      </div>
-    <% end %>
+    <div class="question-form">
+      <%= render "questions/question_form", workout_session: @workout_session, question: @question%>
+    </div>
   </div>
 </div>

@@ -1,0 +1,12 @@
+<%= simple_form_for [workout_session, comment],
+  html: { class: "d-flex", data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" } } do |f| %>
+  <div class="input-group mb-3 w-100">
+    <div class="form-floating">
+      <%= f.input :content,
+            label: false,
+            wrapper: false %>
+      <%= f.label :user_question, "Your comment" %>
+    </div>
+  </div>
+  <%= f.submit "Send", class: "btn btn-danger mb-3" %>
+<% end %>

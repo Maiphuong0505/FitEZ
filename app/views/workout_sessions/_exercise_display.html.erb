@@ -2,14 +2,14 @@
   <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden" data-controller="display-toggle form-toggle-display">
     <div class="row g-0 align-items-center">
       <!-- Image -->
-      <div class="col-12 col-md-4 text-center p-3" style="background-color: #f8f9fa;">
+      <div class="col-12 col-md-4 text-center p-0" style="background-color: #f8f9fa;">
         <%= cl_image_tag(session_exercise.exercise.photo.key,
                   class: "img-fluid",
                   style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
       </div>
       <!-- Text -->
-      <div class="col-12 col-md-8 p-4 d-flex flex-column justify-content-center">
-        <h3><%= session_exercise.exercise.name %></h3>
+      <div class="col-12 col-md-8 p-3 d-flex flex-column justify-content-center">
+        <h3 class="mt-0"><%= session_exercise.exercise.name %></h3>
         <p>
           <% unless session_exercise.load.zero? %>
             <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
@@ -23,7 +23,7 @@
             <%= session_exercise.set %> sets
           </span>
         </p>
-        <button type="button" class="btn btn-outline-warning my-4 rounded-pill px-3 py-2 me-2 fw-bold fs-5" data-action="click->display-toggle#fire">
+        <button type="button" class="btn btn-outline-warning my-2 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
           <i class="fa-solid fa-eye"></i> Exercise details
         </button>
       </div>
