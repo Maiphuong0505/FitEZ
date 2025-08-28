@@ -1,4 +1,4 @@
-<div class="mb-3">
+<div id="<%= dom_id(session_exercise) %>" class="mb-3">
   <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden" data-controller="display-toggle form-toggle-display">
     <div class="row g-0 align-items-center">
       <!-- Image -->
@@ -23,9 +23,21 @@
             <%= session_exercise.set %> sets
           </span>
         </p>
-        <button type="button" class="btn btn-outline-warning my-2 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
-          <i class="fa-solid fa-eye"></i> Exercise details
-        </button>
+        <div class="row align-items-center justify-content-center gap-2 flex-wrap">
+          <div class="col-8 d-flex align-items-center justify-content-center">
+            <button type="button" class="btn btn-outline-warning my-2 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
+              <i class="fa-solid fa-eye"></i> Exercise details
+            </button>
+          </div>
+          <div class="col-4 d-flex align-items-center justify-content-center">
+            <%= button_to session_exercise_path(session_exercise),
+                        method: :delete,
+                        form: { data: { turbo_confirm: "Are you sure?" } },
+                        class: "btn btn-outline-warning rounded-4 gap-1" do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     <div data-display-toggle-target="togglableElement" class="session-display d-none">
