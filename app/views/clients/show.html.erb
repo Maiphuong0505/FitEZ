@@ -70,17 +70,19 @@
               <p class="link-button badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">Schedule Workout Plan</p>
             <% end %>
           </div>
-          <% if @workout_plans.any? %>
-            <% @workout_plans.each do |plan| %>
-              <%= render 'clients/workout_plan_display', workout_plans: @workout_plans, plan: plan, workout_session: @workout_session, workout_plan: plan %>
-            <% end %>
-          <% else %>
-            <% if current_user.trainer? %>
-              <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> <%= @client.first_name %>'s plan awaits!</p>
+          <div class="plan-cards" id="workout_plans">
+            <% unless @workout_plans.any? %>
+              <% if current_user.trainer? %>
+                <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> <%= @client.first_name %>'s plan awaits!</p>
+              <% else %>
+                <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> Waiting for a plan? Ask your trainer to add one!</p>
+              <% end %>
             <% else %>
-              <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> Waiting for a plan? Ask your trainer to add one!</p>
+              <% @workout_plans.each do |plan| %>
+                <%= render 'clients/workout_plan_display', workout_plans: @workout_plans, plan: plan, workout_session: @workout_session, workout_plan: plan %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
         <%# Add workout plan form %>
         <% if current_user.trainer? %>

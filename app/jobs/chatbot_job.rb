@@ -37,7 +37,7 @@ class ChatbotJob < ApplicationJob
     Turbo::StreamsChannel.broadcast_append_to(
       "question_#{@question.id}",
       target: dom_id(@question),
-      partial: "workout_sessions/ai_exercise_form", locals: { workout_session: @question.workout_session, session_exercise: @session_exercise, scroll: false, exercise: @session_exercise.exercise }
+      partial: "workout_sessions/ai_exercise_form", locals: { workout_session: @question.workout_session, session_exercise: @session_exercise, scroll: true, exercise: @session_exercise.exercise }
     )
   end
 
