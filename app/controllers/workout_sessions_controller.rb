@@ -16,8 +16,16 @@ class WorkoutSessionsController < ApplicationController
     @workout_session_copy = @workout_session.deep_clone include: :session_exercises
     @workout_session_copy.assign_attributes(workout_session_params)
     authorize @workout_session_copy
-    @workout_session_copy.save
-    redirect_to client_path(@workout_session_copy.workout_plan.client_id)
+    if @workout_session_copy.save
+      redirect_to workout_session_path(@workout_session_copy), notice: "Workout session copied successfully."
+    else
+      # render client show page if workout plan is invalid
+      @client = set_client
+      @workout_plans = @client.workout_plans_as_client
+      @body_stat = BodyStat.new
+      @workout_plan = WorkoutPlan.new
+      render "clients/show", status: :unprocessable_entity
+    end
   end
 
   def create
