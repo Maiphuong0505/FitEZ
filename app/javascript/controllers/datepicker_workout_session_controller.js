@@ -9,7 +9,7 @@ export default class extends Controller {
       enableTime: true,
       dateFormat: "Y-m-d H:i",
       disableMobile: "true",
-      minDate: "today",
+      // minDate: "today",
       time_24hr: true,
       minTime: "7:00",
       maxTime: "21:00",

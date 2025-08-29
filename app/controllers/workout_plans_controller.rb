@@ -7,7 +7,8 @@ class WorkoutPlansController < ApplicationController
       starting_date: date_range[0],
       ending_date: date_range[1],
       trainer_id: current_user.id,
-      client_id: @client.id
+      client_id: @client.id,
+      scheduled_trainer_session: params[:workout_plan][:scheduled_trainer_session]
     )
     authorize @workout_plan
     if @workout_plan.save
