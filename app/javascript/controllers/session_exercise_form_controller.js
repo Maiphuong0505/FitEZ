@@ -17,7 +17,11 @@ export default class extends Controller {
   connect() {
     if (this.hasTomSelectTarget) {
       this.tomSelect = new TomSelect(this.tomSelectTarget, {
-        create: true,
+        theme: "bootstrap5",
+        create: false,
+        allowEmptyOption: true,
+        placeholder: "Search exercises...",
+        dropdownParent: "body",
         sortField: {
           field: "text",
           direction: "asc",
