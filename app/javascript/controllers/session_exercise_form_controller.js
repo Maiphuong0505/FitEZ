@@ -15,28 +15,38 @@ export default class extends Controller {
   }
 
   connect() {
-    if (this.hasTomSelectTarget) {
-      this.tomSelect = new TomSelect(this.tomSelectTarget, {
-        theme: "bootstrap5",
-        create: false,
-        allowEmptyOption: true,
-        placeholder: "Search exercises...",
-        dropdownParent: "body",
-        sortField: {
-          field: "text",
-          direction: "asc",
-        },
+    const modal = document.getElementById("addExerciseModal");
+    if (modal) {
+      modal.addEventListener("shown.bs.modal", () => {
+        console.log("Modal shown");
+        if (this.hasTomSelectTarget) {
+          console.log("Tom select found", this.tomSelectTarget);
+          if (this.tomSelect) {
+            this.tomSelect.destroy();
+          }
+          this.tomSelect = new TomSelect(this.tomSelectTarget, {
+            theme: "bootstrap5",
+            create: false,
+            allowEmptyOption: true,
+            placeholder: "Search exercises...",
+            dropdownParent: "body",
+            sortField: {
+              field: "text",
+              direction: "asc",
+            },
+          });
+
+          this.exercisePhotos = JSON.parse(
+            this.tomSelectTarget.closest("[data-exercise-photos]").dataset
+              .exercisePhotos
+          );
+
+          this.tomSelectTarget.addEventListener(
+            "change",
+            this.updatePreview.bind(this)
+          );
+        }
       });
-
-      this.exercisePhotos = JSON.parse(
-        this.tomSelectTarget.closest("[data-exercise-photos]").dataset
-          .exercisePhotos
-      );
-
-      this.tomSelectTarget.addEventListener(
-        "change",
-        this.updatePreview.bind(this)
-      );
     }
   }
 

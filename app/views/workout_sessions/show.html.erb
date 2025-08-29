@@ -7,9 +7,12 @@
     <h2 ><%= @workout_session.workout_plan.client.first_name %>'s <%= @workout_session.session_name.split(" ")[0] %> training</h2>
   </div>
   <div class="d-flex justify-content-start mt-2">
-    <%= link_to "#add-exercise-form" do %>
-      <p class="link-button badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">Add Session Exercise</p>
-    <% end %>
+    <button type="button"
+        class="link-button badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6"
+        data-bs-toggle="modal"
+        data-bs-target="#addExerciseModal">
+      Add Session Exercise
+    </button>
   </div>
   <div class="row justify-content-between g-1">
     <!-- Exercises Box -->
@@ -23,10 +26,6 @@
           <% end %>
         </div>
       <% end %>
-    </div>
-    <!-- Add Exercise Form -->
-    <div class="col-12 col-md-5 d-flex" id="add-exercise-form">
-      <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
     </div>
   </div>
   <hr>
@@ -52,6 +51,20 @@
     </div>
     <div class="question-form">
       <%= render "questions/question_form", workout_session: @workout_session, question: @question%>
+    </div>
+  </div>
+</div>
+<!-- Add Exercise Modal -->
+<div class="modal fade" id="addExerciseModal" tabindex="-1" aria-labelledby="addExerciseModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addExerciseModalLabel">Add Session Exercise</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
+      </div>
     </div>
   </div>
 </div>
