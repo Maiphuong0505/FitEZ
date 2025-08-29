@@ -5,3 +5,7 @@
   background: none;
   padding-right: 2.5rem; /* Space for Tom Select arrow */
 }
+
+.ts-dropdown {
+  z-index: 10000000 !important;
+}
