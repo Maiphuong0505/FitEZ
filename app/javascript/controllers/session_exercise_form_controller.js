@@ -27,6 +27,30 @@ export default class extends Controller {
           direction: "asc",
         },
       });
+
+      this.exercisePhotos = JSON.parse(
+        this.tomSelectTarget.closest("[data-exercise-photos]").dataset
+          .exercisePhotos
+      );
+
+      this.tomSelectTarget.addEventListener(
+        "change",
+        this.updatePreview.bind(this)
+      );
+    }
+  }
+
+  updatePreview(event) {
+    const exerciseId = event.target.value;
+    const photoUrl = this.exercisePhotos[exerciseId];
+    const preview = document.getElementById("exercise-preview");
+    if (photoUrl) {
+      // Cloudinary direct URL pattern: https://res.cloudinary.com/<cloud_name>/image/upload/<photoKey>
+      preview.src = photoUrl;
+      preview.style.display = "inline-block";
+    } else {
+      preview.src = "";
+      preview.style.display = "none";
     }
   }
 }
