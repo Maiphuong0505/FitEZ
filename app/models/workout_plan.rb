@@ -28,4 +28,7 @@ class WorkoutPlan < ApplicationRecord
     end
   end
 
+  def trainer_session_count
+    workout_sessions.where(with_trainer: true).count
+  end
 end

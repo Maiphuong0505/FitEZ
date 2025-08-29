@@ -1,0 +1,14 @@
+<% if workout_plan.trainer_session_count.zero? %>
+  <small class="mt-1 mb-0 mx-1">0/<%= workout_plan.scheduled_trainer_session %> trainer sessions done</small>
+  <div class="d-flex" style="height: 20px; width: 320px; margin: 0 auto">
+    <div style="width: 100%; background-color: #C9B5B5"></div>
+  </div>
+<% else %>
+  <% completed_percent = ((workout_plan.trainer_session_count.to_f/workout_plan.scheduled_trainer_session.to_f) * 100).ceil %>
+  <small class="mt-1 mb-0 mx-1"> <%= workout_plan.trainer_session_count %>/<%= workout_plan.scheduled_trainer_session %> trainer sessions done</small>
+  <div class="d-flex" style="height: 20px; width: 324px; margin: 0 auto">
+    <div style="width: <%= completed_percent %>%; background-color: #B15965">
+    </div>
+    <div style="width: <%= 100-completed_percent %>%; background-color: #C9B5B5"></div>
+  </div>
+<% end %>
