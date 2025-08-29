@@ -12,7 +12,14 @@ class WorkoutPlansController < ApplicationController
     )
     authorize @workout_plan
     if @workout_plan.save
-      redirect_to client_path(@client), notice: "Workout plan created successfully."
+      @workout_session = WorkoutSession.new
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append(:workout_plans, partial: "clients/workout_plan_display",
+                                                                    locals: { workout_plans: @workout_plans, plan: @workout_plan, workout_session: @workout_session, workout_plan: @workout_plan })
+        end
+        format.html { redirect_to client_path(@client), notice: "Workout plan created successfully." }
+      end
     else
       # render client show page if workout plan is invalid
       @workout_plans = @client.workout_plans_as_client

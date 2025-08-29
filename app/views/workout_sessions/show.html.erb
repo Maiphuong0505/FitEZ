@@ -28,10 +28,9 @@
       <% end %>
     </div>
   </div>
-  <hr>
   <!-- Comments section -->
   <div class="container chat my-3">
-    <h2>Comments about <%= @workout_session.session_name %> training</h2>
+    <h2>Leave a note</h2>
     <div id="comment-section" class="comments">
       <% @workout_session.comments.each do |comment| %>
         <%= render "comments/comment", comment: comment %>
@@ -56,10 +55,10 @@
 </div>
 <!-- Add Exercise Modal -->
 <div class="modal fade" id="addExerciseModal" tabindex="-1" aria-labelledby="addExerciseModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addExerciseModalLabel">Add Session Exercise</h5>
+        <%# <h5 class="modal-title" id="addExerciseModalLabel">Add Session Exercise</h5> %>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
