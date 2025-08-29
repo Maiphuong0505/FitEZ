@@ -1,5 +1,6 @@
 class SessionExercisesController < ApplicationController
   before_action :set_workout_session, only: %i[create]
+  before_action :set_session_exercise, only: %i[destroy]
 
   def create
     @session_exercise = SessionExercise.new(session_exercise_params)
@@ -23,6 +24,16 @@ class SessionExercisesController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @session_exercise
+    @session_exercise.destroy
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@session_exercise) }
+      format.html { redirect_to workout_session_path(@session_exercise.workout_session), notice: "Exercise removed successfully" }
+    end
+  end
+
   private
 
   def set_workout_session
@@ -32,4 +43,8 @@ class SessionExercisesController < ApplicationController
   def session_exercise_params
     params.require(:session_exercise).permit(:exercise_id, :repetitions, :load, :set, :done)
   end
+
+  def set_session_exercise
+  @session_exercise = SessionExercise.find(params[:id])
+end
 end

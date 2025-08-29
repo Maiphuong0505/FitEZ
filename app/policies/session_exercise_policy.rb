@@ -19,4 +19,8 @@ class SessionExercisePolicy < ApplicationPolicy
   def create?
     user.present? && user.trainer?
   end
+
+  def destroy?
+    user.present? && user.trainer?
+  end
 end
