@@ -1,13 +1,23 @@
 <div class="container my-3">
   <ol>
     <% @exercises.each do |exercise| %>
-      <hr>
+
       <li>
         <h2><%= exercise.name %></h2>
+        <div class="d-flex flex-wrap justify-content-start m-4 p-4 shadow-sm rounded">
         <% unless exercise.execution.blank? %>
-          <h5>Execution: <%= exercise.execution%></h5>
+          <div class="d-flex justify-content-center align-items-center col-12 col-lg-4 text-center p-3" style="background-color: #f8f9fa;">
+            <%= cl_image_tag(exercise.photo.key,
+                      class: "img-fluid",
+                      style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
+          </div>
+          <div class="m-2 p-2 col-lg-7" >
+            <h3>How To Perform This Exercise</h3>
+            <%= exercise.execution%>
         <% else %>
-          <h5>No execution</h5>
+            <h5><b>No execution</b></h5>
+          </div>
+        </div>
         <% end %>
         <!--
         <% unless exercise.starting_position.blank? %>
@@ -26,7 +36,7 @@
           <h5>No main muscles</h5>
         <% end %>
         -->
-        <hr>
+
       <% end %>
     </li>
   </ol>
