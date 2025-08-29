@@ -8,5 +8,7 @@
       <%= f.label :user_question, "Your comment" %>
     </div>
   </div>
-  <%= f.submit "Send", class: "btn btn-danger mb-3" %>
+  <%= button_tag type: "submit", class: "btn btn-danger mb-3" do %>
+    <i class="fa-solid fa-paper-plane"></i>
+  <% end %>
 <% end %>

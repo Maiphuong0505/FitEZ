@@ -5,6 +5,8 @@
       <%= f.input :user_question, label: false, wrapper: false %>
       <%= f.label :user_question, "Your question" %>
     </div>
-    <%= f.submit "Ask", id: "new-question-button", class: "btn btn-danger" %>
+    <%= button_tag type: "submit", class: "btn btn-danger", id: "new-question-button" do %>
+      <i class="fa-solid fa-paper-plane"></i>
+    <% end %>
   </div>
 <% end %>
