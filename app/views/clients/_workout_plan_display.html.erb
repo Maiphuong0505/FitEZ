@@ -56,7 +56,7 @@
   <%# Div for displaying sessions %>
   <div data-display-toggle-target="togglableElement" class="session-display d-none">
     <% if plan.workout_sessions.any? %>
-      <% plan.workout_sessions.each do |session| %>
+      <% plan.workout_sessions.order(:date_time).each do |session| %>
         <%= render 'clients/workout_session_display', session: session%>
       <% end %>
     <% end %>
