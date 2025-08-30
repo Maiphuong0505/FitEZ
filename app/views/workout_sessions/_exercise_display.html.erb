@@ -12,20 +12,20 @@
         <h3 class="mt-0"><%= session_exercise.exercise.name %></h3>
         <p class="text-center">
           <% unless session_exercise.load.zero? %>
-            <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+            <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal" style="font-size: 16px;">
               <%= session_exercise.load %> kg
             </span>
           <% end %>
-          <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+          <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal" style="font-size: 16px;">
             <%= session_exercise.repetitions %> reps
           </span>
-          <span class="badge rounded-pill px-3 py-2 border bg-white text-dark fw-normal fs-6">
+          <span class="badge rounded-pill px-3 py-2 border bg-white text-dark fw-normal" style="font-size: 16px;">
             <%= session_exercise.set %> sets
           </span>
         </p>
         <div class="row align-items-center">
           <div class="col-9 d-flex align-items-center justify-content-center">
-            <button type="button" class="btn btn-outline-warning my-2 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
+            <button type="button" class="btn custom-btn my-2 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
               <i class="fa-solid fa-eye"></i> Exercise details
             </button>
           </div>
@@ -33,7 +33,7 @@
             <%= button_to session_exercise_path(session_exercise),
                         method: :delete,
                         form: { data: { turbo_confirm: "Are you sure?" } },
-                        class: "btn btn-outline-warning rounded-4" do %>
+                        class: "btn custom-btn rounded-4" do %>
               <i class="fa-solid fa-trash"></i>
             <% end %>
           </div>
