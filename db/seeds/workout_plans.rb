@@ -14,11 +14,17 @@ gaps = [30, 60, 90]
 clients.each do |client|
   puts "Creating one workout plan for #{client.last_name} #{client.first_name}."
   starting_date = client.body_stats.first.timestamp - 2
+  chosen_gap = gaps.sample
+  scheduled_trainer_session = 8 if chosen_gap == 30
+  scheduled_trainer_session = 16 if chosen_gap == 60
+  scheduled_trainer_session = 24 if chosen_gap == 90
+
   workout_plan = WorkoutPlan.create(
     starting_date: starting_date,
-    ending_date: starting_date + gaps.sample,
+    ending_date: starting_date + chosen_gap,
     trainer_id: trainers.sample.id,
-    client_id: client.id
+    client_id: client.id,
+    scheduled_trainer_session: scheduled_trainer_session
   )
   puts workout_plan.errors.full_messages unless workout_plan.persisted?
   puts "Finished creating one workout plan for #{client.last_name} #{client.first_name}."

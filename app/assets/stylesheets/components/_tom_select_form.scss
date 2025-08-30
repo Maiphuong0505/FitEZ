@@ -9,3 +9,11 @@
 .ts-dropdown {
   z-index: 10000000 !important;
 }
+
+.ts-control .item {
+  font-size: 14px;
+}
+
+#select-exercise-ts-control::placeholder {
+  font-size: 14px;
+}
