@@ -1,4 +1,5 @@
-<div id="<%= dom_id(session_exercise) %>" class="mb-3">
+<% scroll ||= false %>
+<div id="<%= dom_id(session_exercise) %>" class="mb-3" data-controller="scroll-into-view" data-scroll-into-view-scroll-value="<%=  scroll %>">
   <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden" data-controller="display-toggle form-toggle-display">
     <div class="row g-0 align-items-center">
       <!-- Image -->
