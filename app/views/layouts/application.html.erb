@@ -15,8 +15,15 @@
     <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
     <%= render 'shared/ios_pwa_links' %>
   </head>
-  <body><%= render "shared/navbar" %>
+  <body
+    data-controller="back-to-top"
+    data-back-to-top-target="button"
+    data-action="back-to-top#scrollFunction">
+    <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
     <%= yield %>
+    <% unless controller_name == "pages" && action_name == "home" %>
+      <button id="back-to-top" class="btn btn-primary rounded-circle shadow" data-action="back-to-top#scrollToTop"> Back to top </button>
+    <% end %>
   </body>
 </html>
