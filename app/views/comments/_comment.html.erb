@@ -1,7 +1,9 @@
-<div id="comment-<%= comment.id %>">
-  <small>
+<div
+    id="comment-<%= comment.id %>"
+    class="comment <%= comment.user === current_user ? 'sent' : 'received' %>">
+  <small class="comment-info">
     <strong><%= comment.user.first_name %></strong>
     <i><%= comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
-  <p><%= comment.content %></p>
+  <p class="comment-content"><%= comment.content %></p>
 </div>

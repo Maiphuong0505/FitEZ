@@ -37,7 +37,7 @@
       <% end %>
     </div>
     <div class="comment-form">
-      <%= render "comments/comment_form", workout_session: @workout_session, comment: @comment %>
+      <%= render "comments/comment_form", workout_session: @workout_session, comment: @comment, user: current_user %>
     </div>
   </div>
   <!-- AI section -->

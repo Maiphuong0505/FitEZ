@@ -27,4 +27,36 @@
       margin-bottom: 0;
     }
   }
+  .comments {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  .comment-info {
+    opacity: 0.5;
+    text-align: center;
+    width: fit-content;
+  }
+
+  .comment-content {
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    max-width: 70%;
+    width: fit-content;
+    word-wrap: break-word;
+  }
+
+  .comment.sent .comment-content {
+    align-self: flex-end;
+    background: $red;
+    color: $light-gray;
+  }
+
+  .comment.received .comment-content {
+    align-self: flex-start;
+    background: $gray-200;
+  }
 }
