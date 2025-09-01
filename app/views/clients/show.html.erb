@@ -25,8 +25,40 @@
             <% end %>
           </div>
           <!-- Code to display the charts, just change if you know what you are doing -->
-          <div class="my-5">
-            <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+          <!-- Dealing with edge case when bodystats are nil-->
+          <% if @client.body_stats.blank? %>
+            <div class="my-5">
+              <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+            {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
+            colors: ["#4CAF50", "#2196F3"],
+            curve: true,
+            empty: "No data available",
+            library: {
+                      scales: {
+                        y: {
+                          min: 0,
+                          max: 80
+                        }
+                      }
+                    } %>
+            </div>
+            <div class="my-5">
+              <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
+            colors: ["#FF9800"],
+            curve: true,
+            empty: "No data available",
+            library: {
+                      scales: {
+                        y: {
+                          min: 0,
+                          max: 100
+                        }
+                      }
+                    } %>
+            </div>
+          <% else %>
+            <div class="my-5">
+              <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
             {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
             colors: ["#4CAF50", "#2196F3"],
             curve: true,
@@ -39,9 +71,9 @@
                         }
                       }
                     } %>
-          </div>
-          <div class="my-5">
-            <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
+            </div>
+            <div class="my-5">
+              <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
             colors: ["#FF9800"],
             curve: true,
             empty: "No data available",
@@ -53,7 +85,8 @@
                         }
                       }
                     } %>
-          </div>
+            </div>
+          <% end %>
         </div>
         <%# Div for add stats %>
         <div class="col-12 col-md-5 add-body-stats-form" id="add-body-stat-form">
