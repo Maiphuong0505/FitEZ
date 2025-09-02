@@ -23,5 +23,4 @@ class User < ApplicationRecord
   def trainer?
     is_a_trainer
   end
-
 end

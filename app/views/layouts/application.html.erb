@@ -6,7 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_red.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.css">
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.min.css" %>
     <%= javascript_importmap_tags %>
@@ -25,5 +24,8 @@
     <% unless controller_name == "pages" && action_name == "home" %>
       <button id="back-to-top" class="btn btn-primary rounded-circle shadow" data-action="back-to-top#scrollToTop"> Back to top </button>
     <% end %>
+    <footer>
+      <%= render "shared/footer_navbar" %>
+    </footer>
   </body>
 </html>
