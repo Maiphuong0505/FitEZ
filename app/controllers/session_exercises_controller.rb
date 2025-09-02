@@ -10,7 +10,7 @@ class SessionExercisesController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.append(:session_exercises, partial: "workout_sessions/exercise_display",
-                                                                       locals: { session_exercise: @session_exercise })
+                                                                       locals: { session_exercise: @session_exercise, scroll: true })
         end
         format.html { redirect_to workout_session_path(@workout_session), notice: "Exercise added successfully" }
       end
