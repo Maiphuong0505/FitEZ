@@ -1,23 +1,22 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  staticTargets = ["button"]
 
   connect() {
     // this.scrollFunction = this.scrollFunction.bind(this)
   }
 
   scrollFunction() {
-    console.log("Hello")
+    console.log("Scroll")
     if ( window.scrollY > 200 ) {
-      this.buttonTarget.remove("d-none")
+      this.element.classList.remove("d-none")
     } else {
-      this.buttonTarget.add("d-none")
+      this.element.classList.add("d-none")
     }
   }
 
   scrollToTop() {
-    console.log("Hello")
+    console.log("Back")
     window.scrollTo ({
       top: 0,
       behavior: "smooth"
