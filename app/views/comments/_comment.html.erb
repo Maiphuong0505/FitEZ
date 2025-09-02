@@ -1,7 +1,13 @@
-<div id="comment-<%= comment.id %>">
-  <small>
-    <strong><%= comment.user.first_name %></strong>
-    <i><%= comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-  </small>
-  <p><%= comment.content %></p>
+<div
+    id="comment-<%= comment.id %>"
+    class="comment <%= comment.user === current_user ? 'sent' : 'received' %>">
+  <div class="comment-box d-flex flex-column">
+    <div class="info-box d-flex">
+      <small class="comment-info">
+        <strong><%= comment.user.first_name %></strong>
+        <i><%= comment.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+      </small>
+    </div>
+    <p class="comment-content"><%= comment.content %></p>
+  </div>
 </div>
