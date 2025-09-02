@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.append(:questions, partial: "questions/question",
-                                                               locals: { question: @question })
+                                                               locals: { question: @question})
         end
         format.html { redirect_to workout_session_path(@workout_session) }
       end
