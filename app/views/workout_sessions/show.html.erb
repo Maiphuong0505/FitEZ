@@ -6,7 +6,7 @@
     </div>
     <h2 ><%= @workout_session.workout_plan.client.first_name %>'s <%= @workout_session.session_name.split(" ")[0] %> training</h2>
   </div>
-  <div class="d-flex justify-content-start mt-2">
+  <div class="d-flex justify-content-center mt-2 mb-4">
     <button type="button"
         class="link-button badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6"
         data-bs-toggle="modal"
@@ -16,7 +16,7 @@
   </div>
   <div class="row justify-content-between g-1">
     <!-- Exercises Box -->
-    <div class="card p-3 mb-4 shadow-sm border-0 rounded-3 col-12 col-md-7" id="session_exercises">
+    <div class="card p-3 mb-4 shadow-sm border-0 rounded-3 col-12 col-md-7 bg-white" id="session_exercises">
       <% if @session_exercises.empty? %>
         <h3><i class="fa-solid fa-star"></i> Workout magic starts here! </h3>
       <% else %>
@@ -29,8 +29,8 @@
     </div>
   </div>
   <!-- Comments section -->
-  <div class="container chat my-3">
-    <h2>Leave a note</h2>
+  <div class="container chat mt-0 mb-4">
+    <h2 class="mt-2"><i class="fa-solid fa-file-pen pe-2" style="color: #b15965;"></i>Leave a note</h2>
     <div id="comment-section" class="comments">
       <% @workout_session.comments.each do |comment| %>
         <%= render "comments/comment", comment: comment %>
@@ -42,7 +42,7 @@
   </div>
   <!-- AI section -->
   <div class="container chatbot mt-4">
-    <h2>Ask AI assistant</h2>
+    <h2 class="mt-2"><i class="fa-solid fa-comments pe-2" style="color: #b15965;"></i>Chat with Fitty</h2>
     <div id="questions">
       <% @workout_session.questions.each do |question| %>
         <%= render "questions/question", question: question %>
