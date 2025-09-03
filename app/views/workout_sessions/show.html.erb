@@ -55,13 +55,13 @@
 </div>
 <!-- Add Exercise Modal -->
 <div class="modal fade" id="addExerciseModal" tabindex="-1" aria-labelledby="addExerciseModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <%# <h5 class="modal-title" id="addExerciseModalLabel">Add Session Exercise</h5> %>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body pt-2">
         <%= render 'workout_sessions/new_exercise', workout_session: @workout_session, session_exercise: @session_exercise %>
       </div>
     </div>
