@@ -24,69 +24,62 @@
               <p class="link-button badge rounded-pill mb-0 px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">Add Body Stats</p>
             <% end %>
           </div>
-          <!-- Code to display the charts, just change if you know what you are doing -->
-          <!-- Dealing with edge case when bodystats are nil-->
-          <% if @client.body_stats.blank? %>
-            <div class="my-5">
-              <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
-            {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
-            colors: ["#4CAF50", "#2196F3"],
-            curve: true,
-            empty: "No data available",
-            library: {
-                      scales: {
-                        y: {
-                          min: 0,
-                          max: 80
-                        }
-                      }
-                    } %>
+          <!-- Bootstrap Carousel for Charts -->
+          <div id="bodyStatsCarousel" class="carousel slide my-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%# Chart 1: Muscle Mass & Weight %>
+                <%= line_chart [
+        {name: "Muscle Mass (kg)", data: @client.body_stats.map.with_index { |stat| [stat.timestamp.strftime("%d %b %Y"), stat.muscle_mass] }},
+        {name: "Weight (kg)", data: @client.body_stats.map.with_index { |stat| [stat.timestamp.strftime("%d %b %Y"), stat.weight] }}
+      ],
+      colors: ["#4CAF50", "#2196F3"],
+      curve: true,
+      points: true,
+      empty: "No data available",
+      library: {
+        responsive: true,
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { display: false }, min: 0 }
+        },
+        plugins: {
+          legend: { labels: { font: { size: 16 } } },
+          tooltip: { enabled: true, bodyFont: { size: 16 } }
+        }
+      } %>
+              </div>
+              <div class="carousel-item">
+                <%# Chart 2: Body Fat %>
+                <%= area_chart [
+        {name: "Body Fat (%)", data: @client.body_stats.map.with_index { |stat| [stat.timestamp.strftime("%d %b %Y"), stat.body_fat] }}
+      ],
+      colors: ["#FF9800"],
+      curve: true,
+      points: true,
+      empty: "No data available",
+      library: {
+        responsive: true,
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { display: false }, min: 0 }
+        },
+        plugins: {
+          legend: { labels: { font: { size: 16 } } },
+          tooltip: { enabled: true, bodyFont: { size: 16 } }
+        }
+      } %>
+              </div>
             </div>
-            <div class="my-5">
-              <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
-            colors: ["#FF9800"],
-            curve: true,
-            empty: "No data available",
-            library: {
-                      scales: {
-                        y: {
-                          min: 0,
-                          max: 100
-                        }
-                      }
-                    } %>
-            </div>
-          <% else %>
-            <div class="my-5">
-              <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
-            {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
-            colors: ["#4CAF50", "#2196F3"],
-            curve: true,
-            empty: "No data available",
-            library: {
-                      scales: {
-                        y: {
-                          min: [@client.body_stats.map(&:weight).min, @client.body_stats.map(&:muscle_mass).min].min.round - 2,
-                          max: [@client.body_stats.map(&:weight).max, @client.body_stats.map(&:muscle_mass).max].max.round + 2
-                        }
-                      }
-                    } %>
-            </div>
-            <div class="my-5">
-              <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
-            colors: ["#FF9800"],
-            curve: true,
-            empty: "No data available",
-            library: {
-                      scales: {
-                        y: {
-                          min: @client.body_stats.map(&:body_fat).min.round - 2,
-                          max: @client.body_stats.map(&:body_fat).max.round + 2
-                        }
-                      }
-                    } %>
-            </div>
-          <% end %>
+            <button class="carousel-control-prev" type="button" data-bs-target="#bodyStatsCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#bodyStatsCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
         </div>
         <%# Div for add stats %>
         <div class="col-12 col-md-5 add-body-stats-form" id="add-body-stat-form">
