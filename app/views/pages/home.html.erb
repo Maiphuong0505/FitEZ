@@ -1,17 +1,16 @@
-<div class="container my-3 d-flex justify-content-center align-items-center flex-column">
-  <h1>Welcome to FitEZ!</h1>
-  <div class="chotto-matte-image">
-    <%= image_tag("chotto-matte.png", size: "338x450", alt: "Chotto Matte") %>
+<div class="container-fluid p-0 d-flex justify-content-center align-items-center flex-column">
+  <div class="landing-page-image">
+    <%= image_tag("FitEZ.png", alt: "Landing page image", class: "img-fluid landing-img") %>
   </div>
-  <h4 class="text-danger">Please be patient! We will code this page later!</h4>
-  <h5 class="text-danger">!WE PROMISE!</h5>
-  <div class="redirect-link my-3">
+  <div class="redirect-link my-3 position-absolute w-100 d-flex justify-content-center" style="top: 85%;">
     <% if user_signed_in? %>
       <% if current_user.trainer? %>
-        <%= link_to "Getting started", clients_path, class: "btn btn-danger rounded-4" %>
+        <%= link_to "Getting started", clients_path, class: "btn btn-danger btn-lg rounded-pill col-9" %>
       <% else %>
-        <%= link_to "Getting started", client_path(@client), class: "btn btn-info rounded-4" %>
+        <%= link_to "Getting started", client_path(@client), class: "btn btn-info btn-lg rounded-pill col-9" %>
       <% end %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-danger btn-lg rounded-pill col-9" %>
     <% end %>
   </div>
 </div>
