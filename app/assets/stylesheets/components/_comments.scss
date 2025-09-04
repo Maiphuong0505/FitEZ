@@ -8,7 +8,7 @@
   flex-grow: 1;
 
   h2 {
-    border-bottom: 1px solid $gray-200;
+    border-bottom: 1px solid $red-200;
     margin-bottom: 0;
     padding: 1rem;
   }
@@ -20,7 +20,7 @@
   }
 
   #new_comment {
-    border-top: 1px solid $gray-200;
+    border-top: 1px solid $red-200;
     padding: 1rem;
 
     .form-group {
