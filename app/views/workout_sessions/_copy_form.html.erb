@@ -17,15 +17,15 @@
               </div>
             </div>
             <%# <%= f.input :duration, label: "Session duration (minutes)?",input_html: { class: "form-control", placeholder: "30" }%>
-            <!--<div class="col-12 my-0">
+            <div class="col-12 my-0">
               <%= f.input :with_trainer,
                   as: :radio_buttons,
                   label: "Session type",
                   collection: [[ 'With trainer', true ], [ 'Solo', false ]],
                   input_html: { class: "session-selector" },
                   item_wrapper_class: 'session-item' %>
-            </div>-->
-            <%= f.input :with_trainer, as: :radio_buttons, collection: [[ 'Yes', true ], [ 'No', false ]], label: "With a trainer?" %>
+            </div>
+            <%# <%= f.input :with_trainer, as: :radio_buttons, collection: [[ 'Yes', true ], [ 'No', false ]], label: "With a trainer?" %>
             <div class="col-12 text-center pt-1">
               <%= f.submit "Add a session", class: "btn btn-danger px-5 rounded-5" %>
             </div>
