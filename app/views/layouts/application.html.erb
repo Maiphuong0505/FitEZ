@@ -19,7 +19,7 @@
     <% unless controller_name == "pages" && action_name == "home" %>
       <button data-controller="back-to-top" id="back-to-top" class="btn rounded-circle shadow d-none" data-action="back-to-top#scrollToTop scroll@window->back-to-top#scrollFunction"> <i class="fa-solid fa-arrow-up" style="color: #ffffff; font-size: 20px"></i> </button>
     <% end %>
-    <%= render "shared/flashes" %>
+    <%# <%= render "shared/flashes" %>
     <%= yield %>
     <% unless controller_name == "pages" && action_name == "home" %>
       <footer>
