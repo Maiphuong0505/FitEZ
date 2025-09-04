@@ -2,7 +2,7 @@
   <div class="landing-page-image">
     <%= image_tag("FitEZ.png", alt: "Landing page image", class: "img-fluid landing-img") %>
   </div>
-  <div class="redirect-link my-3 position-absolute w-100 d-flex justify-content-center" style="top: 85%;">
+  <div class="redirect-link my-3 position-absolute w-100 d-flex justify-content-center">
     <% if user_signed_in? %>
       <% if current_user.trainer? %>
         <%= link_to "Getting started", clients_path, class: "btn btn-danger btn-lg rounded-pill col-9" %>
