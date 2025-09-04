@@ -25,13 +25,13 @@
             <% end %>
           </div>
           <!-- Bootstrap Carousel for Charts -->
-          <div id="bodyStatsCarousel" class="carousel slide my-5" data-bs-ride="carousel">
+          <div id="bodyStatsCarousel" class="carousel slide my-5">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <%# Chart 1: Muscle Mass & Weight %>
                 <%= line_chart [
-        {name: "Muscle Mass (kg)", data: @client.body_stats.map.with_index { |stat| [stat.timestamp.strftime("%d %b %Y"), stat.muscle_mass] }},
-        {name: "Weight (kg)", data: @client.body_stats.map.with_index { |stat| [stat.timestamp.strftime("%d %b %Y"), stat.weight] }}
+        {name: "Muscle Mass (kg)", data: @client.body_stats.map.with_index { |stat, i| [stat.timestamp.strftime("%d %b %Y"), stat.muscle_mass] }},
+        {name: "Weight (kg)", data: @client.body_stats.map.with_index { |stat, i| [stat.timestamp.strftime("%d %b %Y"), stat.weight] }}
       ],
       colors: ["#4CAF50", "#2196F3"],
       curve: true,
@@ -52,7 +52,7 @@
               <div class="carousel-item">
                 <%# Chart 2: Body Fat %>
                 <%= area_chart [
-        {name: "Body Fat (%)", data: @client.body_stats.map.with_index { |stat| [stat.timestamp.strftime("%d %b %Y"), stat.body_fat] }}
+        {name: "Body Fat (%)", data: @client.body_stats.map.with_index { |stat, i| [stat.timestamp.strftime("%d %b %Y"), stat.body_fat] }}
       ],
       colors: ["#FF9800"],
       curve: true,
@@ -71,14 +71,23 @@
       } %>
               </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#bodyStatsCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#bodyStatsCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+            <!-- Carousel Controls: moved below charts -->
+            <div class="d-flex justify-content-center gap-3 mt-3">
+              <button class="btn btn-outline-danger rounded-circle px-3 py-2"
+    type="button"
+    data-bs-target="#bodyStatsCarousel"
+    data-bs-slide="prev"
+    aria-label="Previous chart">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button class="btn btn-outline-danger rounded-circle px-3 py-2"
+    type="button"
+    data-bs-target="#bodyStatsCarousel"
+    data-bs-slide="next"
+    aria-label="Next chart">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
           </div>
         </div>
         <%# Div for add stats %>
