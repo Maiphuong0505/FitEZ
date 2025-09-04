@@ -6,7 +6,12 @@ export default class extends Controller {
     console.log("Hitachi Honda Toyota")
   }
 
-  submit(event) {
+  submit() {
     this.element.classList.add("d-none");
+  }
+
+  cancel(event) {
+    event.preventDefault();
+    this.element.remove();
   }
 }

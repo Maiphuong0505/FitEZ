@@ -90,8 +90,17 @@
                   </div>
                 </div>
                 <!-- Submit Button -->
-                <div class="col-12 text-center mt-3">
-                  <%= f.button :submit, "Add Exercise", class: "btn btn-danger px-5 rounded-5" %>
+                <div class="row justify-content-between align-items-center">
+                  <div class="col-6 text-center mt-3 ps-1">
+                    <%= f.button :submit, "Add Exercise", class: "btn btn-danger rounded-5" %>
+                  </div>
+                  <div class="col-6 text-center mt-3 d-flex justify-content-end pe-1">
+                    <%= button_tag "Cancel", class: "btn btn-info rounded-5", data: { action: "click->ai-form-behavior#cancel" } %>
+                    <!-- Button in form by default is to submit, if the button is used for any other purpose, add preventDefault() in JS -->
+                    <!-- f.button is linked to the form object of simple form, button_tag is rails helper -->
+                    <!-- Adding data-controller in f.button or any simple_form component has to be done inside input_html: {} -->
+                    <!-- Adding data-controller in button_tag doesn't require input_html: {} -->
+                  </div>
                 </div>
               </div>
             <% end %>
