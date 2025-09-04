@@ -1,0 +1,14 @@
+<div class="row justify-content-center">
+  <div class="col-sm-8 my-3">
+    <%= form_with url: exercises_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            class: "form-control rounded-start-3",
+            placeholder: "Type a keyword"
+        %>
+      <%= button_tag type: "submit", class: "btn btn-danger rounded-end-3" do %>
+        <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>
