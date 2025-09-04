@@ -1,0 +1,15 @@
+.carousel .btn {
+  font-size: 20px;
+  width: 39px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel .carousel-control-prev-icon,
+.carousel .carousel-control-next-icon {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
