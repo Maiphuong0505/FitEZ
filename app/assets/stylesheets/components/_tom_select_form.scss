@@ -1,0 +1,19 @@
+#select-exercise {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  padding-right: 2.5rem; /* Space for Tom Select arrow */
+}
+
+.ts-dropdown {
+  z-index: 10000000 !important;
+}
+
+.ts-control .item {
+  font-size: 14px;
+}
+
+#select-exercise-ts-control::placeholder {
+  font-size: 14px;
+}

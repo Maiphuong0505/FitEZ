@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   end
 
   resources :exercises, only: %i[index]
+
+  resources :session_exercises, only: %i[destroy]
 end

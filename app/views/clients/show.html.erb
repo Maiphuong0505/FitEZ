@@ -1,4 +1,4 @@
-<div class="container my-3">
+<div class="container mt-3 mb-5">
   <h1><%= @client.first_name %> <%= @client.last_name %></h1>
   <!-- Tab Navigation -->
   <ul class="nav nav-pills nav-justified mb-3" id="clientTabs" role="tablist">
@@ -19,14 +19,46 @@
     <div class="tab-pane fade show active" id="body-stats" role="tabpanel" aria-labelledby="body-stats-tab">
       <div class="row">
         <div class="col-12 col-md-7">
-          <div class="d-flex justify-content-end mt-2">
+          <div class="d-flex justify-content-center mt-2">
             <%= link_to "#add-body-stat-form" do %>
               <p class="link-button badge rounded-pill mb-0 px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">Add Body Stats</p>
             <% end %>
           </div>
           <!-- Code to display the charts, just change if you know what you are doing -->
-          <div class="my-5">
-            <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+          <!-- Dealing with edge case when bodystats are nil-->
+          <% if @client.body_stats.blank? %>
+            <div class="my-5">
+              <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
+            {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
+            colors: ["#4CAF50", "#2196F3"],
+            curve: true,
+            empty: "No data available",
+            library: {
+                      scales: {
+                        y: {
+                          min: 0,
+                          max: 80
+                        }
+                      }
+                    } %>
+            </div>
+            <div class="my-5">
+              <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
+            colors: ["#FF9800"],
+            curve: true,
+            empty: "No data available",
+            library: {
+                      scales: {
+                        y: {
+                          min: 0,
+                          max: 100
+                        }
+                      }
+                    } %>
+            </div>
+          <% else %>
+            <div class="my-5">
+              <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
             {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
             colors: ["#4CAF50", "#2196F3"],
             curve: true,
@@ -39,9 +71,9 @@
                         }
                       }
                     } %>
-          </div>
-          <div class="my-5">
-            <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
+            </div>
+            <div class="my-5">
+              <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
             colors: ["#FF9800"],
             curve: true,
             empty: "No data available",
@@ -53,7 +85,8 @@
                         }
                       }
                     } %>
-          </div>
+            </div>
+          <% end %>
         </div>
         <%# Div for add stats %>
         <div class="col-12 col-md-5 add-body-stats-form" id="add-body-stat-form">
@@ -65,22 +98,24 @@
     <div class="tab-pane fade" id="workout-plans" role="tabpanel" aria-labelledby="workout-plans-tab">
       <div class="row display_workout-plans">
         <div class="col-12 col-md-7">
-          <div class="d-flex justify-content-start mt-2">
+          <div class="d-flex justify-content-center mt-2">
             <%= link_to "#add-plan-form" do %>
               <p class="link-button badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">Schedule Workout Plan</p>
             <% end %>
           </div>
-          <% if @workout_plans.any? %>
-            <% @workout_plans.each do |plan| %>
-              <%= render 'clients/workout_plan_display', workout_plans: @workout_plans, plan: plan, workout_session: @workout_session, workout_plan: plan %>
-            <% end %>
-          <% else %>
-            <% if current_user.trainer? %>
-              <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> <%= @client.first_name %>'s plan awaits!</p>
+          <div class="plan-cards" id="workout_plans">
+            <% unless @workout_plans.any? %>
+              <% if current_user.trainer? %>
+                <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> <%= @client.first_name %>'s plan awaits!</p>
+              <% else %>
+                <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> Waiting for a plan? Ask your trainer to add one!</p>
+              <% end %>
             <% else %>
-              <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> Waiting for a plan? Ask your trainer to add one!</p>
+              <% @workout_plans.each do |plan| %>
+                <%= render 'clients/workout_plan_display', workout_plans: @workout_plans, plan: plan, workout_session: @workout_session, workout_plan: plan %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
         <%# Add workout plan form %>
         <% if current_user.trainer? %>

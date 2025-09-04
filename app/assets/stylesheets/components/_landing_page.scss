@@ -1,0 +1,22 @@
+.landing-img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+.landing-page-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+.redirect-link {
+  z-index: 2;
+}
+
+body.home-page {
+  overflow: hidden;
+  height: 100vh;
+}

@@ -1,4 +1,5 @@
-<div class="mb-3">
+<% scroll ||= false %>
+<div id="<%= dom_id(session_exercise) %>" class="mb-3" data-controller="scroll-into-view" data-scroll-into-view-scroll-value="<%=  scroll %>">
   <div class="card mb-3 shadow-sm border-0 rounded-3 overflow-hidden" data-controller="display-toggle form-toggle-display">
     <div class="row g-0 align-items-center">
       <!-- Image -->
@@ -8,24 +9,36 @@
                   style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
       </div>
       <!-- Text -->
-      <div class="col-12 col-md-8 p-3 d-flex flex-column justify-content-center">
+      <div class="col-12 col-md-8 p-3">
         <h3 class="mt-0"><%= session_exercise.exercise.name %></h3>
-        <p>
+        <p class="text-center">
           <% unless session_exercise.load.zero? %>
-            <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+            <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal" style="font-size: 16px;">
               <%= session_exercise.load %> kg
             </span>
           <% end %>
-          <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+          <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal" style="font-size: 16px;">
             <%= session_exercise.repetitions %> reps
           </span>
-          <span class="badge rounded-pill px-3 py-2 me-2 border bg-white text-dark fw-normal fs-6">
+          <span class="badge rounded-pill px-3 py-2 border bg-white text-dark fw-normal" style="font-size: 16px;">
             <%= session_exercise.set %> sets
           </span>
         </p>
-        <button type="button" class="btn btn-outline-warning my-2 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
-          <i class="fa-solid fa-eye"></i> Exercise details
-        </button>
+        <div class="row align-items-center">
+          <div class="col-9 d-flex align-items-center justify-content-center">
+            <button type="button" class="btn custom-btn my-2 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
+              <i class="fa-solid fa-eye"></i> Exercise details
+            </button>
+          </div>
+          <div class="col-3 d-flex align-items-center justify-content-start">
+            <%= button_to session_exercise_path(session_exercise),
+                        method: :delete,
+                        form: { data: { turbo_confirm: "Are you sure?" } },
+                        class: "btn custom-btn rounded-4" do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     <div data-display-toggle-target="togglableElement" class="session-display d-none">

@@ -4,6 +4,7 @@ class WorkoutPlan < ApplicationRecord
   has_many :workout_sessions, dependent: :destroy
 
   validates :starting_date, :ending_date, presence: true
+  validates :scheduled_trainer_session, presence: true
   # validate :starting_date_cannot_be_in_the_past
   # validate :ending_date_cannot_be_in_the_past
   validate :plan_date_cannot_be_reverse
@@ -28,4 +29,7 @@ class WorkoutPlan < ApplicationRecord
     end
   end
 
+  def trainer_session_count
+    workout_sessions.where(with_trainer: true).count
+  end
 end

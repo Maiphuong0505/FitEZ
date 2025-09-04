@@ -11,7 +11,8 @@ class ChatbotJob < ApplicationJob
       }
     )
     new_content = chatgpt_response["choices"][0]["message"]["content"]
-
+    puts new_content
+    puts "Hey"
     @session_exercise = eval(new_content)
     return unless @session_exercise.is_a?(SessionExercise)
 
@@ -37,7 +38,7 @@ class ChatbotJob < ApplicationJob
     Turbo::StreamsChannel.broadcast_append_to(
       "question_#{@question.id}",
       target: dom_id(@question),
-      partial: "workout_sessions/new_exercise", locals: { workout_session: @question.workout_session, session_exercise: @session_exercise, scroll: true }
+      partial: "workout_sessions/ai_exercise_form", locals: { workout_session: @question.workout_session, session_exercise: @session_exercise, scroll: true, exercise: @session_exercise.exercise }
     )
   end
 
@@ -74,6 +75,7 @@ class ChatbotJob < ApplicationJob
       starting position: #{exercise.starting_position}, execution: #{exercise.execution}"
     end
     results << { role: "system", content: system_text }
+    results << { role: "developer", content: "Only return in ruby code that start with SessionExercise.new" }
 
     questions.each do |question|
       results << { role: "user", content: question.user_question }
