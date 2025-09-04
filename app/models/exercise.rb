@@ -7,6 +7,13 @@ class Exercise < ApplicationRecord
   after_create :set_embedding
   after_update :set_embedding
 
+  include PgSearch::Model
+  pg_search_scope :search_by_all_attributes,
+    against: %i[ name equipment main_muscles execution ],
+    using: {
+      tsearch: { prefix: true }
+    }
+
   private
 
   def set_embedding

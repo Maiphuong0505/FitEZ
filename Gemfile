@@ -34,6 +34,8 @@ gem "chartkick"
 
 gem "groupdate"
 
+gem "pg_search"
+
 gem 'deep_cloneable', '~> 3.2.1'
 
 # Turbo Stream
