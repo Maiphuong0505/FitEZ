@@ -7,7 +7,8 @@
           <p class="text-light text-center mb-0">Prep <%= workout_plan.client.first_name %>'s next win!</p>
         </div>
         <div class="card-body p-5">
-          <%= simple_form_for [workout_plan, workout_session], method: :post, url: workout_plan_workout_sessions_path(workout_plan) do |f| %>
+          <!-- add namespace to make form id unique -->
+          <%= simple_form_for [workout_plan, workout_session], method: :post, url: workout_plan_workout_sessions_path(workout_plan), namespace: dom_id(workout_plan) do |f| %>
             <div class="row g-4 justify-content-center align-items-center">
               <div class="col-12 my-0">
                 <%= f.input :session_name, label: "Focus of the session", input_html: { class: "rounded-3" } %>
