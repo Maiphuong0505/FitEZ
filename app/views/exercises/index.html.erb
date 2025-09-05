@@ -15,10 +15,14 @@
                           style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
           </div>
           <div class="mt-4 col-12 col-lg-7 px-2">
-            <p class="mb-1"><strong>Muscle Group:</strong>
-              <%= exercise.main_muscles%></p>
-            <p class="mb-0"><strong>Equipment:</strong>
-              <%= exercise.equipment%></p>
+            <% unless exercise.main_muscles.blank? %>
+              <p class="mb-1"><strong>Muscle Group:</strong>
+                <%= exercise.main_muscles%></p>
+            <% end %>
+            <% unless exercise.equipment.blank? %>
+              <p class="mb-0"><strong>Equipment:</strong>
+                <%= exercise.equipment%></p>
+            <% end %>
           </div>
         <% end %>
         <button type="button" class="btn btn-outline-danger my-3 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
