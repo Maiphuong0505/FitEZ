@@ -2,40 +2,44 @@
   <div>
     <%= render "exercises/search_form"  %>
   </div>
-  <% @exercises.each do |exercise| %>
-    <div class="d-flex card my-3 shadow pt-4 pb-3 bg-body rounded-4" data-controller="display-toggle">
-      <div class="mx-3 mt-0">
-        <h3 class="mt-1"><%= exercise.name %></h3>
-      </div>
-      <div class="d-flex flex-wrap align-items-center justify-content-center mx-3">
-        <% unless exercise.execution.blank? %>
-          <div class="d-flex justify-content-center align-items-center col-12 col-lg-4 text-center p-3" style="background-color: #f8f9fa;">
-            <%= cl_image_tag(exercise.photo.key,
+  <div class="row g-4">
+    <% @exercises.each do |exercise| %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="d-flex card my-3 h-100 shadow pt-4 pb-3 bg-body rounded-4" data-controller="display-toggle">
+          <div class="mx-3 mt-0">
+            <h3 class="mt-1"><%= exercise.name %></h3>
+          </div>
+          <div class="d-flex flex-wrap align-items-center justify-content-center mx-3">
+            <% unless exercise.execution.blank? %>
+              <div class="d-flex justify-content-center align-items-center col-12 col-lg-4 text-center p-3" style="background-color: #f8f9fa;">
+                <%= cl_image_tag(exercise.photo.key,
                           class: "img-fluid",
                           style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
-          </div>
-          <div class="mt-4 col-12 col-lg-7 px-2">
-            <p class="mb-1"><strong>Muscle Group:</strong>
-              <%= exercise.main_muscles%></p>
-            <p class="mb-0"><strong>Equipment:</strong>
-              <%= exercise.equipment%></p>
-          </div>
-        <% end %>
-        <button type="button" class="btn btn-outline-danger my-3 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
-          <i class="fa-solid fa-eye"></i> Exercise Details
-        </button>
-        <div data-display-toggle-target= "togglableElement" class="session-display d-none">
-          <div class="exercise-details py-2 px-2">
-            <% unless exercise.starting_position.blank?%>
-              <p><strong>Starting Position: </strong>
-                <%= exercise.starting_position %></p>
+              </div>
+              <div class="mt-4 col-12 col-lg-7 px-2">
+                <p class="mb-1"><strong>Muscle Group:</strong>
+                  <%= exercise.main_muscles%></p>
+                <p class="mb-0"><strong>Equipment:</strong>
+                  <%= exercise.equipment%></p>
+              </div>
             <% end %>
-            <% unless exercise.execution.blank?%>
-              <p><strong>Execution: </strong><%= exercise.execution %></p>
-            <% end %>
+            <button type="button" class="btn btn-outline-danger my-3 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
+              <i class="fa-solid fa-eye"></i> Exercise Details
+            </button>
+            <div data-display-toggle-target= "togglableElement" class="session-display d-none">
+              <div class="exercise-details py-2 px-2">
+                <% unless exercise.starting_position.blank?%>
+                  <p><strong>Starting Position: </strong>
+                    <%= exercise.starting_position %></p>
+                <% end %>
+                <% unless exercise.execution.blank?%>
+                  <p><strong>Execution: </strong><%= exercise.execution %></p>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
