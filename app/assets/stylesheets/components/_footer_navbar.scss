@@ -6,6 +6,7 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
+  z-index: 99;
 }
 
 .nav-icon {
@@ -22,10 +23,6 @@
   backface-visibility: hidden;
 
   &:hover {
-    transform: translateY(-4px);
-  }
-
-  &:active {
-    transform: translateY(-2px) scale(1.5);
+    transform: translateY(-4px) scale(1.5);
   }
 }

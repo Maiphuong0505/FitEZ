@@ -14,11 +14,17 @@
     <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
     <%= render 'shared/ios_pwa_links' %>
   </head>
-  <body><%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
+  <body class="<%= 'home-page' if controller_name == 'pages' && action_name == 'home' %>">
+    <%= render "shared/navbar" %>
+    <% unless controller_name == "pages" && action_name == "home" %>
+      <button data-controller="back-to-top" id="back-to-top" class="btn rounded-circle shadow d-none" data-action="back-to-top#scrollToTop scroll@window->back-to-top#scrollFunction"> <i class="fa-solid fa-arrow-up" style="color: #ffffff; font-size: 20px"></i> </button>
+    <% end %>
+    <%# <%= render "shared/flashes" %>
     <%= yield %>
-    <footer>
-      <%= render "shared/footer_navbar" %>
-    </footer>
+    <% unless controller_name == "pages" && action_name == "home" %>
+      <footer>
+        <%= render "shared/footer_navbar" %>
+      </footer>
+    <% end %>
   </body>
 </html>

@@ -1,0 +1,14 @@
+#back-to-top {
+  position: fixed;
+  bottom: 80px !important;
+  right: 20px;
+  z-index: 999;
+  border: none;
+  outline: #B15965;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 39px;
+  background-color: $red-subtle;
+}

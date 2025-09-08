@@ -2,12 +2,12 @@
   <div class="container py-2">
     <div class="row justify-content-center">
       <div class="col-lg-10 col-md-10 col-sm-12">
-        <div class="card border-0 shadow-sm">
-          <div class="card-header bg-danger border-0 py-4">
+        <div class="card border-0 rounded-5 shadow-sm">
+          <div class="card-header bg-danger border-0 rounded-top-5 py-4">
             <h3 class="text-center text-light mt-0 mb-2 fw-bold">Add exercises</h3>
             <p class="text-center text-light mb-0">Customize your client's exercise</p>
           </div>
-          <div class="card-body p-5">
+          <div class="card-body pt-3 pb-4">
             <%= simple_form_for([workout_session, session_exercise], data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" }) do |f| %>
               <div class="row g-4 justify-content-center align-items-center">
                 <!-- Exercise Selection -->
@@ -21,55 +21,76 @@
                 <div class="col-12 mb-3 text-center">
                   <%= cl_image_tag "", id: "exercise-preview", alt: "Exercise preview", class: "border border-danger border-4 rounded-4", style: "max-width: 200px; display: none;" %>
                 </div>
-                <div class="col-12" data-exercise-photos="<%= exercise_photos.to_json %>">
+                <div class="col-12 m-0" data-exercise-photos="<%= exercise_photos.to_json %>">
                   <%= f.input :exercise_id,
                     collection: Exercise.all.map { |exercise| [ "#{exercise.name}", exercise.id ] },
                     label: "Choose exercise",
                     input_html: {
                       id: "select-exercise",
                       data: { session_exercise_form_target: "tomSelect"},
-                      class: "form-select form-select-lg"
+                      class: "form-select"
                     } %>
                 </div>
                 <!-- Load -->
-                <div class="col-12">
-                  <div class="input-group mb-3">
-                    <%= f.input :load,
-                      label: "Load:",
+                <div class="col-12 mt-1">
+                  <div class="row">
+                    <div class="col-3" style="padding-left: 12px; padding-top: 5px;">
+                      <%= f.label :load, "Load:", class: "form-label mb-0" %>
+                    </div>
+                    <div class="col-9">
+                      <div class="input-group mb-3">
+                        <%= f.input :load,
+                      label: false,
                       input_html: {
-                        class: "form-control",
+                        class: "form-control rounded-start-3 placeholder-light",
                         placeholder: "10"
                       }, wrapper: false %>
-                    <span class="input-group-text">kg</span>
+                        <span class="input-group-text rounded-end-3">kg</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <!-- Repetitions -->
-                <div class="col-12">
-                  <div class="input-group mb-3">
-                    <%= f.input :repetitions,
-                      label: "Reps:",
+                <div class="col-12 mt-1">
+                  <div class="row">
+                    <div class="col-3" style="padding-left: 12px; padding-top: 5px;">
+                      <%= f.label :repetitions, "Reps:", class: "form-label" %>
+                    </div>
+                    <div class="col-9">
+                      <div class="input-group mb-3">
+                        <%= f.input :repetitions,
+                      label: false,
                       input_html: {
-                        class: "form-control",
-                        placeholder: "8"
+                        class: "form-control rounded-start-3",
+                        placeholder: "10"
                       }, wrapper: false %>
-                    <span class="input-group-text">reps</span>
+                        <span class="input-group-text rounded-end-3">reps</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <!-- Sets -->
-                <div class="col-12">
-                  <div class="input-group mb-3">
-                    <%= f.input :set,
-                      label: "Sets:",
+                <div class="col-12 mt-1">
+                  <div class="row">
+                    <div class="col-3" style="padding-left: 12px; padding-top: 5px;">
+                      <%= f.label :set, "Sets:", class: "form-label" %>
+                    </div>
+                    <div class="col-9">
+                      <div class="input-group mb-3">
+                        <%= f.input :set,
+                      label: false,
                       input_html: {
-                        class: "form-control",
-                        placeholder: "3"
+                        class: "form-control rounded-start-3",
+                        placeholder: "10"
                       }, wrapper: false %>
-                    <span class="input-group-text">sets</span>
+                        <span class="input-group-text rounded-end-3">sets</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <!-- Submit Button -->
-                <div class="col-12 text-center pt-1">
-                  <%= f.button :submit, "Add Exercise", class: "btn btn-danger px-5" %>
+                <div class="col-12 text-center mt-3">
+                  <%= f.button :submit, "Add Exercise", class: "btn btn-danger px-5 rounded-5" %>
                 </div>
               </div>
             <% end %>

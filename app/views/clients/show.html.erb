@@ -1,4 +1,4 @@
-<div class="container my-3">
+<div class="container mt-3 mb-5">
   <h1><%= @client.first_name %> <%= @client.last_name %></h1>
   <!-- Tab Navigation -->
   <ul class="nav nav-pills nav-justified mb-3" id="clientTabs" role="tablist">
@@ -24,69 +24,80 @@
               <p class="link-button badge rounded-pill mb-0 px-3 py-2 me-2 bg-danger text-light fw-normal fs-6">Add Body Stats</p>
             <% end %>
           </div>
-          <!-- Code to display the charts, just change if you know what you are doing -->
-          <!-- Dealing with edge case when bodystats are nil-->
-          <% if @client.body_stats.blank? %>
-            <div class="my-5">
-              <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
-            {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
-            colors: ["#4CAF50", "#2196F3"],
-            curve: true,
-            empty: "No data available",
-            library: {
-                      scales: {
-                        y: {
-                          min: 0,
-                          max: 80
+          <!-- Bootstrap Carousel for Charts -->
+          <div id="bodyStatsCarousel" class="carousel slide my-5">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <%# Chart 1: Muscle Mass & Weight %>
+                <div class="chartkick-mobile chartkick-shadow rounded-4 p-2 mb-2">
+                  <%= line_chart [
+                    {name: "Muscle Mass (kg)", data: @client.body_stats.map.with_index { |stat, i| [stat.timestamp.strftime("%d %b %Y"), stat.muscle_mass] }},
+                    {name: "Weight (kg)", data: @client.body_stats.map.with_index { |stat, i| [stat.timestamp.strftime("%d %b %Y"), stat.weight] }}
+                  ],
+                  height: "280px",
+                  width: "100%",
+                  colors: ["#43B581", "#3B82F6"],
+                  curve: true,
+                  points: true,
+                  descrete: true,
+                  empty: "No data available",
+                  library: {
+                    responsive: true,
+                    plugins: {
+                      legend: { labels: { font: { size: 15, family: "Poppins" } } },
+                      tooltip: { enabled: true, bodyFont: { size: 15 } }
+                    }
+                  } %>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <%# Chart 2: Body Fat %>
+                <div class="chartkick-mobile chartkick-shadow rounded-4 p-2 mb-2">
+                  <%=line_chart [
+                    {name: "Body Fat (%)", data: @client.body_stats.map.with_index { |stat, i| [stat.timestamp.strftime("%d %b %Y"), stat.body_fat] }}
+                  ],
+                  height: "280px",
+                  width: "100%",
+                  colors: ["#F59E42"],
+                  curve: true,
+                  points: true,
+                  descrete: true,
+                  empty: "No data available",
+                  library: {
+                    scales: {
+                      x: {
+                        ticks: {
+                          source: "data"
                         }
                       }
-                    } %>
+                    },
+                    responsive: true,
+                    plugins: {
+                      legend: { labels: { font: { size: 15, family: "Poppins" } } },
+                      tooltip: { enabled: true, bodyFont: { size: 15 } }
+                    }
+                  } %>
+                </div>
+              </div>
             </div>
-            <div class="my-5">
-              <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
-            colors: ["#FF9800"],
-            curve: true,
-            empty: "No data available",
-            library: {
-                      scales: {
-                        y: {
-                          min: 0,
-                          max: 100
-                        }
-                      }
-                    } %>
+            <!-- Carousel Controls: moved below charts -->
+            <div class="d-flex justify-content-center gap-3 mt-3">
+              <button class="btn btn-outline-danger rounded-circle px-3 py-2"
+    type="button"
+    data-bs-target="#bodyStatsCarousel"
+    data-bs-slide="prev"
+    aria-label="Previous chart">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button class="btn btn-outline-danger rounded-circle px-3 py-2"
+    type="button"
+    data-bs-target="#bodyStatsCarousel"
+    data-bs-slide="next"
+    aria-label="Next chart">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
             </div>
-          <% else %>
-            <div class="my-5">
-              <%= line_chart [{name: "Muscle Mass (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.muscle_mass] }},
-            {name: "Weight (kg)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.weight] }}],
-            colors: ["#4CAF50", "#2196F3"],
-            curve: true,
-            empty: "No data available",
-            library: {
-                      scales: {
-                        y: {
-                          min: [@client.body_stats.map(&:weight).min, @client.body_stats.map(&:muscle_mass).min].min.round - 2,
-                          max: [@client.body_stats.map(&:weight).max, @client.body_stats.map(&:muscle_mass).max].max.round + 2
-                        }
-                      }
-                    } %>
-            </div>
-            <div class="my-5">
-              <%= line_chart [{name: "Body Fat (%)", data: @client.body_stats.map { |stat| [stat.timestamp, stat.body_fat] }}],
-            colors: ["#FF9800"],
-            curve: true,
-            empty: "No data available",
-            library: {
-                      scales: {
-                        y: {
-                          min: @client.body_stats.map(&:body_fat).min.round - 2,
-                          max: @client.body_stats.map(&:body_fat).max.round + 2
-                        }
-                      }
-                    } %>
-            </div>
-          <% end %>
+          </div>
         </div>
         <%# Div for add stats %>
         <div class="col-12 col-md-5 add-body-stats-form" id="add-body-stat-form">

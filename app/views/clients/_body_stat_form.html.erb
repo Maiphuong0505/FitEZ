@@ -1,8 +1,8 @@
-<div class="container py-4">
+<div class="container pt-0 pb-4">
   <div class="row justify-content-end">
     <div class="col-lg-10 col-md-10 col-sm-12">
-      <div class="card border-0 shadow-sm">
-        <div class="card-header bg-danger border-0 py-4">
+      <div class="card border-0 rounded-5 shadow-sm">
+        <div class="card-header bg-danger border-0 rounded-top-5 py-4">
           <% if current_user.trainer? %>
             <h3 class="text-center text-light mt-0 mb-2 fw-bold">Add <%= client.first_name %>'s body stats</h3>
             <p class="text-center text-light mb-0">Show us how fat <%= client.first_name %> is!</p>
@@ -16,38 +16,68 @@
             <div class="row g-4 justify-content-center align-items-center">
               <!-- Date -->
               <div class="col-12 my-0">
-                <%= f.input :timestamp, as: :string, label: "Date of measurement", input_html: { data: {controller: "datepicker-body-stat"} } %>
+                <%= f.input :timestamp, as: :string, label: "Date of measurement", input_html: { data: {controller: "datepicker-body-stat"}, class: "rounded-3" } %>
               </div>
               <!-- Weight -->
-              <div class="col-12 my-0">
-                <%= f.input :weight,
-                  label: "Weight (kg)",
-                  input_html: {
-                    class: "form-control",
-                    placeholder: "59.7"
-                  } %>
+              <div class="col-12 mt-1">
+                <div class="row">
+                  <div class="col-6 pe-0" style="padding-left: 12px; padding-top: 5px;">
+                    <%= f.label :weight, "Weight:", class: "form-label mb-0" %>
+                  </div>
+                  <div class="col-6">
+                    <div class="input-group mb-3">
+                      <%= f.input :weight,
+                      label: false,
+                      input_html: {
+                        class: "form-control rounded-start-3 placeholder-light",
+                        placeholder: "59.7"
+                      }, wrapper: false %>
+                      <span class="input-group-text rounded-end-3">kg</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- Body Fat -->
-              <div class="col-12 my-0">
-                <%= f.input :body_fat,
-                  label: "Body fat percentage (%)",
-                  input_html: {
-                    class: "form-control",
-                    placeholder: "15.9"
-                  } %>
+              <div class="col-12 mt-1">
+                <div class="row">
+                  <div class="col-6 pe-0" style="padding-left: 12px; padding-top: 5px;">
+                    <%= f.label :body_fat, "Body fat:", class: "form-label mb-0" %>
+                  </div>
+                  <div class="col-6">
+                    <div class="input-group mb-3">
+                      <%= f.input :body_fat,
+                      label: false,
+                      input_html: {
+                        class: "form-control rounded-start-3 placeholder-light",
+                        placeholder: "15.9"
+                      }, wrapper: false %>
+                      <span class="input-group-text rounded-end-3">%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- Muscle Mass -->
-              <div class="col-12 my-0">
-                <%= f.input :muscle_mass,
-                  label: "Muscle mass (kg)",
-                  input_html: {
-                    class: "form-control",
-                    placeholder: "48.2"
-                  } %>
+              <div class="col-12 mt-1">
+                <div class="row">
+                  <div class="col-6 pe-0" style="padding-left: 12px; padding-top: 5px;">
+                    <%= f.label :muscle_mass, "Muscle mass:", class: "form-label mb-0" %>
+                  </div>
+                  <div class="col-6">
+                    <div class="input-group mb-3">
+                      <%= f.input :muscle_mass,
+                      label: false,
+                      input_html: {
+                        class: "form-control rounded-start-3 placeholder-light",
+                        placeholder: "48.2"
+                      }, wrapper: false %>
+                      <span class="input-group-text rounded-end-3">kg</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- Submit Button -->
               <div class="col-12 text-center pt-1">
-                <%= f.button :submit, "Add body stats", class: "btn btn-danger px-5" %>
+                <%= f.button :submit, "Add body stats", class: "btn btn-danger px-5 rounded-5" %>
               </div>
             </div>
           <% end %>

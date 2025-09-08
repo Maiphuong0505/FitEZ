@@ -1,18 +1,34 @@
 <div class="container py-0">
   <div class="row justify-content-center">
     <div class="col-lg-10 col-md-10 col-sm-12">
-      <div class="card border-0 shadow-sm">
-        <div class="card-header bg-light border-0 py-4">
-          <h3 class="text-center fw-bold my-0">Copy a Workout Session</h3>
+      <div class="card border-0 rounded-5 shadow-sm">
+        <div class="card-header rounded-top-5 bg-danger border-0 py-4">
+          <h3 class="text-center text-light fw-bold my-0">Copy a Workout Session</h3>
         </div>
-        <div class="card-body pt-0 pb-5">
-          <%= simple_form_for [workout_session, empty_workout_session], method: :post, url: workout_session_copy_path(workout_session) do |f| %>
-            <%= f.input :session_name, label: "Focus of the session", input_html: { value: "Copy of #{workout_session.session_name}" } %>
-            <%= f.input :date_time, as: :string, label: "Choose date and time", input_html: { data: {controller: "datepicker-workout-session"} } %>
-            <%= f.input :duration, label: "Session duration (minutes)?",input_html: { class: "form-control", placeholder: "30" }%>
-            <%= f.input :with_trainer, as: :radio_buttons, collection: [[ 'Yes', true ], [ 'No', false ]], label: "With a trainer?" %>
+        <div class="card-body pt-3 pb-4 mb-2">
+          <!-- add namespace to make form id unique -->
+          <%= simple_form_for [workout_session, empty_workout_session], method: :post, url: workout_session_copy_path(workout_session), namespace: dom_id(workout_session) do |f| %>
+            <%= f.input :session_name, label: "Focus of the session", input_html: { value: "Copy of #{workout_session.session_name}", class: "rounded-3" } %>
+            <%= f.input :date_time, as: :string, label: "Choose date and time", input_html: { data: {controller: "datepicker-workout-session"}, class: "rounded-3" } %>
+            <div class="col-12 my-0">
+              <%= f.label :duration, "Session duration", class: "form-label" %>
+              <div class="input-group mb-3">
+                <%= f.input :duration, label: false, input_html: { class: "form-control rounded-start-3", placeholder: "30" }, wrapper: false %>
+                <span class="input-group-text rounded-end-3">minutes</span>
+              </div>
+            </div>
+            <%# <%= f.input :duration, label: "Session duration (minutes)?",input_html: { class: "form-control", placeholder: "30" }%>
+            <div class="col-12 my-0">
+              <%= f.input :with_trainer,
+                  as: :radio_buttons,
+                  label: "Session type",
+                  collection: [[ 'With trainer', true ], [ 'Solo', false ]],
+                  input_html: { class: "session-selector" },
+                  item_wrapper_class: 'session-item' %>
+            </div>
+            <%# <%= f.input :with_trainer, as: :radio_buttons, collection: [[ 'Yes', true ], [ 'No', false ]], label: "With a trainer?" %>
             <div class="col-12 text-center pt-1">
-              <%= f.submit "Add a session", class: "btn btn-danger px-5" %>
+              <%= f.submit "Add a session", class: "btn btn-danger px-5 rounded-5" %>
             </div>
           <% end %>
         </div>
