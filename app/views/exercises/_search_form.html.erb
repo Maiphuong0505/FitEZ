@@ -3,10 +3,10 @@
     <%= form_with url: exercises_path, method: :get, class: "d-flex" do %>
       <%= text_field_tag :query,
             params[:query],
-            class: "form-control rounded-start-3",
+            class: "form-control rounded-start-5",
             placeholder: "Type a keyword"
         %>
-      <%= button_tag type: "submit", class: "btn btn-danger rounded-end-3" do %>
+      <%= button_tag type: "submit", class: "btn btn-danger rounded-end-5" do %>
         <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
       <% end %>
     <% end %>
