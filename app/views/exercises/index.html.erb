@@ -5,36 +5,36 @@
   <div class="row gy-4 exercise-card">
     <% @exercises.each do |exercise| %>
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card h-100 my-3 shadow pt-4 pb-3 bg-body rounded-4" data-controller="display-toggle">
-          <div class="mx-3 mt-0">
-            <h3 class="mt-1"><%= exercise.name %></h3>
+        <div class="card h-100 my-3 shadow pt-4 bg-body rounded-4" data-controller="display-toggle">
+          <div class="exercise-name text-center">
+            <h6 class="mt-0 mx-2"><%= exercise.name %></h6>
           </div>
-          <div class="text-center p-3 mx-3" style="background-color: #f8f9fa;">
+          <div class="exercise-image text-center mx-3" style="background-color: #f8f9fa;">
             <%= cl_image_tag(exercise.photo.key,
                           class: "img-fluid",
                           style: "max-height: 180px; object-fit: contain; background-color: #f8f9fa;") %>
           </div>
-          <div class="mt-4 col-12 col-lg-7 px-2">
+          <div class="exercise-info col-12 col-lg-7 mx-2 mt-3">
             <% unless exercise.main_muscles.blank? %>
-              <p class="mb-1"><strong>Muscle Group:</strong>
+              <p class="mb-1 mx-2"><strong>Muscle Group:</strong>
                 <%= exercise.main_muscles%></p>
             <% end %>
             <% unless exercise.equipment.blank? %>
-              <p class="mb-0"><strong>Equipment:</strong>
+              <p class="mb-0 mx-2"><strong>Equipment:</strong>
                 <%= exercise.equipment%></p>
             <% end %>
           </div>
-          <button type="button" class="btn btn-outline-danger my-3 mx-3 rounded-pill px-3 py-2 me-2 fw-bold fs-6" data-action="click->display-toggle#fire">
+          <button type="button" class="btn btn-outline-danger mt-3 mx-3 rounded-pill px-3 py-2 fw-bold fs-6" data-action="click->display-toggle#fire">
             <i class="fa-solid fa-eye"></i> Exercise Details
           </button>
           <div data-display-toggle-target= "togglableElement" class="session-display d-none">
-            <div class="exercise-details py-2 px-2">
+            <div class="exercise-details mt-4 mx-2 py-2 px-2">
               <% unless exercise.starting_position.blank?%>
                 <p><strong>Starting Position: </strong>
                   <%= exercise.starting_position %></p>
               <% end %>
               <% unless exercise.execution.blank?%>
-                <p><strong>Execution: </strong><%= exercise.execution %></p>
+                <p class="mb-0"><strong>Execution: </strong><%= exercise.execution %></p>
               <% end %>
             </div>
           </div>
