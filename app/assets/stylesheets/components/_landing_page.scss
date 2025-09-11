@@ -24,6 +24,19 @@
   .landing-btn {
     width: 60%;
   }
+  .landing-page-image {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .landing-img-pc {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
 }
 
 @media (max-width: 991.98px) {
