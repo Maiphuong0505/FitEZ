@@ -15,7 +15,9 @@
     <%= render 'shared/ios_pwa_links' %>
   </head>
   <body class="<%= 'home-page' if controller_name == 'pages' && action_name == 'home' %>">
-    <%= render "shared/navbar" %>
+    <% unless controller_name == "pages" && action_name == "home" %>
+      <%= render "shared/navbar" %>
+    <% end %>
     <% unless controller_name == "pages" && action_name == "home" %>
       <button data-controller="back-to-top" id="back-to-top" class="btn rounded-circle shadow d-none" data-action="back-to-top#scrollToTop scroll@window->back-to-top#scrollFunction"> <i class="fa-solid fa-arrow-up" style="color: #ffffff; font-size: 20px"></i> </button>
     <% end %>
