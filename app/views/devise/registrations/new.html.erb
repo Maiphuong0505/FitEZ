@@ -1,6 +1,6 @@
 <div class="container mt-3 mb-5">
   <div class="row justify-content-center">
-    <div class="col-lg-10 col-md-10 col-sm-12 px-4">
+    <div class="col-lg-6 col-md-8 col-sm-12 px-4">
       <div class="card border-0 rounded-5 shadow-sm">
         <div class="card-header rounded-top-5 bg-danger border-0 py-4">
           <h3 class="text-center text-light mt-0 mb-2 fw-bold">Sign up</h3>
@@ -20,6 +20,12 @@
               <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password", class: "rounded-3"  } %>
+              <%= f.input :is_a_trainer,
+                  as: :radio_buttons,
+                  label: "What are you ?",
+                  collection: [[ 'Trainer', true ], [ 'Client', false ]],
+                  input_html: { class: "session-selector" },
+                  item_wrapper_class: 'session-item' %>
             </div>
             <div class="form-actions col-12 text-center my-4">
               <%= f.button :submit, "Sign up", class: "btn btn-danger px-5 rounded-5 w-100" %>
