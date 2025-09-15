@@ -4,11 +4,12 @@
     <div class="form-floating">
       <%= f.input :content,
             label: false,
-            wrapper: false %>
+            wrapper: false,
+            input_html: { class: "border-1 rounded-start-5" } %>
       <%= f.label :user_question, "Your comment" %>
     </div>
   </div>
-  <%= button_tag type: "submit", class: "btn btn-danger mb-3" do %>
+  <%= button_tag type: "submit", class: "btn btn-danger mb-3 border-1 rounded-end-5" do %>
     <i class="fa-solid fa-paper-plane"></i>
   <% end %>
 <% end %>
