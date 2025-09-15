@@ -1,22 +1,26 @@
 <div class="container mt-3 mb-5">
-  <div class="col-12 my-3">
-    <div class="d-flex justify-content-between align-items-center">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-3">
       <%= link_to "← Back", client_path(@workout_session.workout_plan.client), class: "link-button btn btn-outline-secondary rounded-pill" %>
       <h3 class="my-2 badge rounded-pill px-3 py-2 me-2 bg-info text-dark fw-normal fs-6"><i class="fa-solid fa-clock"></i> <%= @workout_session.date_time.strftime("%a %b %e at %l:%M %p") %></h3>
     </div>
-    <h2 ><%= @workout_session.workout_plan.client.first_name %>'s <%= @workout_session.session_name.split(" ")[0] %> training</h2>
-  </div>
-  <div class="d-flex justify-content-center mt-2 mb-4">
-    <button type="button"
-        class="link-button badge rounded-pill px-3 py-2 me-2 bg-danger text-light fw-normal fs-6"
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-9 margin-bottom-responsive">
+        <h2 class="my-0"><%= @workout_session.workout_plan.client.first_name %>'s <%= @workout_session.session_name.split(" ")[0] %> training</h2>
+      </div>
+      <div class="col-12 col-md-12 col-lg-3 flex-responsive mt-2 mb-4">
+        <button type="button"
+        class="link-button badge rounded-pill px-3 py-2 bg-danger text-light fw-normal fs-6"
         data-bs-toggle="modal"
         data-bs-target="#addExerciseModal">
-      Add Session Exercise
-    </button>
+          Add Session Exercise
+        </button>
+      </div>
+    </div>
   </div>
   <div class="row justify-content-between g-1">
     <!-- Exercises Box -->
-    <div class="card p-3 mb-4 shadow-sm border-0 rounded-3 col-12 col-md-7 bg-white" id="session_exercises">
+    <div class="border-round-responsive-start card p-3 border-0 col-12 col-md-7 bg-white" id="session_exercises">
       <% if @session_exercises.empty? %>
         <h3><i class="fa-solid fa-star"></i> Workout magic starts here! </h3>
       <% else %>
@@ -27,22 +31,24 @@
         </div>
       <% end %>
     </div>
-  </div>
-  <!-- Comments section -->
-  <div class="container chat mt-0 mb-4">
-    <h2 class="mt-2"><i class="fa-solid fa-file-pen pe-2" style="color: #b15965;"></i>Leave a note</h2>
-    <div id="comment-section" class="comments">
-      <% @workout_session.comments.each do |comment| %>
-        <%= render "comments/comment", comment: comment %>
-      <% end %>
-    </div>
-    <div class="comment-form">
-      <%= render "comments/comment_form", workout_session: @workout_session, comment: @comment, user: current_user %>
+    <!-- Comments section -->
+    <div class="col-12 col-md-5 margin-top-responsive">
+      <div class="container chat mt-0 border-round-responsive-end">
+        <h3 class="mt-2"><i class="fa-solid fa-file-pen pe-2" style="color: #b15965;"></i>Leave a note</h3>
+        <div id="comment-section" class="comments">
+          <% @workout_session.comments.each do |comment| %>
+            <%= render "comments/comment", comment: comment %>
+          <% end %>
+        </div>
+        <div class="comment-form">
+          <%= render "comments/comment_form", workout_session: @workout_session, comment: @comment, user: current_user %>
+        </div>
+      </div>
     </div>
   </div>
   <!-- AI section -->
-  <div class="container chatbot mt-4">
-    <h2 class="mt-2"><i class="fa-solid fa-comments pe-2" style="color: #b15965;"></i>Chat with Fitty</h2>
+  <div class="container chatbot rounded-5 ai-margin-top">
+    <h3 class="mt-2"><i class="fa-solid fa-comments pe-2" style="color: #b15965;"></i>Chat with Fitty</h3>
     <div id="questions">
       <% @workout_session.questions.each do |question| %>
         <%= render "questions/question", question: question %>
