@@ -16,10 +16,10 @@
                 <!-- 2. generate stimulus controller and mount the controller on the select input field-->
                 <!-- 3. add a line to import tom select into the stimulus controller -->
                 <!-- 4. In application.html.erb, add a link for tom select stylesheet-->
-                <% exercise_photos = Exercise.all.map { |exercise| [exercise.id, exercise_photo_url(exercise)] }.to_h %>
+                <% exercise_photos = Exercise.all.map { |exercise| [exercise.id, photo_url(exercise)] }.to_h %>
                 <!-- Exercise Preview -->
                 <div class="col-12 mb-3 text-center">
-                  <%= cl_image_tag "", id: "exercise-preview", alt: "Exercise preview", class: "border border-danger border-4 rounded-4", style: "max-width: 200px; display: none;" %>
+                  <%= cl_image_tag "", id: "photo-preview", alt: "Exercise preview", class: "border border-danger border-4 rounded-4", style: "max-width: 200px; display: none;" %>
                 </div>
                 <div class="col-12 m-0" data-exercise-photos="<%= exercise_photos.to_json %>">
                   <%= f.input :exercise_id,

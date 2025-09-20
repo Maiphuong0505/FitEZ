@@ -12,7 +12,7 @@
         <button type="button"
         class="link-button badge rounded-pill px-3 py-2 bg-danger text-light fw-normal fs-6"
         data-bs-toggle="modal"
-        data-bs-target="#addExerciseModal">
+        data-bs-target="#formModal">
           Add Session Exercise
         </button>
       </div>
@@ -21,7 +21,7 @@
   <div class="row justify-content-between g-1">
     <!-- Exercises Box -->
     <div class="border-round-responsive-start card p-3 border-0 col-12 col-md-7 bg-white" id="session_exercises">
-      <% if @session_exercises.empty? %>
+      <% if @session_exercises.blank? %>
         <h3><i class="fa-solid fa-star"></i> Workout magic starts here! </h3>
       <% else %>
         <div>
@@ -60,7 +60,7 @@
   </div>
 </div>
 <!-- Add Exercise Modal -->
-<div class="modal fade" id="addExerciseModal" tabindex="-1" aria-labelledby="addExerciseModalLabel" aria-hidden="true">
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="addExerciseModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
