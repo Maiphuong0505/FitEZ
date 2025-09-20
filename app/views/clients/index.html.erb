@@ -1,26 +1,32 @@
 <div class="container mt-3 mb-5">
   <h1 class="text-center mt-2 mb-2">My Clients</h1>
-  <div class="row">
+  <% unless @my_clients.any? %>
+    <h3><i class="fa-solid fa-face-sad-cry" style="color: #b15965;"></i> Go get some clients! </h3>
+  <% end %>
+  <div class="mt-3 mb-4 d-flex justify-content-center align-items-center">
+    <button type="button"
+        class="link-button badge rounded-pill px-3 py-2 bg-danger text-light fw-normal fs-6"
+        data-bs-toggle="modal"
+        data-bs-target="#formModal">
+      Find my clients
+    </button>
+  </div>
+  <div class="row" id="clients">
     <% @my_clients.each do |client| %>
-      <div class="col-12 col-md-6 col-lg-4 mb-4">
-        <%= link_to client_path(client), class: "text-decoration-none" do %>
-          <div class="card client-card">
-            <div class="card-body d-flex align-items-center">
-              <!-- Avatar -->
-              <div class="me-3">
-                <%= cl_image_tag(client.photo.key, class: "avatar-bordered") %>
-              </div>
-              <!-- Name and Workout Plans -->
-              <div class="client-info">
-                <h5 class="card-title mb-1"> <%= "#{client.first_name} #{client.last_name}" %></h5>
-                <p class="card-text mb-0">
-                  <%= pluralize(client.workout_plans_as_client.count, "Workout Plan") %>
-                </p>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
+      <%= render "clients/client", client: client %>
     <% end %>
+  </div>
+</div>
+<!-- New Contract Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="addExerciseModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-2 pb-5">
+        <%= render "contracts/new_contract", contract: @contract %>
+      </div>
+    </div>
   </div>
 </div>

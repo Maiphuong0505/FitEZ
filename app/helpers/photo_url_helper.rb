@@ -1,8 +1,8 @@
-module ExercisesHelper
+module PhotoUrlHelper
   include Rails.application.routes.url_helpers
 
-  def exercise_photo_url(exercise)
-    exercise.photo.attached? ? rails_blob_url(exercise.photo, only_path: false) : nil
+  def photo_url(item)
+    item.photo.attached? ? rails_blob_url(item.photo, only_path: false) : nil
   end
 end
 
@@ -16,7 +16,7 @@ Passed URLs to the View:
 In the ERB partial, I built a hash mapping exercise IDs to their photo URLs and added it as a JSON data attribute (data-exercise-photos) on a <div>.
 
 Rendered an Image Preview Area:
-I added an <cl_image_tag> tag (id="exercise-preview") to the form, which starts hidden and empty.
+I added an <cl_image_tag> tag (id="photo-preview") to the form, which starts hidden and empty.
 
 Updated the Stimulus Controller:
 

@@ -1,0 +1,19 @@
+<div class="col-12 col-md-12 col-lg-4 mb-4">
+  <%= link_to client_path(client), class: "text-decoration-none" do %>
+    <div class="card client-card">
+      <div class="card-body d-flex align-items-center">
+        <!-- Avatar -->
+        <div class="me-3">
+          <%= cl_image_tag(client.photo.key, class: "avatar-bordered") %>
+        </div>
+        <!-- Name and Workout Plans -->
+        <div class="client-info">
+          <h5 class="card-title mb-1"> <%= "#{client.first_name} #{client.last_name}" %></h5>
+          <p class="card-text mb-0">
+            <%= pluralize(client.workout_plans_as_client.where(trainer_id: current_user.id).count, "Workout Plan") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

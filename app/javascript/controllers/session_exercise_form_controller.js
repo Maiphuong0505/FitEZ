@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   connect() {
-    const modal = document.getElementById("addExerciseModal");
+    const modal = document.getElementById("formModal");
     if (modal) {
       modal.addEventListener("shown.bs.modal", () => {
         console.log("Modal shown");
@@ -28,7 +28,6 @@ export default class extends Controller {
             theme: "bootstrap5",
             create: false,
             allowEmptyOption: true,
-            placeholder: "Search exercises...",
             dropdownParent: "body",
             sortField: {
               field: "text",
@@ -53,7 +52,7 @@ export default class extends Controller {
   updatePreview(event) {
     const exerciseId = event.target.value;
     const photoUrl = this.exercisePhotos[exerciseId];
-    const preview = document.getElementById("exercise-preview");
+    const preview = document.getElementById("photo-preview");
     if (photoUrl) {
       // Cloudinary direct URL pattern: https://res.cloudinary.com/<cloud_name>/image/upload/<photoKey>
       preview.src = photoUrl;

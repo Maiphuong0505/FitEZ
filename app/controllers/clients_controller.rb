@@ -4,6 +4,7 @@ class ClientsController < ApplicationController
   def index
     @clients = policy_scope(User)
     @my_clients = User.my_clients(current_user.id)
+    @contract = Contract.new
   end
 
   def show

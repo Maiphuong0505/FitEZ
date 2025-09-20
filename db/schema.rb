@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_29_094549) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_20_034021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -62,6 +62,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_29_094549) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["workout_session_id"], name: "index_comments_on_workout_session_id"
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.bigint "trainer_id", null: false
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_contracts_on_client_id"
+    t.index ["trainer_id"], name: "index_contracts_on_trainer_id"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -275,6 +284,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_29_094549) do
   add_foreign_key "body_stats", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "comments", "workout_sessions"
+  add_foreign_key "contracts", "users", column: "client_id"
+  add_foreign_key "contracts", "users", column: "trainer_id"
   add_foreign_key "questions", "users"
   add_foreign_key "questions", "workout_sessions"
   add_foreign_key "session_exercises", "exercises"

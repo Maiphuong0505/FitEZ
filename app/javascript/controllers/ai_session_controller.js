@@ -54,7 +54,7 @@ export default class extends Controller {
 
   updatePreviewForValue(exerciseId) {
     const photoUrl = this.exercisePhotos[exerciseId];
-    const preview = document.getElementById("exercise-preview");
+    const preview = document.getElementById("photo-preview");
     if (photoUrl && preview) {
       // Cloudinary direct URL pattern: https://res.cloudinary.com/<cloud_name>/image/upload/<photoKey>
       preview.src = photoUrl;

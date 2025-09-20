@@ -115,6 +115,14 @@
             <% end %>
           </div>
           <div class="plan-cards" id="workout_plans">
+            <!--If current user is trainer, @workout_plans should be the plans between current user and the client-->
+            <!--Meaning need to add another filter to @workout_plans-->
+            <!--If current user is clients, @workout_plans still the same-->
+            <% if current_user.trainer? %>
+              <% @workout_plans = @client.workout_plans_as_client.where(trainer_id: current_user.id)%>
+            <% else %>
+              <% @workout_plans %>
+            <% end %>
             <% unless @workout_plans.any? %>
               <% if current_user.trainer? %>
                 <p class="text-muted mt-4"><i class="fa-solid fa-face-grimace"></i> <%= @client.first_name %>'s plan awaits!</p>
