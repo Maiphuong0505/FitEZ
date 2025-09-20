@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 124px); margin: 0">
+<div class="d-flex justify-content-center align-items-center" style="margin-top: 24px; margin-bottom: 72px;">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8 col-sm-12 px-4">
@@ -13,14 +13,29 @@
                 <%= f.input :email,
                 required: true,
                 autofocus: true,
-                input_html: { autocomplete: "email", class: "rounded-3"  }%>
+                input_html: { autocomplete: "email", class: "rounded-3" }%>
                 <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password", class: "rounded-3"  } %>
+                input_html: { autocomplete: "new-password", class: "rounded-3" } %>
                 <%= f.input :password_confirmation,
                 required: true,
-                input_html: { autocomplete: "new-password", class: "rounded-3"  } %>
+                input_html: { autocomplete: "new-password", class: "rounded-3" } %>
+                <%= f.input :first_name,
+                required: true,
+                input_html: { class: "rounded-3" }%>
+                <%= f.input :last_name,
+                required: true,
+                input_html: { autocomplete: "email", class: "rounded-3" }%>
+                <%= f.input :gender,
+                  as: :radio_buttons,
+                  label: "Gender",
+                  collection: [[ 'Male', "male" ], [ 'Female', "female" ]],
+                  input_html: { class: "session-selector" },
+                  item_wrapper_class: 'session-item' %>
+                <div class="col-12 my-0">
+                  <%= f.input :date_of_birth, as: :string, label: "Date of birth", input_html: { data: {controller: "datepicker-single-date"}, class: "rounded-3" } %>
+                </div>
                 <%= f.input :is_a_trainer,
                   as: :radio_buttons,
                   label: "What are you ?",
