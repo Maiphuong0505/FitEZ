@@ -38,11 +38,11 @@
                 </div>
                 <%= f.input :is_a_trainer,
                   as: :radio_buttons,
-                  label: "What are you ?",
+                  label: "What are you?",
                   collection: [[ 'Trainer', true ], [ 'Client', false ]],
                   input_html: { class: "session-selector" },
                   item_wrapper_class: 'session-item' %>
-                <%= f.input :photo, as: :file, input_html: { class: "rounded-3" } %>
+                <%= f.input :photo, as: :file, label: "Your avatar", input_html: { class: "rounded-3" } %>
               </div>
               <div class="form-actions col-12 text-center my-4">
                 <%= f.button :submit, "Sign up", class: "btn btn-danger px-5 rounded-5 w-100" %>
