@@ -1,8 +1,8 @@
 <div id="<%= dom_id(question) %>" class="question" data-controller="auto-scroll">
   <%= turbo_stream_from dom_id(question) %>
   <p class="user-question"><%= question.user_question %></p>
-  <% if question.ai_answer.blank? || question.ai_answer == "..." %>
-    <p class="ai-answer ai-answer-text">...</p>
+  <% if question.ai_answer.blank?%>
+    <p class="ai-answer ai-answer-text"><i>Fitty is looking into the exercise dictionary...</i></p>
   <% else %>
     <div class="ai-answer">
       <p class="ai-answer-text my-0"><%= question.ai_answer%></p>
