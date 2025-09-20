@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   resources :exercises, only: %i[index]
 
   resources :session_exercises, only: %i[destroy]
+
+  resources :contracts, only: %i[create]
 end

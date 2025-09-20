@@ -1,0 +1,46 @@
+<%= turbo_frame_tag :new_contract_form do %>
+  <div class="container pt-0 pb-2">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-10 col-sm-12">
+        <div class="card border-0 rounded-5 shadow-sm">
+          <div class="card-header bg-danger border-0 rounded-top-5 py-4">
+            <h3 class="text-center text-light mt-0 mb-2 fw-bold">Find my client</h3>
+            <p class="text-center text-light mb-0">Connect and start your journey together</p>
+          </div>
+          <div class="card-body pt-3 pb-4">
+            <%= simple_form_for [contract], data: { controller: "session-exercise-form", action: "turbo:submit-end->session-exercise-form#reset" } do |f| %>
+              <div class="row g-4 justify-content-center align-items-center">
+                <!-- Exercise Selection -->
+                <!-- For using Tom Select -->
+                <!-- 1. importmap pin tom-select -> go to importmap.rb, change the version source if needed -->
+                <!-- 2. generate stimulus controller and mount the controller on the select input field-->
+                <!-- 3. add a line to import tom select into the stimulus controller -->
+                <!-- 4. In application.html.erb, add a link for tom select stylesheet-->
+                <% user_photos = User.all.map { |user| [user.id, exercise_photo_url(user)] }.to_h %>
+                <!-- Exercise Preview -->
+                <div class="col-12 mb-3 text-center">
+                  <%= cl_image_tag "", id: "exercise-preview", alt: "User preview", class: "border border-danger border-4 rounded-4", style: "max-width: 200px; display: none;" %>
+                </div>
+                <div class="col-12 m-0" data-exercise-photos="<%= user_photos.to_json %>">
+                  <%= f.input :client_id,
+                    collection: User.where(is_a_trainer: false).map { |user| [ "#{user.first_name} #{user.last_name}", user.id ] },
+                    label: "Choose wisely",
+                    input_html: {
+                      id: "select-exercise",
+                      data: { session_exercise_form_target: "tomSelect"},
+                      class: "form-select"
+                    } %>
+                </div>
+              </div>
+              <!-- Submit Button -->
+              <div class="col-12 text-center mt-3">
+                <%= f.button :submit, "Connect with this client", class: "btn btn-danger px-5 rounded-5" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
