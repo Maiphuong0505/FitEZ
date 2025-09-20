@@ -1,16 +1,17 @@
 <div class="container-fluid p-0 d-flex justify-content-center align-items-center flex-column">
-  <div class="landing-page-image">
-    <%= image_tag("FitEZ.png", alt: "Landing page image", class: "img-fluid landing-img") %>
-  </div>
-  <div class="redirect-link my-3 position-absolute w-100 d-flex justify-content-center">
-    <% if user_signed_in? %>
-      <% if current_user.trainer? %>
-        <%= link_to "Getting started", clients_path, class: "btn btn-danger btn-lg rounded-pill col-9" %>
+  <div class="landing-page-image position-relative w-100">
+    <%= image_tag("FitEZ ( PC ).png", alt: "Landing page PC image", class: "img-fluid landing-img-pc w-100") %>
+    <%= image_tag("FitEZ.png", alt: "Landing page mobile image", class: "img-fluid landing-img-mobile w-100") %>
+    <div class="redirect-link-wrapper">
+      <% if user_signed_in? %>
+        <% if current_user.trainer? %>
+          <%= link_to "Getting started", clients_path, class: "btn btn-danger btn-lg rounded-pill col-9 landing-btn" %>
+        <% else %>
+          <%= link_to "Getting started", client_path(@client), class: "btn btn-info btn-lg rounded-pill col-9 landing-btn" %>
+        <% end %>
       <% else %>
-        <%= link_to "Getting started", client_path(@client), class: "btn btn-info btn-lg rounded-pill col-9" %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-danger btn-lg rounded-pill col-9 landing-btn" %>
       <% end %>
-    <% else %>
-      <%= link_to "Login", new_user_session_path, class: "btn btn-danger btn-lg rounded-pill col-9" %>
-    <% end %>
+    </div>
   </div>
 </div>
